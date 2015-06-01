@@ -11,7 +11,7 @@ $(document).ready(function() {
             crossDomain: true,
             success: function(response) {
                 console.log('success:', response)
-                console.log('todo_items:', todo_items[0])
+                console.log('todo_items:', todo_items)
                 $('#one').html(todo_items[0].title)
                 $('#one_s').html(todo_items[0].details)
                 $('#two').html(todo_items[1].title)
