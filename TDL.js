@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    var title = $('input#title').val();
-    var summary = $('input#summary').val();
-    var date = $('input#date').val();
+    var title = $('#title').val();
+    var summary = $('#summary').val();
+    var date = $('#date').val();
    $.ajax({
 
             method: 'GET',
@@ -27,7 +27,25 @@ $(document).ready(function() {
 
     $('body').on('click', '#add', function() {
         console.log("button worked")
-        
+        $('#list').append($('<a>',{
+            class: 'list-group-item',
+            id: 'new'
+        }));
+        $('#new').append($('<h5>',{
+            class: 'list-group-item-heading',
+            text: $('#title').val(),
+            id: 'four'
+        }));
+            $('#new').append($('<p>',{
+            class: 'list-group-item-text',
+            text: $('#summary').val(),
+            id: 'four_s'
+        }));
+            $('#new').append($('<p>',{
+            class: 'list-group-item-heading',
+            text: $('#date').val().replace('t', ''),
+            id: 'four_t'
+        }));
         $.ajax({
 
             method: 'GET',
