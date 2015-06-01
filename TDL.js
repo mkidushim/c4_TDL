@@ -43,7 +43,7 @@ $(document).ready(function() {
         }));
             $('#new').append($('<p>',{
             class: 'list-group-item-heading',
-            text: $('#date').val().replace('t', ''),
+            text: $('#date').val().replace('T', ' ').replace('-','/').replace('-','/'),
             id: 'four_t'
         }));
         $.ajax({
