@@ -1,8 +1,0 @@
-var todo_items=[
-    {
-      id: 0,
-      user_id: 1,
-      timeStamp: '2015/06/15 12:00:00',
-      title: 'get eggs',
-      details: 'get jumbo eggs from the supermarket'
-    }];
