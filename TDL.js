@@ -5,7 +5,7 @@ $(document).ready(function() {
    $.ajax({
 
             method: 'GET',
-            url: 'http://localhost/lf_projects/MySandbox%20/c4_TDL/get_todo_item.json',
+            url: 'get_todo_item.json',
             dataType: 'script',
             cache: false,
             crossDomain: true,
