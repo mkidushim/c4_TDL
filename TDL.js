@@ -14,10 +14,13 @@ $(document).ready(function() {
                 console.log('todo_items:', todo_items)
                 $('#one').html(todo_items[0].title)
                 $('#one_s').html(todo_items[0].details)
+                 $('#one_t').html(todo_items[0].timeStamp)
                 $('#two').html(todo_items[1].title)
                 $('#two_s').html(todo_items[1].details)
+                 $('#two_t').html(todo_items[1].timeStamp)
                  $('#three').html(todo_items[2].title)
                 $('#three_s').html(todo_items[2].details)
+                 $('#three_t').html(todo_items[2].timeStamp)
             }
 
         })

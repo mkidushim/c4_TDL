@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<script src="get_todo_item.json"></script>
-	<title>List Multiple Items</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="TDL.css">
-  <script src="TDL.js"></script>
+    <script src="get_todo_item.json"></script>
+    <title>List Multiple Items</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="TDL.css">
+    <script src="TDL.js"></script>
 </head>
+
 <body>
-<div class="col-md-12">
- <h1 class="col-md-12">To-Do List</h1>
-  <input id="title" class="col-xs-12 col-md-6 col-md-offset-2" type="text" placeholder="Add new item title to your todo list"></input>
-    <input id="summary" class=" col-xs-12 col-md-6 col-md-offset-2" type="text" placeholder="Add new item summary to your todo list"></input>
-    <input id="date" type="date" class="col-md-4 col-md-offset-4" placeholder="Date and Time"></input>
-    <button type="button" id="add" class="col-xs-2 col-xs-offset-10 col-md-2 col-md-offset-6">Add</button>
-  	<!--<input class=" col-xs-12 col-md-6 col-md-offset-2" type="text" placeholder="Add new todo Item to your list"></input>
-  	<button type="button" class="col-md-2 col-md-offset-1" id="add">Add</button>
+    <div class="col-md-12">
+        <h1 class="col-md-12">To-Do List</h1>
+        <input id="title" class="col-xs-12 col-md-6 col-md-offset-2" type="text" placeholder="Add new item title to your todo list"></input>
+        
+        <input id="summary" class=" col-xs-12 col-md-6 col-md-offset-2" type="text" placeholder="Add new item summary to your todo list"></input>
+        
+        <input id="date" type="date" class="col-md-4 col-md-offset-4" placeholder="Date and Time"></input>
+        <button type="button" id="add" class="col-xs-2 col-xs-offset-10 col-md-1">Add</button>
+        <!--<input class=" col-xs-12 col-md-6 col-md-offset-2" type="text" placeholder="Add new todo Item to your list"></input>
+    <button type="button" class="col-md-2 col-md-offset-1" id="add">Add</button>
 <div class="container">-->
- </div>
-  	
-  <div id="list" class="list-group">
-  <h3>ToDo List Title</h3>
-    <a href="#" class="list-group-item active">
-      <h5 id="one" class="list-group-item-heading one">First Item Title</h5>
-      <p id="one_s" class="list-group-item-text one">First Item Summary/Details</p>
-    </a>
-    <a href="#" class="list-group-item">
-      <h5 id="two" class="list-group-item-heading">Second List Title</h5>
-      <p id="two_s" class="list-group-item-text">Second Item Summary/Details</p>
-    </a>
-    <a href="#" class="list-group-item">
-      <h5 id="three" class="list-group-item-heading">Third List Title</h5>
-      <p id="three_s" class="list-group-item-text">Third Item Summary/Details</p>
-    </a>
-  </div>
-</div>
+    </div>
+    <div id="list" class="list-group">
+        <h3>ToDo List Title</h3>
+        <a class="list-group-item active">
+            <h5 id="one" class="list-group-item-heading">First Item Title</h5>
+            <p id="one_s" class="list-group-item-text">First Item Summary/Details</p>
+            <p id="one_t" class="list-group-item-text"></p>
+        </a>
+        <a  class="list-group-item">
+            <h5 id="two" class="list-group-item-heading">Second List Title</h5>
+            <p id="two_s" class="list-group-item-text">Second Item Summary/Details</p>
+            <p id="two_t" class="list-group-item-text"></p>
+        </a>
+        <a class="list-group-item">
+            <h5 id="three" class="list-group-item-heading">Third List Title</h5>
+            <p id="three_s" class="list-group-item-text">Third Item Summary/Details</p>
+            <p id="three_t" class="list-group-item-text"></p>
+        </a>
+    </div>
+    </div>
 </body>
+
 </html>
