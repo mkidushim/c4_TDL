@@ -2,11 +2,18 @@
 
 function addListItem() {
 	console.log("in the add")
+
+	var title = $('#add-title').val();
 	var text = $('#add-item').val();
+	var date_item = $('#add-date').val();
+
 	console.log('text=', text);
   
-	$("#list-item").append("<li>" + "<input type= "+"'checkbox'"+" class="+"'item_done'"+">"+text+" <"+"button "+"class= "+"'delete_btn'"+">"+"x"+"</button>"+"</li>");
-        
+	$("#list-item").append("<li>" + "<input type= "+"'checkbox'"+" class="+"'item_done'"+">"+title+" <"+"button "+"class= "+"'delete_btn'"+">"+"x"+"</button>"+"</li>");
+    $("#list-item").append("<li>" + "<input type= "+"'checkbox'"+" class="+"'item_done'"+">"+text+" <"+"button "+"class= "+"'delete_btn'"+">"+"x"+"</button>"+"</li>");
+  $("#list-item").append("<li>" + "<input type= "+"'checkbox'"+" class="+"'item_done'"+">"+text+" <"+"button "+"class= "+"'delete_btn'"+">"+"x"+"</button>"+"</li>");
+
+   
 	$('#add-item').val("");
 	load_data()
 
@@ -34,40 +41,7 @@ function crossOutListItem() {
  
 };
 
-function load_data() {
-
-    var objectData = 
- 	 {
-      id: 0,
-      user_id: 1,
-      timeStamp: '2015/06/15 12:00:00',
-      title: 'get eggs',
-      details: 'this is a test'
-    };
-
-		console.log("in load data");
-		console.log("in load:",$('#add-item').val());
-		
-
-			$.ajax({
-				url: 'http://localhost/lf_projects/sandbox/c4_TDL/get_todo_items.json',
-      			dataType: "json",
-      			data: { data: JSON.stringify(objectData) },
-      			method: 'POST',
-      			async: false,
-      			cache: false,
-            	crossDomain: true,
-            	success: function(response) {
-
-                console.log('success  inside post result - respons==', response);
-                //$('#data_display').html(response);
-              
-            	}
-
-       		 });
-    }
-  
-
+ 
 
 function get_data() {
 	console.log("in data");
@@ -101,7 +75,7 @@ function get_data() {
 
 	  $.ajax({
         dataType: 'json',
-        url: 'http://localhost/lf_projects/sandbox/c4_TDL/get_todo_items.json',
+        url: 'get_todo_items.json',
         method: 'GET',
         cache: false,
         crossDomain: true,
@@ -121,8 +95,11 @@ function get_data() {
 				      console.log("response title", response[i].title);
 				      console.log("response id", response[i].details);
                       console.log("in the for loop:", response[i]);
+                      $("#list-item").append("<li>" + "<input type= "+"'checkbox'"+" class="+"'item_done'"+">"+response[i].title+" <"+"button "+"class= "+"'delete_btn'"+">"+"x"+"</button>"+"</li>");
                       $("#list-item").append("<li>" + "<input type= "+"'checkbox'"+" class="+"'item_done'"+">"+response[i].details+" <"+"button "+"class= "+"'delete_btn'"+">"+"x"+"</button>"+"</li>");
-         
+                      $("#list-item").append("<li>" + "<input type= "+"'checkbox'"+" class="+"'item_done'"+">"+response[i].timeStamp+" <"+"button "+"class= "+"'delete_btn'"+">"+"x"+"</button>"+"</li>");
+
+         				
                     
        			  }
     		} 
