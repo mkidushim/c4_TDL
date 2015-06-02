@@ -214,6 +214,23 @@ function get_TDL_json_populate_single() {
     });
 }
 
+function login_to_server() {
+    console.log("ajax call");
+    $.ajax({
+        dataType: 'json',
+        data: {username: $('#user_name').val(), password: $('#password').val() },
+        url: 'http://s-apis.learningfuze.com/todo/login',
+        method: 'POST',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            $('#display_successful_login').html(response);
+        }
+    });
+}
+
+
 $(document).ready(function() {
     $('#add_LI').click(function() {
         todo_initialize();
@@ -227,4 +244,7 @@ $(document).ready(function() {
         get_TDL_json_populate_single();
 
     })
+
+    $('#login_button').click(login_to_server);
 });
+
