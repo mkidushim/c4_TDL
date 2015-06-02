@@ -1,4 +1,4 @@
-var todo_items=[
+todo_items[
     {
       id: 0,
       user_id: 1,
@@ -19,4 +19,4 @@ var todo_items=[
       timeStamp: '2015/11/17 11:22:00',
       title: 'proposition parris',
       details: 'to go to the zoo'
-    }];
+    }]
