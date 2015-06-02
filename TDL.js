@@ -229,6 +229,22 @@ function login_to_server() {
         }
     });
 }
+//MK- created logout_server() function
+function logout_server() {
+    console.log("ajax logout:");
+    $.ajax({
+        dataType: 'json',
+        data: {username: $('#user_name').val(), password: $('#password').val() },
+        url: 'http://s-apis.learningfuze.com/todo/login',
+        method: 'POST',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            $('#display_successful_login').html(response);
+        }
+    });
+}
 
 
 $(document).ready(function() {
