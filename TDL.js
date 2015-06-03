@@ -231,12 +231,14 @@ function login_to_server() {
                 load_user_data()
                 sesssion = response.session_id;
                 $('.alert').remove();
+
             }
             else if(!response.success){
                 if(login_clicked){
                 var alert=$('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
                 $('body').append(alert);
                 login_clicked = false;
+
             }
             }
         }
@@ -278,6 +280,7 @@ function load_user_data(){
         success: function(response){
             $('.container').html('');
             $('.container').html(response);
+            $('#logout_button').click(logout_server);
             populate_success_data();
         }
     })
@@ -291,6 +294,7 @@ function logout_to_mainpage(){
         success: function(response){
             $('.container').html('');
             $('.container').html(response);
+            $('#logout_button').click(logout_server);
             
         }
     })
