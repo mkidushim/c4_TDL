@@ -46,7 +46,7 @@ function populate_todo_list() {
             data_index: i
         });
 
-       var p3_button = $("<button>", {
+        var p3_button = $("<button>", {
             type: 'button',
             class: 'button',
             text: "priority 3",
@@ -86,13 +86,13 @@ function populate_todo_list() {
         delete_button.click(function() {
             var index = $(this).parent().attr('data_index');
             console.log("list item ", index + ' was clicked');
-            
+
             todo_items_array.splice(index, 1);
             populate_todo_list();
         });
 
 
-// this is being worked on to add priority
+        // this is being worked on to add priority
         p1_button.click(function() {
             var index = $(this).parent().attr('data_index');
             console.log("list item ", index + ' was clicked');
@@ -195,56 +195,86 @@ function get_TDL_json_populate_multiple() {
 }
 
 function get_TDL_json_populate_single() {
-    console.log("ajax call");
-    $.ajax({
-        dataType: 'json',
-        url: 'get_todo_items.json',
-        method: 'GET',
-        cache: false,
-        crossDomain: true,
+        console.log("ajax call");
+        $.ajax({
+            dataType: 'json',
+            url: 'get_todo_items.json',
+            method: 'GET',
+            cache: false,
+            crossDomain: true,
 
-        success: function(response) {
-            todo_items_array = [];
-            global_response = response;
-            todo_items_array = todo_items_array.concat(global_response);
-            console.log("response: ", response);
-            console.log("response: ", global_response);
-            console.log('todo_items_array: ', todo_items_array);
-            populate_todo_single();
-        }
-    });
-}
+            success: function(response) {
+                todo_items_array = [];
+                global_response = response;
+                todo_items_array = todo_items_array.concat(global_response);
+                console.log("response: ", response);
+                console.log("response: ", global_response);
+                console.log('todo_items_array: ', todo_items_array);
+                populate_todo_single();
+            }
+        });
+    }
 //used to validate username and password before login is successfull
 // I am not sure what function needs to run on login success commented out so logout would work
 function login_to_server() {
-    console.log("ajax call");
-    $.ajax({
-        dataType: 'json',
-        data: {username: $('#user_name').val(), password: $('#password').val() },
-        url: 'http://s-apis.learningfuze.com/todo/login',
-        method: 'POST',
-        cache: false,
-        crossDomain: true,
-        success: function(response) {
-            window.response = response;
-            if(response.success){
-                load_user_data()
-                sesssion = response.session_id;
-                $('.alert').remove();
-
+        console.log("ajax call");
+        $.ajax({
+            dataType: 'json',
+            data: {
+                username: $('#user_name').val(),
+                password: $('#password').val()
+            },
+            url: 'http://s-apis.learningfuze.com/todo/login',
+            method: 'POST',
+            cache: false,
+            crossDomain: true,
+            success: function(response) {
+                window.response = response;
+                if (response.success) {
+                    load_user_data()
+                    sesssion = response.session_id;
+                    $('.alert').remove();
+                } else if (!response.success) {
+                    if (login_clicked) {
+                        var alert = $('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
+                        $('body').append(alert);
+                        login_clicked = false;
+                    }
+                }
             }
-            else if(!response.success){
-                if(login_clicked){
-                var alert=$('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
-                $('body').append(alert);
-                login_clicked = false;
-
+        });
+    }
+    //used to validate username and password before login is successfull
+    // I am not sure what function needs to run on login success commented out so logout would work
+function login_to_server() {
+        console.log("ajax call");
+        $.ajax({
+            dataType: 'json',
+            data: {
+                username: $('#user_name').val(),
+                password: $('#password').val()
+            },
+            url: 'http://s-apis.learningfuze.com/todo/login',
+            method: 'POST',
+            cache: false,
+            crossDomain: true,
+            success: function(response) {
+                window.response = response;
+                if (response.success) {
+                    load_user_data()
+                    sesssion = response.session_id;
+                    $('.alert').remove();
+                } else if (!response.success) {
+                    if (login_clicked) {
+                        var alert = $('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
+                        $('body').append(alert);
+                        login_clicked = false;
+                    }
+                }
             }
-            }
-        }
-    });
-}
-//MK - created logout_server() function
+        });
+    }
+    //MK - created logout_server() function
 function logout_server() {
     console.log("ajax logout");
     console.log('sesssion id#', sesssion)
@@ -259,43 +289,53 @@ function logout_server() {
         crossDomain: true,
         success: function(response) {
             if (response.success) {
-            window.response = response;
-            console.log('response:', response)
-            console.log('msgs:', response.msgs)
-            logout_to_mainpage();
+                window.response = response;
+                console.log('logout:', response)
+                logout_to_mainpage();
 
-            }
-            else if (response.success == false){
+            } else if (response.success == false) {
                 console.log('logout error:', response.errors)
             }
         }
     });
 }
 
-function load_user_data(){
+function load_user_data() {
     $.ajax({
         dataType: 'html',
-        url:'multiple_to_do_item.html',
+        url: 'multiple_to_do_item.html',
         cache: false,
-        success: function(response){
+        success: function(response) {
             $('.container').html('');
             $('.container').html(response);
             $('#logout_button').click(logout_server);
+            $('#add_LI').click(function() {
+                todo_initialize();
+                populate_todo_list();
+            });
+            $('#pull_json').click(function() {
+                get_TDL_json_populate_multiple();
+
+            })
+            $('#single_pull_json').click(function() {
+                get_TDL_json_populate_single();
+
+            })
             populate_success_data();
         }
     })
 }
 
-function logout_to_mainpage(){
+function logout_to_mainpage() {
     $.ajax({
         dataType: 'html',
-        url:'login.html',
+        url: 'login.html',
         cache: false,
-        success: function(response){
+        success: function(response) {
             $('.container').html('');
             $('.container').html(response);
             $('#logout_button').click(logout_server);
-            
+            $('#login_button').click(login_to_server);
         }
     })
 }
@@ -324,8 +364,8 @@ $(document).ready(function() {
 //Parris function creation to populate DOM with response object data
 
 function populate_success_data() {
-            $('#email').html('Email : ' + response.email);
-            $('#lastName').html('Last Name : ' + response.lastName);
-            $('#firstName').html('First Name : ' + response.firstName);
-            $('#id').html('id : ' + response.id)
-        }
+    $('#email').html('Email : ' + response.email);
+    $('#lastName').html('Last Name : ' + response.lastName);
+    $('#firstName').html('First Name : ' + response.firstName);
+    $('#id').html('id : ' + response.id)
+}
