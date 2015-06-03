@@ -213,7 +213,7 @@ function get_TDL_json_populate_single() {
         }
     });
 }
-
+//used to validate username and password before login is successfull
 function login_to_server() {
     console.log("ajax call");
     $.ajax({
@@ -225,7 +225,10 @@ function login_to_server() {
         crossDomain: true,
         success: function(response) {
             window.response = response;
-            $('#display_successful_login').html(response);
+            if(response.success){
+                location.href="multiple_to_do_item.html"
+                populate_success_data();
+            }
         }
     });
 }
@@ -263,4 +266,15 @@ $(document).ready(function() {
     $('#login_button').click(login_to_server);
     $('#logout_button').click(logout_server);
 });
+
+//Parris function creation to populate DOM with response object data
+function populate_success_data(){
+    $('#success').html("response.success");
+    $('#status').html("response.status");
+    $('#email').html("response.email");
+    $('#lastName').html("response.lastName");
+    $('#firstName').html("response.firstName");
+    $('#id').html("response.id");
+    $('#errors').html("response.errors");
+}
 
