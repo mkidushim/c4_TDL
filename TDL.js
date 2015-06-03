@@ -214,6 +214,7 @@ function get_TDL_json_populate_single() {
     });
 }
 //used to validate username and password before login is successfull
+// I am not sure what function needs to run on login success commented out so logout would work
 function login_to_server() {
     console.log("ajax call");
     $.ajax({
@@ -226,7 +227,34 @@ function login_to_server() {
         success: function(response) {
             window.response = response;
             if(response.success){
-                load_user_data();
+                //location.href="multiple_to_do_item.html"
+                populate_success_data();
+                console.log('success')
+                sesssion = response.session_id;
+            }
+        }
+    });
+}
+//MK - created logout_server() function
+function logout_server() {
+    console.log("ajax logout");
+    console.log('sesssion', sesssion)
+    $.ajax({
+        dataType: 'json',
+        url: 'http://s-apis.learningfuze.com/todo/logout',
+        data: {
+            session_id: 'response.session_id',
+        },
+        method: 'POST',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            if (response.success) {
+            window.response = response;
+            console.log('logout:', response)
+            }
+            else if (response.success == false){
+                console.log('logout error:', response.errors)
             }
         }
     });
@@ -260,14 +288,16 @@ $(document).ready(function() {
         get_TDL_json_populate_single();
 
     })
+
     $('#login_button').click(login_to_server);
+    $('#logout_button').click(logout_server);
 });
 
 //Parris function creation to populate DOM with response object data
+
 function populate_success_data() {
             $('#email').html('Email : ' + response.email);
             $('#lastName').html('Last Name : ' + response.lastName);
             $('#firstName').html('First Name : ' + response.firstName);
             $('#id').html('id : ' + response.id)
         }
-
