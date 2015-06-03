@@ -239,7 +239,7 @@ function login_to_server() {
 //MK - created logout_server() function
 function logout_server() {
     console.log("ajax logout");
-    console.log('sesssion', sesssion)
+    console.log('sesssion id#', sesssion)
     $.ajax({
         dataType: 'json',
         url: 'http://s-apis.learningfuze.com/todo/logout',
@@ -252,7 +252,8 @@ function logout_server() {
         success: function(response) {
             if (response.success) {
             window.response = response;
-            console.log('logout:', response)
+            console.log('response:', response)
+            console.log('msgs:', response.msgs)
             logout_to_mainpage();
 
             }
