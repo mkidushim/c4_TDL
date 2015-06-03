@@ -1,3 +1,30 @@
 .list-group {
-	margin-top: 45px;
+    margin-top: 45px;
+}
+
+#password {
+    color: white;
+    background-color: rgba(194, 175, 243, 1.0);
+    -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    box-shadow: 3px 3px 8px 4px #888888;
+    margin: 5px;
+}
+
+#user_name {
+    color: white;
+    background-color: rgba(194, 175, 243, 1.0);
+    -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    box-shadow: 3px 3px 8px 4px #888888;
+    margin: 5px;
+}
+
+#login_button {
+    color: white;
+    background-color: rgba(194, 175, 243, 1.0);
+    -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    box-shadow: 3px 3px 8px 4px #888888;
+    margin: 5px;
 }
