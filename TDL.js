@@ -6,6 +6,7 @@ var todo_items_object = {
     id: null
 };
 var todo_items_array = [];
+var login_clicked = true;
 
 function todo_initialize() {
     var todo_initialize = Object.create(todo_items_object);
@@ -232,8 +233,11 @@ function login_to_server() {
                 $('.alert').remove();
             }
             else if(!response.success){
+                if(login_clicked){
                 var alert=$('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
                 $('body').append(alert);
+                login_clicked = false;
+            }
             }
         }
     });
