@@ -228,7 +228,8 @@ function login_to_server() {
             window.response = response;
             if(response.success){
                 //location.href="multiple_to_do_item.html"
-                populate_success_data();
+                load_user_data()
+                // populate_success_data();
                 console.log('success')
                 sesssion = response.session_id;
             }
@@ -252,6 +253,8 @@ function logout_server() {
             if (response.success) {
             window.response = response;
             console.log('logout:', response)
+            logout_to_mainpage();
+
             }
             else if (response.success == false){
                 console.log('logout error:', response.errors)
@@ -266,12 +269,26 @@ function load_user_data(){
         url:'multiple_to_do_item.html',
         cache: false,
         success: function(response){
-            $('body').html('');
-            $('body').html(response);
+            $('.container').html('');
+            $('.container').html(response);
             populate_success_data();
         }
     })
 }
+
+function logout_to_mainpage(){
+    $.ajax({
+        dataType: 'html',
+        url:'login_page.html',
+        cache: false,
+        success: function(response){
+            $('.container').html('');
+            $('.container').html(response);
+            
+        }
+    })
+}
+
 
 
 
