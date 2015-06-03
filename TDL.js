@@ -214,6 +214,7 @@ function get_TDL_json_populate_single() {
     });
 }
 //used to validate username and password before login is successfull
+// I am not sure what function needs to run on login success commented out so logout would work
 function login_to_server() {
     console.log("ajax call");
     $.ajax({
@@ -252,10 +253,26 @@ function logout_server() {
             }
             else if (response.success == false){
                 console.log('logout error:', response.errors)
+                
+
             }
         }
     });
 }
+
+function load_user_data(){
+    $.ajax({
+        dataType: 'html',
+        url:'multiple_to_do_item.html',
+        cache: false,
+        success: function(response){
+            $('body').html('');
+            $('body').html(response);
+            populate_success_data();
+        }
+    })
+}
+
 
 
 $(document).ready(function() {
@@ -277,13 +294,10 @@ $(document).ready(function() {
 });
 
 //Parris function creation to populate DOM with response object data
-function populate_success_data(){
-    $('#success').html("response.success");
-    $('#status').html("response.status");
-    $('#email').html("response.email");
-    $('#lastName').html("response.lastName");
-    $('#firstName').html("response.firstName");
-    $('#id').html("response.id");
-    $('#errors').html("response.errors");
-}
 
+function populate_success_data() {
+            $('#email').html('Email : ' + response.email);
+            $('#lastName').html('Last Name : ' + response.lastName);
+            $('#firstName').html('First Name : ' + response.firstName);
+            $('#id').html('id : ' + response.id)
+        }
