@@ -226,10 +226,11 @@ function login_to_server() {
         success: function(response) {
             window.response = response;
             if(response.success){
-                location.href="multiple_to_do_item.html"
+                //location.href="multiple_to_do_item.html"
                 populate_success_data();
+                console.log('success')
             }
-            else if(response.success == false) {
+            else if(!response.success) {
                 console.log('success:error')
             }
         }
@@ -241,6 +242,9 @@ function logout_server() {
     $.ajax({
         dataType: 'json',
         url: 'http://s-apis.learningfuze.com/todo/logout',
+        data: {
+            response.session_id
+        },
         method: 'POST',
         cache: false,
         crossDomain: true,
