@@ -227,11 +227,13 @@ function login_to_server() {
         success: function(response) {
             window.response = response;
             if(response.success){
-                //location.href="multiple_to_do_item.html"
                 load_user_data()
-                // populate_success_data();
-                console.log('success')
                 sesssion = response.session_id;
+                $('.alert').remove();
+            }
+            else if(!response.success){
+                var alert=$('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
+                $('body').append(alert);
             }
         }
     });
