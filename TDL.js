@@ -230,9 +230,6 @@ function login_to_server() {
                 populate_success_data();
                 console.log('success')
             }
-            else if(!response.success) {
-                console.log('success:error')
-            }
         }
     });
 }
@@ -243,7 +240,7 @@ function logout_server() {
         dataType: 'json',
         url: 'http://s-apis.learningfuze.com/todo/logout',
         data: {
-            response.session_id
+            session_id: 'response.session_id',
         },
         method: 'POST',
         cache: false,
