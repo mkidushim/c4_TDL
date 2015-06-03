@@ -277,6 +277,7 @@ function load_user_data(){
         success: function(response){
             $('.container').html('');
             $('.container').html(response);
+            $('#logout_button').click(logout_server);
             populate_success_data();
         }
     })
@@ -285,7 +286,7 @@ function load_user_data(){
 function logout_to_mainpage(){
     $.ajax({
         dataType: 'html',
-        url:'login_page.html',
+        url:'login.html',
         cache: false,
         success: function(response){
             $('.container').html('');
