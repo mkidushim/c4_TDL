@@ -234,14 +234,13 @@ function logout_server() {
     console.log("ajax logout:");
     $.ajax({
         dataType: 'json',
-        data: {username: $('#user_name').val(), password: $('#password').val() },
-        url: 'http://s-apis.learningfuze.com/todo/login',
+        url: 'http://s-apis.learningfuze.com/todo/logout',
         method: 'POST',
         cache: false,
         crossDomain: true,
         success: function(response) {
             window.response = response;
-            $('#display_successful_login').html(response);
+            console.log(response);
         }
     });
 }
@@ -262,5 +261,6 @@ $(document).ready(function() {
     })
 
     $('#login_button').click(login_to_server);
+    $('#logout_button').click(logout_server);
 });
 
