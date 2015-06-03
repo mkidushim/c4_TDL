@@ -230,6 +230,7 @@ function login_to_server() {
                 //location.href="multiple_to_do_item.html"
                 populate_success_data();
                 console.log('success')
+                sesssion = response.session_id;
             }
         }
     });
@@ -237,6 +238,7 @@ function login_to_server() {
 //MK - created logout_server() function
 function logout_server() {
     console.log("ajax logout");
+    console.log('sesssion', sesssion)
     $.ajax({
         dataType: 'json',
         url: 'http://s-apis.learningfuze.com/todo/logout',
@@ -249,12 +251,10 @@ function logout_server() {
         success: function(response) {
             if (response.success) {
             window.response = response;
-            console.log(response);
+            console.log('logout:', response)
             }
             else if (response.success == false){
                 console.log('logout error:', response.errors)
-                
-
             }
         }
     });
