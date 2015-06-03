@@ -291,6 +291,7 @@ function logout_to_mainpage(){
         success: function(response){
             $('.container').html('');
             $('.container').html(response);
+            $('#login_button').click(login_to_server);
             
         }
     })
