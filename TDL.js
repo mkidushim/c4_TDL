@@ -240,7 +240,7 @@ function login_to_server() {
                 } else if (!response.success) {
                     if (login_clicked) {
                         var alert = $('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
-                        $('.form_container').append(alert);
+                        $('body').append(alert);
                         login_clicked = false;
                     }
                 }
@@ -360,7 +360,7 @@ $(document).ready(function() {
 
 function populate_success_data() {
     $('#email').html('Email : ' + response.email);
-    $('#lastName').html(response.lastName);
-    $('#firstName').html(response.firstName);
+    $('#lastName').html('Last Name : ' + response.lastName);
+    $('#firstName').html('First Name : ' + response.firstName);
     $('#id').html(response.id)
 }
