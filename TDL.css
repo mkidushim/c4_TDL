@@ -89,6 +89,7 @@ legend {
     font-size: 20px;
     margin-left: 9px;
 }
+
 span.glyphicon-check {
 
 padding: 5px;
@@ -99,4 +100,8 @@ color: red;
 }
 .green{
     color: green;
+}
+.pastDue {
+	background-color: red;
+
 }
