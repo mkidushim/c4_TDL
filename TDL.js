@@ -361,8 +361,22 @@ function logout_to_mainpage() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
-            $('#logout_button').click(logout_server);
-            $('#login_button').click(login_to_server);
+        }
+    })
+}
+
+
+function log_to_creation_page() {
+    $.ajax({
+        dataType: 'html',
+        url: 'creation_page.html',
+        cache: false,
+        success: function(response) {
+            $('.container').html('');
+            $('.container').html(response);
+            ('#validate_new_account').click(function(){
+                create_account();
+            })
         }
     })
 }
@@ -392,6 +406,10 @@ function send_list_items() {
 
 
 $(document).ready(function() {
+    $('#create_account_button').click(function(){
+        log_to_creation_page();
+    })
+
     $('#add_LI').click(function() {
         todo_initialize();
         populate_todo_list();
