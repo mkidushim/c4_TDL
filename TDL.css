@@ -1,7 +1,3 @@
-body {
-    background: black;
-}
-
 .list-group {
     margin-top: 45px;
 }
@@ -12,7 +8,7 @@ body {
     -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     box-shadow: 3px 3px 8px 4px #888888;
-    margin-bottom: 10%;
+    margin: 5px;
 }
 
 #user_name {
@@ -21,7 +17,7 @@ body {
     -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     box-shadow: 3px 3px 8px 4px #888888;
-    margin-bottom: 10%;
+    margin: 5px;
 }
 
 #login_button {
@@ -31,52 +27,4 @@ body {
     -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     box-shadow: 3px 3px 8px 4px #888888;
     margin: 5px;
-}
-
-.form_container {
-    margin-left: 38%;
-    background: lavender;
-    padding-top: 1%;
-    padding-bottom: 2%;
-    border-radius: 10px;
-}
-
-.list_container > div > h1 {
-    color: #F3EDAF;
-    font-family: 'Playball', cursive;
-    text-align: center;
-    font-size: 45px;
-    font-weight: 900;
-}
-
-#user_name::-webkit-input-placeholder {
-    color: #754b23;
-}
-
-#password::-webkit-input-placeholder {
-    color: #754b23;
-}
-
-legend {
-    color: rgb(194, 175, 243);
-}
-
-.list_font {
-    text-align: center;
-    margin-top: 4%;
-    margin-bottom: 4%;
-}
-
-.fa-list {
-    color: #F3EDAF;
-}
-
-#lastName {
-    margin-left: 5px;
-    font-size: 20px;
-}
-
-#firstName {
-    font-size: 20px;
-    margin-left: 9px;
 }
