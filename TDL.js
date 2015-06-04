@@ -169,7 +169,7 @@ function populate_todo_list() {
 
 function populate_todo_single() {
 
-    var iLN = parseFloat($('#id_LI').val());
+    var iLN = parseFloat($('#input_search_id').val());
     console.log("item list number chosen: ", iLN);
     console.log("todo_items_array: ", todo_items_array);
     for (var i = iLN; i < (iLN + 1); i++) {
