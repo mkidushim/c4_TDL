@@ -249,8 +249,8 @@ function login_to_server() {
                     $('.alert').remove();
                 } else if (!response.success) {
                     if (login_clicked) {
-                        var alert = $('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
-                        $('body').append(alert);
+                          var alert = $('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
+                        $('.form_container').append(alert);
                         login_clicked = false;
                     }
                 }
@@ -261,6 +261,7 @@ function login_to_server() {
     // I am not sure what function needs to run on login success commented out so logout would work
 function login_to_server() {
         console.log("ajax call");
+        name_user = $('#user_name').val();
         $.ajax({
             dataType: 'json',
             data: {
@@ -296,6 +297,7 @@ function logout_server() {
         url: 'http://s-apis.learningfuze.com/todo/logout',
         data: {
             session_id: 'response.session_id',
+            user_name: 'name_user',
         },
         method: 'POST',
         cache: false,
@@ -407,7 +409,7 @@ $(document).ready(function() {
 
 function populate_success_data() {
     $('#email').html('Email : ' + response.email);
-    $('#lastName').html('Last Name : ' + response.lastName);
-    $('#firstName').html('First Name : ' + response.firstName);
+    $('#lastName').html(response.lastName);
+    $('#firstName').html(response.firstName);
     $('#id').html(response.id)
 }
