@@ -340,6 +340,7 @@ function load_user_data() {
 
             })
             $('#add_LI').click(send_list_items);
+            
             populate_success_data();
 
             $('#sort_button').click(function(){
