@@ -6,7 +6,9 @@ var todo_items_object = {
     id: null
 };
 var todo_items_array = [];
+
 var login_clicked = true;
+
 var name_user;
 var session;
 
@@ -92,9 +94,12 @@ function populate_todo_list() {
             text: "details: " + todo_items_array[i].details,
         });
 
+
        //Janet made changes to remove the priority buttons
-       //$(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+
         $(TD_item).append(list_item_num, title, details, timestamp, delete_button );
+       // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {
@@ -135,7 +140,7 @@ function populate_todo_list() {
             populate_todo_list();
         });
     }
-             $('#list-group').empty();
+
 }
 
 function populate_todo_single() {
@@ -250,6 +255,7 @@ function login_to_server() {
                 window.response = response;
                 if (response.success) {
                     load_user_data()
+
                     sesssion = response.session_id;
                     $('.alert').remove();
                 } else if (!response.success) {
@@ -258,6 +264,16 @@ function login_to_server() {
                         $('.form_container').append(alert);
                         login_clicked = false;
                     }
+
+                    session = response.session_id;
+                    name_user = response.username;
+                    $('.alert').remove();
+                } else if (!response.success) {
+                    $('.alert').remove();
+                          var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
+                        $('.form_container').append(alert);
+                    
+
                 }
             }
         });
@@ -401,12 +417,19 @@ function create_account(){
                 
             }
             else if(!response.success){
+
                 if (signup_clicked) {
                     console.log(response);
                     $(alert).remove();
                           var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
                         $('#creation_div > form').append(alert);
                     }
+
+                    console.log(response);
+                    $('.alert').remove();
+                          var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
+                        $('#creation_div > form').append(alert);
+
             }
         }
 

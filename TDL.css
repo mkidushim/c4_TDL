@@ -1,8 +1,24 @@
+ body {
+   background-color: black;
+ 
+ }
 
-.container {
- background_color: black;
+.list-group-item {
+    background-color: black;
+    width: 850px;
 
 }
+
+
+ .main-container {
+
+   background-color: black;
+
+
+ }
+
+
+
 
 
  #input-container {
@@ -102,11 +118,10 @@ textarea:focus, input:focus{
 .btn-danger {
  margin-left: 900px;
     margin-top: -110px;
-    
+  
 
 
 }
-
 
 
 #add-LI {
@@ -114,14 +129,16 @@ textarea:focus, input:focus{
     margin-top: -110px;
     width: 60px;
  
- 
+
 body {
     background: black;
 }
 
 .list-group {
     margin-top: 45px;
- 
+
+}
+
 
 #password {
     color: white;
@@ -207,5 +224,8 @@ legend {
 #firstName {
     font-size: 20px;
     margin-left: 9px;
+
 }
  
+
+
