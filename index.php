@@ -1,6 +1,8 @@
- <?php
-    $a=1; $b=5;
-    include('includes/data.php');
-    $result = $a * $b;
-    print("<br>Result is $result");
-  </?>
+<?php 
+	
+	print_r($_GET);
+	var_dump($_POST);
+
+
+ 
+ ?>
