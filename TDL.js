@@ -7,6 +7,8 @@ var todo_items_object = {
 };
 var todo_items_array = [];
 var login_clicked = true;
+var name_user;
+var session;
 
 function todo_initialize() {
     var todo_initialize = Object.create(todo_items_object);
@@ -257,16 +259,19 @@ function login_to_server() {
             }
         });
     }
+    //used to validate username and password before login is successfull
+    // I am not sure what function needs to run on login success commented out so logout would work
     //MK - created logout_server() function
+    //MK- 06/04/15 Fixed logout
 function logout_server() {
     console.log("ajax logout");
-    console.log('sesssion id#', sesssion)
+    console.log('sesssion id#', session)
     $.ajax({
         dataType: 'json',
         url: 'http://s-apis.learningfuze.com/todo/logout',
         data: {
-            session_id: 'response.session_id',
-            user_name: 'name_user',
+            sid: session,
+            username: name_user
         },
         method: 'POST',
         cache: false,
@@ -306,6 +311,7 @@ function load_user_data() {
 
             })
             $('#add_LI').click(send_list_items);
+            
             populate_success_data();
 
             $('#sort_button').click(function(){
@@ -326,8 +332,22 @@ function logout_to_mainpage() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
-            $('#logout_button').click(logout_server);
-            $('#login_button').click(login_to_server);
+        }
+    })
+}
+
+
+function log_to_creation_page() {
+    $.ajax({
+        dataType: 'html',
+        url: 'creation_page.html',
+        cache: false,
+        success: function(response) {
+            $('.container').html('');
+            $('.container').html(response);
+            $('#validate_new_account').click(function(){
+                create_account();
+            })
         }
     })
 }
@@ -392,6 +412,10 @@ function create_account(){
 
 
 $(document).ready(function() {
+    $('#create_account_button').click(function(){
+        log_to_creation_page();
+    })
+
     $('#add_LI').click(function() {
         todo_initialize();
         populate_todo_list();
