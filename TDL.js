@@ -279,10 +279,10 @@ function load_user_data() {
             $('.container').html('');
             $('.container').html(response);
             $('#logout_button').click(logout_server);
-            $('#add_LI').click(function() {
-                todo_initialize();
-                populate_todo_list();
-            });
+            // $('#add_LI').click(function() {
+            //     todo_initialize();
+            //     populate_todo_list();
+            // });
             $('#pull_json').click(function() {
                 get_TDL_json_populate_multiple();
 
@@ -291,6 +291,7 @@ function load_user_data() {
                 get_TDL_json_populate_single();
 
             })
+            $('#add_LI').click(send_list_items);
             populate_success_data();
         }
     })
@@ -308,6 +309,28 @@ function logout_to_mainpage() {
 
         }
     })
+}
+
+function send_list_items() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            title: $('#title_LI').val(),
+            dueDate: $('#timeStamp_LI').val(),
+            details: $('#details_LI').val(),
+            userId: $('#id').html(),
+        },
+        method: 'POST',
+        url: 'http://s-apis.learningfuze.com/todo/create',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            if (response.success) {
+                get_TDL_json_populate_multiple();
+            }
+        }
+
+    });
 }
 
 
