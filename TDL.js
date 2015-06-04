@@ -10,22 +10,22 @@ var name_user;
 var session;
 
 function todo_initialize() {
-    var todo_initialize = Object.create(todo_items_object);
-    todo_initialize.title = $('#title_LI').val();
-    todo_initialize.details = $('#details_LI').val();
-    todo_initialize.timeStamp = parseFloat($('#timeStamp_LI').val());
-    console.log("todo_object: ", todo_items_object);
-    todo_items_array.push(todo_initialize);
-}
-//Parris sort function
-function sort_todo(a,b) {
-  if (parseFloat(a.list_item_num) < parseFloat(b.list_item_num))
-    return -1;
-  if (parseFloat(a.list_item_num) > parseFloat(b.list_item_num))
-    return 1;
-  return 0;
-}
-//Parris end sort function
+        var todo_initialize = Object.create(todo_items_object);
+        todo_initialize.title = $('#title_LI').val();
+        todo_initialize.details = $('#details_LI').val();
+        todo_initialize.timeStamp = parseFloat($('#timeStamp_LI').val());
+        console.log("todo_object: ", todo_items_object);
+        todo_items_array.push(todo_initialize);
+    }
+    //Parris sort function
+function sort_todo(a, b) {
+        if (parseFloat(a.list_item_num) < parseFloat(b.list_item_num))
+            return -1;
+        if (parseFloat(a.list_item_num) > parseFloat(b.list_item_num))
+            return 1;
+        return 0;
+    }
+    //Parris end sort function
 
 
 function populate_todo_list() {
@@ -46,30 +46,30 @@ function populate_todo_list() {
         var p1_button = $("<button>", {
             type: 'button',
             class: 'button',
-            text: "priority 1",
+            text: "show details",
             data_index: i
         });
 
-        var p2_button = $("<button>", {
-            type: 'button',
-            class: 'button',
-            text: "priority 2",
-            data_index: i
-        });
+        // var p2_button = $("<button>", {
+        //     type: 'button',
+        //     class: 'button',
+        //     text: "priority 2",
+        //     data_index: i
+        // });
 
-        var p3_button = $("<button>", {
-            type: 'button',
-            class: 'button',
-            text: "priority 3",
-            data_index: i
-        });
+        // var p3_button = $("<button>", {
+        //     type: 'button',
+        //     class: 'button',
+        //     text: "priority 3",
+        //     data_index: i
+        // });
 
-        var p4_button = $("<button>", {
-            type: 'button',
-            class: 'button',
-            text: 'priority 4',
-            data_index: i
-        });
+        // var p4_button = $("<button>", {
+        //     type: 'button',
+        //     class: 'button',
+        //     text: 'priority 4',
+        //     data_index: i
+        // });
 
         var list_item_num = $("<li>", {
             class: 'list_item_num list-group-item',
@@ -91,7 +91,8 @@ function populate_todo_list() {
             text: "details: " + todo_items_array[i].details,
         });
 
-        $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+        // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+        $(TD_item).append(title, p1_button)
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {
@@ -102,35 +103,46 @@ function populate_todo_list() {
             populate_todo_list();
         });
 
+        p1_button.click(function(){
+            $('.modal-body').html('');
+            var index = $(this).parent().attr('data_index');
+            var title_display = todo_items_array[index].title;
+            var details_display = todo_items_array[index].details;
+            var timestamp_display = todo_items_array[index].timeStamp;
+
+            $('.modal-body').append(title_display,  details_display, timestamp_display);
+            $('#myModal').modal('show');
+        })
+
 
         // this is being worked on to add priority
-        p1_button.click(function() {
-            var index = $(this).parent().attr('data_index');
-            console.log("list item ", index + ' was clicked');
-            $(TD_item).addClass('list-group-item list-group-item-danger');
-            populate_todo_list();
-        });
+        // p1_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     $(TD_item).addClass('list-group-item list-group-item-danger');
+        //     populate_todo_list();
+        // });
 
-        p2_button.click(function() {
-            var index = $(this).parent().attr('data_index');
-            console.log("list item ", index + ' was clicked');
-            var priority = $(this).parent().addClass('list-group-item list-group-item-warning');
-            populate_todo_list();
-        });
+        // p2_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     var priority = $(this).parent().addClass('list-group-item list-group-item-warning');
+        //     populate_todo_list();
+        // });
 
-        p3_button.click(function() {
-            var index = $(this).parent().attr('data_index');
-            console.log("list item ", index + ' was clicked');
-            var priority = $(this).parent().addClass('list-group-item list-group-item-info');
-            populate_todo_list();
-        });
+        // p3_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     var priority = $(this).parent().addClass('list-group-item list-group-item-info');
+        //     populate_todo_list();
+        // });
 
-        p4_button.click(function() {
-            var index = $(this).parent().attr('data_index');
-            console.log("list item ", index + ' was clicked');
-            var priority = $(this).parent().addClass('list-group-item list-group-item-success');
-            populate_todo_list();
-        });
+        // p4_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     var priority = $(this).parent().addClass('list-group-item list-group-item-success');
+        //     populate_todo_list();
+        // });
     }
 }
 
@@ -228,8 +240,8 @@ function get_TDL_json_populate_single() {
             }
         });
     }
-//used to validate username and password before login is successfull
-// I am not sure what function needs to run on login success commented out so logout would work
+    //used to validate username and password before login is successfull
+    // I am not sure what function needs to run on login success commented out so logout would work
 function login_to_server() {
         console.log("ajax call");
         $.ajax({
@@ -251,9 +263,9 @@ function login_to_server() {
                     $('.alert').remove();
                 } else if (!response.success) {
                     $('.alert').remove();
-                          var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
-                        $('.form_container').append(alert);
-                    
+                    var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
+                    $('.form_container').append(alert);
+
                 }
             }
         });
@@ -270,7 +282,7 @@ function logout_server() {
         url: 'http://s-apis.learningfuze.com/todo/logout',
         data: {
             sid: session,
-            username: name_user
+            username: name_user,
         },
         method: 'POST',
         cache: false,
@@ -310,10 +322,10 @@ function load_user_data() {
 
             })
             $('#add_LI').click(send_list_items);
-            
+
             populate_success_data();
 
-            $('#sort_button').click(function(){
+            $('#sort_button').click(function() {
                 console.log(todo_items_array.sort(sort_todo));
                 todo_items_array.sort(sort_todo);
                 populate_todo_list
@@ -331,6 +343,10 @@ function logout_to_mainpage() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
+            $('#login_button').click(login_to_server);
+            $('#create_account_button').click(function() {
+                log_to_creation_page();
+            })
         }
     })
 }
@@ -344,7 +360,7 @@ function log_to_creation_page() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
-            $('#validate_new_account').click(function(){
+            $('#validate_new_account').click(function() {
                 create_account();
             })
         }
@@ -374,16 +390,16 @@ function send_list_items() {
     });
 }
 
-function create_account(){
-     $.ajax({
+function create_account() {
+    $.ajax({
         dataType: 'json',
         data: {
-            username: $('#N_user_name').val() ,
+            username: $('#N_user_name').val().toLowerCase(),
             password: $('#N_password1').val(),
             password2: $('#N_password2').val(),
             email: $('#N_user_email').val(),
-            firstName: $('#N_first_name').val() ,
-            lastName: $('#N_last_name').val() ,
+            firstName: $('#N_first_name').val(),
+            lastName: $('#N_last_name').val(),
         },
         method: 'POST',
         url: 'http://s-apis.learningfuze.com/todo/newAccount',
@@ -394,13 +410,12 @@ function create_account(){
             if (response.success) {
                 console.log(response);
                 logout_to_mainpage();
-                
-            }
-            else if(!response.success){
-                    console.log(response);
-                    $('.alert').remove();
-                          var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
-                        $('#creation_div > form').append(alert);
+
+            } else if (!response.success) {
+                console.log(response);
+                $('.alert').remove();
+                var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
+                $('#creation_div > form').append(alert);
             }
         }
 
@@ -409,7 +424,7 @@ function create_account(){
 
 
 $(document).ready(function() {
-    $('#create_account_button').click(function(){
+    $('#create_account_button').click(function() {
         log_to_creation_page();
     })
 
