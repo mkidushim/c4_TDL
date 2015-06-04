@@ -249,39 +249,8 @@ function login_to_server() {
                     $('.alert').remove();
                 } else if (!response.success) {
                     if (login_clicked) {
-                          var alert = $('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
+                          var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
                         $('.form_container').append(alert);
-                        login_clicked = false;
-                    }
-                }
-            }
-        });
-    }
-    //used to validate username and password before login is successfull
-    // I am not sure what function needs to run on login success commented out so logout would work
-function login_to_server() {
-        console.log("ajax call");
-        name_user = $('#user_name').val();
-        $.ajax({
-            dataType: 'json',
-            data: {
-                username: $('#user_name').val(),
-                password: $('#password').val()
-            },
-            url: 'http://s-apis.learningfuze.com/todo/login',
-            method: 'POST',
-            cache: false,
-            crossDomain: true,
-            success: function(response) {
-                window.response = response;
-                if (response.success) {
-                    load_user_data()
-                    sesssion = response.session_id;
-                    $('.alert').remove();
-                } else if (!response.success) {
-                    if (login_clicked) {
-                        var alert = $('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
-                        $('body').append(alert);
                         login_clicked = false;
                     }
                 }
@@ -380,6 +349,41 @@ function send_list_items() {
             window.response = response;
             if (response.success) {
                 get_TDL_json_populate_multiple();
+            }
+        }
+
+    });
+}
+
+function create_account(){
+     $.ajax({
+        dataType: 'json',
+        data: {
+            username: $('#N_user_name').val() ,
+            password: $('#N_password1').val(),
+            password2: $('#N_password2').val(),
+            email: $('#N_user_email').val(),
+            firstName: $('#N_first_name').val() ,
+            lastName: $('#N_last_name').val() ,
+        },
+        method: 'POST',
+        url: 'http://s-apis.learningfuze.com/todo/newAccount',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            if (response.success) {
+                console.log(response);
+                logout_to_mainpage();
+                
+            }
+            else if(!response.success){
+                if (signup_clicked) {
+                    console.log(response);
+                    $(alert).remove();
+                          var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
+                        $('#creation_div > form').append(alert);
+                    }
             }
         }
 
