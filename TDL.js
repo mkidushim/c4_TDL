@@ -261,6 +261,7 @@ function login_to_server() {
     // I am not sure what function needs to run on login success commented out so logout would work
 function login_to_server() {
         console.log("ajax call");
+        name_user = $('#user_name').val();
         $.ajax({
             dataType: 'json',
             data: {
@@ -296,6 +297,7 @@ function logout_server() {
         url: 'http://s-apis.learningfuze.com/todo/logout',
         data: {
             session_id: 'response.session_id',
+            user_name: 'name_user',
         },
         method: 'POST',
         cache: false,
