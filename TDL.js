@@ -247,7 +247,8 @@ function login_to_server() {
                 window.response = response;
                 if (response.success) {
                     load_user_data()
-                    sesssion = response.session_id;
+                    session = response.session_id;
+                    name_user = response.username;
                     $('.alert').remove();
                 } else if (!response.success) {
                     if (login_clicked) {
