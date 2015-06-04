@@ -108,7 +108,7 @@ function populate_todo_list() {
         method: 'POST',
         data: {
             userId: response.Id,
-            postId: todo_items_array[index].id,
+            postId: global_response.data[0].id,
         },
         cache: false,
         crossDomain: true,
@@ -400,6 +400,9 @@ function send_list_items() {
             window.response = response;
             if (response.success) {
                 get_TDL_json_populate_multiple();
+            }
+            else if (!response.success){
+                console.log("error:", response.errors)
             }
         }
 
