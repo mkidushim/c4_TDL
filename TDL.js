@@ -7,6 +7,8 @@ var todo_items_object = {
 };
 var todo_items_array = [];
 var login_clicked = true;
+var name_user;
+var session;
 
 function todo_initialize() {
     var todo_initialize = Object.create(todo_items_object);
@@ -261,7 +263,6 @@ function login_to_server() {
     // I am not sure what function needs to run on login success commented out so logout would work
 function login_to_server() {
         console.log("ajax call");
-        name_user = $('#user_name').val();
         $.ajax({
             dataType: 'json',
             data: {
@@ -276,7 +277,8 @@ function login_to_server() {
                 window.response = response;
                 if (response.success) {
                     load_user_data()
-                    sesssion = response.session_id;
+                    session = response.session_id;
+                    name_user = response.username;
                     $('.alert').remove();
                 } else if (!response.success) {
                     if (login_clicked) {
@@ -289,15 +291,16 @@ function login_to_server() {
         });
     }
     //MK - created logout_server() function
+    //MK- 06/04/15 Fixed logout
 function logout_server() {
     console.log("ajax logout");
-    console.log('sesssion id#', sesssion)
+    console.log('sesssion id#', session)
     $.ajax({
         dataType: 'json',
         url: 'http://s-apis.learningfuze.com/todo/logout',
         data: {
-            session_id: 'response.session_id',
-            user_name: 'name_user',
+            sid: session,
+            username: name_user
         },
         method: 'POST',
         cache: false,
