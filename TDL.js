@@ -249,8 +249,8 @@ function login_to_server() {
                     $('.alert').remove();
                 } else if (!response.success) {
                     if (login_clicked) {
-                        var alert = $('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
-                        $('body').append(alert);
+                          var alert = $('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
+                        $('.form_container').append(alert);
                         login_clicked = false;
                     }
                 }
@@ -409,7 +409,7 @@ $(document).ready(function() {
 
 function populate_success_data() {
     $('#email').html('Email : ' + response.email);
-    $('#lastName').html('Last Name : ' + response.lastName);
-    $('#firstName').html('First Name : ' + response.firstName);
+    $('#lastName').html(response.lastName);
+    $('#firstName').html(response.firstName);
     $('#id').html(response.id)
 }
