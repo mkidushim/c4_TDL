@@ -90,7 +90,13 @@ legend {
     margin-left: 9px;
 }
 span.glyphicon-check {
-color: green;
+
 padding: 5px;
 display: block;
+}
+.red{
+color: red;
+}
+.green{
+    color: green;
 }

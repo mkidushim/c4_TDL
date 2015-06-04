@@ -352,21 +352,21 @@ function load_user_data() {
 }
 
 function logout_to_mainpage() {
-    $.ajax({
-        dataType: 'html',
-        url: 'login.html',
-        cache: false,
-        success: function(response) {
-            $('.container').html('');
-            $('.container').html(response);
-            $('#login_button').click(login_to_server);
-            $('#create_account_button').click(function() {
-                log_to_creation_page();
-            })
-        }
-    })
-}
-
+        $.ajax({
+            dataType: 'html',
+            url: 'login.html',
+            cache: false,
+            success: function(response) {
+                $('.container').html('');
+                $('.container').html(response);
+                $('#login_button').click(login_to_server);
+                $('#create_account_button').click(function() {
+                    log_to_creation_page();
+                })
+            }
+        })
+    }
+    //adding glyph color to create page
 
 function log_to_creation_page() {
     $.ajax({
@@ -376,21 +376,7 @@ function log_to_creation_page() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
-            $("input#N_user_name").change(function() {
-                $('#N_user_name_c').addClass('glyphicon glyphicon-check')
-            });
-            $("input#N_password1").change(function() {
-                $('#N_pass1_c').addClass('glyphicon glyphicon-check')
-            });
-            $("input#N_password2").change(function() {
-                $('#N_pass2_c').addClass('glyphicon glyphicon-check')
-            });
-            $("input#N_user_email").change(function() {
-                $('#N_user_email_c').addClass('glyphicon glyphicon-check')
-            });
-            $("input#N_first_name").change(function() {
-                $('#N_first_c').addClass('glyphicon glyphicon-check')
-            });
+         
             $("input#N_last_name").change(function() {
                 $('#N_last_c').addClass('glyphicon glyphicon-check')
             });
