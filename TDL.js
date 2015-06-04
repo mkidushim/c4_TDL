@@ -16,6 +16,16 @@ function todo_initialize() {
     console.log("todo_object: ", todo_items_object);
     todo_items_array.push(todo_initialize);
 }
+//Parris sort function
+function sort_todo(a,b) {
+  if (parseFloat(a.list_item_num) < parseFloat(b.list_item_num))
+    return -1;
+  if (parseFloat(a.list_item_num) > parseFloat(b.list_item_num))
+    return 1;
+  return 0;
+}
+//Parris end sort function
+
 
 function populate_todo_list() {
     $('#display_list').empty();
@@ -326,6 +336,13 @@ function load_user_data() {
             })
             $('#add_LI').click(send_list_items);
             populate_success_data();
+
+            $('#sort_button').click(function(){
+                console.log(todo_items_array.sort(sort_todo));
+                todo_items_array.sort(sort_todo);
+                populate_todo_list
+            });
+
         }
     })
 }
