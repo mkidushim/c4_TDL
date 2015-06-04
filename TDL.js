@@ -96,11 +96,27 @@ function populate_todo_list() {
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {
+            console.log(todo_items_array[1])
             var index = $(this).parent().attr('data_index');
             console.log("list item ", index + ' was clicked');
 
             todo_items_array.splice(index, 1);
             populate_todo_list();
+            $.ajax({
+        dataType: 'json',
+        url: 'http://s-apis.learningfuze.com/todo/delete',
+        method: 'POST',
+        data: {
+            userId: response.Id,
+            postId: todo_items_array[index].id,
+        },
+        cache: false,
+        crossDomain: true,
+
+        success: function(response) {
+           console.log(response)
+        }
+    });
         });
 
         p1_button.click(function(){
