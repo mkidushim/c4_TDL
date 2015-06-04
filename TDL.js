@@ -217,6 +217,36 @@ function get_TDL_json_populate_single() {
             }
         });
     }
+//used to validate username and password before login is successfull
+// I am not sure what function needs to run on login success commented out so logout would work
+function login_to_server() {
+        console.log("ajax call");
+        $.ajax({
+            dataType: 'json',
+            data: {
+                username: $('#user_name').val(),
+                password: $('#password').val()
+            },
+            url: 'http://s-apis.learningfuze.com/todo/login',
+            method: 'POST',
+            cache: false,
+            crossDomain: true,
+            success: function(response) {
+                window.response = response;
+                if (response.success) {
+                    load_user_data()
+                    sesssion = response.session_id;
+                    $('.alert').remove();
+                } else if (!response.success) {
+                    if (login_clicked) {
+                        var alert = $('<div>').addClass('alert alert-danger').html('Invalid Username or Password');
+                        $('body').append(alert);
+                        login_clicked = false;
+                    }
+                }
+            }
+        });
+    }
     //used to validate username and password before login is successfull
     // I am not sure what function needs to run on login success commented out so logout would work
 function login_to_server() {
@@ -250,7 +280,7 @@ function login_to_server() {
     //MK - created logout_server() function
 function logout_server() {
     console.log("ajax logout");
-    console.log('sesssion', sesssion)
+    console.log('sesssion id#', sesssion)
     $.ajax({
         dataType: 'json',
         url: 'http://s-apis.learningfuze.com/todo/logout',
@@ -308,8 +338,8 @@ function logout_to_mainpage() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
+            $('#logout_button').click(logout_server);
             $('#login_button').click(login_to_server);
-
         }
     })
 }
