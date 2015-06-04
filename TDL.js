@@ -92,7 +92,7 @@ function populate_todo_list() {
         });
 
         // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-        $(TD_item).append(title, p1_button)
+        $(TD_item).append(title, p1_button, delete_button)
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {
@@ -120,11 +120,11 @@ function populate_todo_list() {
         });
 
         p1_button.click(function(){
-            $('.modal-body').html('');
+         $('.modal-body').html('');
             var index = $(this).parent().attr('data_index');
-            var title_display = todo_items_array[index].title;
-            var details_display = todo_items_array[index].details;
-            var timestamp_display = todo_items_array[index].timeStamp;
+            var title_display = $('<div>').html('title : ' + todo_items_array[index].title);
+            var details_display = $('<div>').html('details : ' + todo_items_array[index].details);
+            var timestamp_display = $('<div>').html('time : ' + todo_items_array[index].timeStamp);
 
             $('.modal-body').append(title_display,  details_display, timestamp_display);
             $('#myModal').modal('show');
