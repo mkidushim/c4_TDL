@@ -19,9 +19,9 @@ function todo_initialize() {
     }
     //Parris sort function
 function sort_todo(a, b) {
-        if (parseFloat(a.list_item_num) < parseFloat(b.list_item_num))
+        if (parseFloat(a.timeStamp) < parseFloat(b.timeStamp))
             return -1;
-        if (parseFloat(a.list_item_num) > parseFloat(b.list_item_num))
+        if (parseFloat(a.timeStamp) > parseFloat(b.timeStamp))
             return 1;
         return 0;
     }
@@ -91,6 +91,11 @@ function populate_todo_list() {
             text: "details: " + todo_items_array[i].details,
         });
 
+            var selected_timeStamp =Date.parse(todo_items_array[i].timeStamp);
+            var dateInMS = Date.now();
+            if (selected_timeStamp < dateInMS){
+                $(TD_item).addClass('pastDue') 
+            }
         // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
         $(TD_item).append(title, p1_button, delete_button)
         $('#display_list').append(TD_item);
@@ -340,7 +345,7 @@ function load_user_data() {
             $('#add_LI').click(send_list_items);
 
             populate_success_data();
-
+            
             $('#sort_button').click(function() {
                 console.log(todo_items_array.sort(sort_todo));
                 todo_items_array.sort(sort_todo);
