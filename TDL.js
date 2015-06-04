@@ -6,7 +6,6 @@ var todo_items_object = {
     id: null
 };
 var todo_items_array = [];
-var login_clicked = true;
 var name_user;
 var session;
 
@@ -250,11 +249,10 @@ function login_to_server() {
                     sesssion = response.session_id;
                     $('.alert').remove();
                 } else if (!response.success) {
-                    if (login_clicked) {
+                    $('.alert').remove();
                           var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
                         $('.form_container').append(alert);
-                        login_clicked = false;
-                    }
+                    
                 }
             }
         });
@@ -398,12 +396,10 @@ function create_account(){
                 
             }
             else if(!response.success){
-                if (signup_clicked) {
                     console.log(response);
-                    $(alert).remove();
+                    $('.alert').remove();
                           var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
                         $('#creation_div > form').append(alert);
-                    }
             }
         }
 
