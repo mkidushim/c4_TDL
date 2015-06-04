@@ -180,7 +180,7 @@ function get_TDL_json_populate_multiple() {
         url: 'http://s-apis.learningfuze.com/todo/get',
         method: 'POST',
         data: {
-            userId: $('#id').val(),
+            userId: parseFloat($('#id').html()),
         },
         cache: false,
         crossDomain: true,
@@ -188,8 +188,8 @@ function get_TDL_json_populate_multiple() {
         success: function(response) {
             todo_items_array = [];
             global_response = response;
-            todo_items_array = todo_items_array.concat(global_response);
-            console.log("response: ", response);
+            todo_items_array = todo_items_array.concat(global_response.data);
+            console.log("response: ", global_response);
             console.log("response: ", global_response);
             console.log('todo_items_array: ', todo_items_array);
             populate_todo_list();
@@ -351,13 +351,14 @@ function send_list_items() {
             title: $('#title_LI').val(),
             dueDate: $('#timeStamp_LI').val(),
             details: $('#details_LI').val(),
-            userId: $('#id').html(),
+            userId: parseFloat($('#id').html()),
         },
         method: 'POST',
         url: 'http://s-apis.learningfuze.com/todo/create',
         cache: false,
         crossDomain: true,
         success: function(response) {
+            window.response = response;
             if (response.success) {
                 get_TDL_json_populate_multiple();
             }
@@ -391,5 +392,5 @@ function populate_success_data() {
     $('#email').html('Email : ' + response.email);
     $('#lastName').html('Last Name : ' + response.lastName);
     $('#firstName').html('First Name : ' + response.firstName);
-    $('#id').html('id : ' + response.id)
+    $('#id').html(response.id)
 }
