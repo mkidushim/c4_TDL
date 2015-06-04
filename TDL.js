@@ -374,7 +374,7 @@ function log_to_creation_page() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
-            ('#validate_new_account').click(function(){
+            $('#validate_new_account').click(function(){
                 create_account();
             })
         }
