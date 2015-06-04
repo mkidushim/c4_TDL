@@ -6,8 +6,7 @@ var todo_items_object = {
     id: null
 };
 var todo_items_array = [];
-var name_user;
-var session;
+var update_array = [];
 
 function todo_initialize() {
         var todo_initialize = Object.create(todo_items_object);
@@ -49,6 +48,10 @@ function populate_todo_list() {
             text: "show details",
             data_index: i
         });
+
+        var complete_button = $('<button>').attr('type', 'button').text('complete').attr('data_index', i);
+
+        var update_button = $('<button>').attr('type', 'button').text('update').attr('data_index', i);
 
         // var p2_button = $("<button>", {
         //     type: 'button',
@@ -92,7 +95,7 @@ function populate_todo_list() {
         });
 
         // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-        $(TD_item).append(title, p1_button, delete_button)
+        $(TD_item).append(title, p1_button, delete_button, update_button)
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {
@@ -103,32 +106,54 @@ function populate_todo_list() {
             todo_items_array.splice(index, 1);
             populate_todo_list();
             $.ajax({
-        dataType: 'json',
-        url: 'http://s-apis.learningfuze.com/todo/delete',
-        method: 'POST',
-        data: {
-            userId: response.Id,
-            postId: todo_items_array[index].id,
-        },
-        cache: false,
-        crossDomain: true,
+                dataType: 'json',
+                url: 'http://s-apis.learningfuze.com/todo/delete',
+                method: 'POST',
+                data: {
+                    userId: response.Id,
+                    postId: todo_items_array[index].id,
+                },
+                cache: false,
+                crossDomain: true,
 
-        success: function(response) {
-           console.log(response)
-        }
-    });
+                success: function(response) {
+                    console.log(response)
+                }
+            });
         });
 
-        p1_button.click(function(){
-         $('.modal-body').html('');
+        p1_button.click(function() {
+            $('.modal-body').html('');
             var index = $(this).parent().attr('data_index');
             var title_display = $('<div>').html('title : ' + todo_items_array[index].title);
             var details_display = $('<div>').html('details : ' + todo_items_array[index].details);
             var timestamp_display = $('<div>').html('time : ' + todo_items_array[index].timeStamp);
 
-            $('.modal-body').append(title_display,  details_display, timestamp_display);
+            $('.modal-body').append(title_display, details_display, timestamp_display);
             $('#myModal').modal('show');
         })
+
+        update_button.click(function() {
+            $('.modal-body').html('');
+            update_array = [];
+            var index = $(this).parent().attr('data_index');
+            update_array.push(todo_items_array[index]);
+            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update');
+            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update');
+            var time_update = $('<input>').attr('type', 'text').attr('placeholder', 'duedate').addClass('time_update');
+            var submit_update = $('<button>').attr('type', 'submit').text('submit');
+
+            submit_update.click(update_item);
+
+            $('.modal-body').append(title_update, details_update, time_update, submit_update);
+            $('#myModal').modal('show');
+
+
+
+
+        });
+
+
 
 
         // this is being worked on to add priority
@@ -438,6 +463,35 @@ function create_account() {
     });
 }
 
+function update_item() {
+    console.log('ajax getting called')
+    $.ajax({
+        dataType: 'json',
+        data: {
+            postId: update_array[0].id,
+            title: $('.title_update').val(),
+            dueDate: $('.time_update').val(),
+            details: $('.details_update').val(),
+            userId: update_array[0].userId,
+        },
+        method: 'POST',
+        url: 'http://s-apis.learningfuze.com/todo/update',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            if (response.success) {
+                $('.modal-body').html('')
+                $('.modal-body').html('Your item has been updated!');
+                $('#myModal').modal('show');
+                
+            }
+
+
+        }
+
+    });
+}
 
 $(document).ready(function() {
     $('#create_account_button').click(function() {
