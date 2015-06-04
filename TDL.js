@@ -46,30 +46,30 @@ function populate_todo_list() {
         var p1_button = $("<button>", {
             type: 'button',
             class: 'button',
-            text: "priority 1",
+            text: "show details",
             data_index: i
         });
 
-        var p2_button = $("<button>", {
-            type: 'button',
-            class: 'button',
-            text: "priority 2",
-            data_index: i
-        });
+        // var p2_button = $("<button>", {
+        //     type: 'button',
+        //     class: 'button',
+        //     text: "priority 2",
+        //     data_index: i
+        // });
 
-        var p3_button = $("<button>", {
-            type: 'button',
-            class: 'button',
-            text: "priority 3",
-            data_index: i
-        });
+        // var p3_button = $("<button>", {
+        //     type: 'button',
+        //     class: 'button',
+        //     text: "priority 3",
+        //     data_index: i
+        // });
 
-        var p4_button = $("<button>", {
-            type: 'button',
-            class: 'button',
-            text: 'priority 4',
-            data_index: i
-        });
+        // var p4_button = $("<button>", {
+        //     type: 'button',
+        //     class: 'button',
+        //     text: 'priority 4',
+        //     data_index: i
+        // });
 
         var list_item_num = $("<li>", {
             class: 'list_item_num list-group-item',
@@ -91,7 +91,8 @@ function populate_todo_list() {
             text: "details: " + todo_items_array[i].details,
         });
 
-        $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+        // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+        $(TD_item).append(title, p1_button)
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {
@@ -102,35 +103,46 @@ function populate_todo_list() {
             populate_todo_list();
         });
 
+        p1_button.click(function(){
+            $('.modal-body').html('');
+            var index = $(this).parent().attr('data_index');
+            var title_display = todo_items_array[index].title;
+            var details_display = todo_items_array[index].details;
+            var timestamp_display = todo_items_array[index].timeStamp;
+
+            $('.modal-body').append(title_display,  details_display, timestamp_display);
+            $('#myModal').modal('show');
+        })
+
 
         // this is being worked on to add priority
-        p1_button.click(function() {
-            var index = $(this).parent().attr('data_index');
-            console.log("list item ", index + ' was clicked');
-            $(TD_item).addClass('list-group-item list-group-item-danger');
-            populate_todo_list();
-        });
+        // p1_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     $(TD_item).addClass('list-group-item list-group-item-danger');
+        //     populate_todo_list();
+        // });
 
-        p2_button.click(function() {
-            var index = $(this).parent().attr('data_index');
-            console.log("list item ", index + ' was clicked');
-            var priority = $(this).parent().addClass('list-group-item list-group-item-warning');
-            populate_todo_list();
-        });
+        // p2_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     var priority = $(this).parent().addClass('list-group-item list-group-item-warning');
+        //     populate_todo_list();
+        // });
 
-        p3_button.click(function() {
-            var index = $(this).parent().attr('data_index');
-            console.log("list item ", index + ' was clicked');
-            var priority = $(this).parent().addClass('list-group-item list-group-item-info');
-            populate_todo_list();
-        });
+        // p3_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     var priority = $(this).parent().addClass('list-group-item list-group-item-info');
+        //     populate_todo_list();
+        // });
 
-        p4_button.click(function() {
-            var index = $(this).parent().attr('data_index');
-            console.log("list item ", index + ' was clicked');
-            var priority = $(this).parent().addClass('list-group-item list-group-item-success');
-            populate_todo_list();
-        });
+        // p4_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     var priority = $(this).parent().addClass('list-group-item list-group-item-success');
+        //     populate_todo_list();
+        // });
     }
 }
 
