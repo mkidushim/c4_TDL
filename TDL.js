@@ -177,8 +177,11 @@ function get_TDL_json_populate_multiple() {
     console.log("ajax call");
     $.ajax({
         dataType: 'json',
-        url: 'get_todo_items.json',
-        method: 'GET',
+        url: 'http://s-apis.learningfuze.com/todo/get',
+        method: 'POST',
+        data: {
+            userId: $('#id').val(),
+        },
         cache: false,
         crossDomain: true,
 
@@ -309,8 +312,6 @@ function logout_to_mainpage() {
         }
     })
 }
-
-
 
 
 $(document).ready(function() {
