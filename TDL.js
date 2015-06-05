@@ -141,6 +141,7 @@ function populate_todo_list() {
         })
 
         update_button.click(function() {
+            $('.modal-title').html('')
             $('.modal-body').html('');
             update_array = [];
             var index = $(this).parent().attr('data_index');
@@ -151,13 +152,14 @@ function populate_todo_list() {
             var submit_update = $('<button>').attr('type', 'submit').text('submit');
 
             submit_update.click(update_item);
-
+            $('.modal-title').html('Update for : ' + update_array[0].title)
             $('.modal-body').append(title_update, details_update, time_update, submit_update);
             $('#myModal').modal('show');
 
         });
 
         complete_button.click(function() {
+            $('.modal-title').html('');
             $('.modal-body').html('');
             update_array = [];
             var index = $(this).parent().attr('data_index');
@@ -166,7 +168,7 @@ function populate_todo_list() {
             var submit_complete = $('<button>').attr('type', 'submit').text('submit');
 
             submit_complete.click(item_complete_function)
-
+            $('.modal-title').html('Complete for : ' + update_array[0].title)
             $('.modal-body').append(item_complete, submit_complete);
             $('#myModal').modal('show');
              $('.close_button').click(populate_todo_list)
