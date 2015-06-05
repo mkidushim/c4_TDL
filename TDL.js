@@ -157,15 +157,11 @@ function populate_todo_list() {
             $('#myModal').modal('show');
 
         });
-
+        //***********complete function needs to be added******************//
         complete_button.click(function() {
-            // $('.modal-title').html('');
-            // $('.modal-body').html('');
             update_array = [];
             var index = $(this).parent().attr('data_index');
             update_array.push(todo_items_array[index]);
-            // var item_complete = $('<input>').attr('type', 'text').attr('placeholder', 'input 1 for complete or 0 for incomplete').addClass('item_complete');
-            // var submit_complete = $('<button>').attr('type', 'submit').text('submit');
             if(update_array[0].complete == 0){
                 update_array[0].complete = 1;
                 populate_todo_list();
@@ -177,11 +173,12 @@ function populate_todo_list() {
             }
 
             submit_complete.click(item_complete_function)
-            // $('.modal-title').html('Complete for : ' + update_array[0].title)
-            // $('.modal-body').append(item_complete, submit_complete);
-            // $('#myModal').modal('show');
 
         });
+
+        //***********complete function needs to be added******************//
+
+
 
 
 
@@ -547,9 +544,6 @@ function item_complete_function() {
             window.response = response;
             if (response.success) {
                 console.log(response);
-                $('.modal-body').html('')
-                $('.modal-body').html('Your item has been updated!');
-                $('#myModal').modal('show');
 
             } else if (!response.success) {
                 console.log(response)
