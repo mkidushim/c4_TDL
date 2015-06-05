@@ -752,7 +752,7 @@ $(document).ready(function() {
     $('#logout_button').click(logout_server);
 
     $("N_user_name").change(function() {
-        $('N_user_name').addClass('glyphicon glyphicon-ok')
+        validate_create();
     })
     keep_user_logged_in();
 
@@ -766,4 +766,33 @@ function populate_success_data() {
     $('#lastName').html(response.lastName);
     $('#firstName').html(response.firstName);
     $('#id').html(response.id)
+}
+function validate_create() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            username: $('#N_user_name').val(),
+            password: $('#N_password1').val(),
+            password2: $('#N_password2').val(),
+            email: $('#N_user_email').val(),
+            firstName: $('#N_first_name').val(),
+            lastName: $('#N_last_name').val()
+        },
+        method: 'POST',
+        url: "http://s-apis.learningfuze.com/todo/validateUserInfo",
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.validate_response = response;
+            if (validate_response.success == true) {
+                $('form span').addClass('glyphicon glyphicon-check green')
+            } else if (validate_response == false) {
+                $('form span').addClass('glyphicon glyphicon-check red')
+                console.log('validate:', validate_response)
+            }
+        }
+    });
+
+
+
 }
