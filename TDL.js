@@ -41,8 +41,9 @@ function populate_todo_list() {
 
         var delete_button = $("<button>", {
             type: 'button',
-            class: 'button glyphicon glyphicon-remove-sign',
-            data_index: i
+            class: 'button ',
+            data_index: i,
+            text: 'delete'
         });
 
         var p1_button = $("<button>", {
@@ -446,7 +447,6 @@ function login_to_server() {
             success: function(response) {
                 window.response = response;
                 if (response.success) {
-                    delete
                     load_user_data();
                     document.cookie = 'sessionid=' + response.session_id;
                     document.cookie = 'username=' + response.username;
