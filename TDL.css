@@ -1,7 +1,17 @@
 body {
     background: black;
 }
+button, input {
+    border-radius: 10px;
 
+}
+input#title_LI, input#details_LI, input#input_search_id {
+    height: 40px;
+}
+h3, h6 {
+    color: white;
+    font: comic Sans MS, Cursive, sans-serif;
+}
 #id {
     display: none;
 }
