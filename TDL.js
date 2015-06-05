@@ -28,490 +28,351 @@ function sort_todo(a, b) {
 
 
 function populate_todo_list() {
-        $('#display_list').empty();
-        for (var i = 0; i < todo_items_array.length; i++) {
-            var TD_item = $("<ul>", {
-                class: 'TD_item list-group',
-                id: todo_items_array[i].id,
-                data_index: i
+    $('#display_list').empty();
+    for (var i = 0; i < todo_items_array.length; i++) {
+        var TD_item = $("<ul>", {
+            class: 'TD_item list-group',
+            id: todo_items_array[i].id,
+            data_index: i
+        });
+
+        var delete_button = $("<button>", {
+            type: 'button',
+            class: 'button glyphicon glyphicon-remove-sign',
+            data_index: i
+        });
+
+        var p1_button = $("<button>", {
+            type: 'button',
+            class: 'button',
+            text: "show details",
+            data_index: i
+        });
+
+        var complete_button = $('<button>').attr('type', 'button').text('complete').attr('data_index', i);
+
+        var update_button = $('<button>').attr('type', 'button').text('update').attr('data_index', i);
+
+        // var p2_button = $("<button>", {
+        //     type: 'button',
+        //     class: 'button',
+        //     text: "priority 2",
+        //     data_index: i
+        // });
+
+        // var p3_button = $("<button>", {
+        //     type: 'button',
+        //     class: 'button',
+        //     text: "priority 3",
+        //     data_index: i
+        // });
+
+        // var p4_button = $("<button>", {
+        //     type: 'button',
+        //     class: 'button',
+        //     text: 'priority 4',
+        //     data_index: i
+        // });
+
+        var list_item_num = $("<li>", {
+            class: 'list_item_num list-group-item',
+            text: "list item number: " + (i + 1)
+        });
+
+        var timestamp = $("<li>", {
+            class: 'to_do_timestamp list-group-item',
+            text: "time: " + todo_items_array[i].timeStamp,
+        });
+
+        var title = $("<li>", {
+            class: 'to_do_title list-group-item',
+            text: "title: " + todo_items_array[i].title,
+        });
+
+        var details = $("<li>", {
+            class: 'to_do_details list-group-item',
+            text: "details: " + todo_items_array[i].details,
+        });
+
+        var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
+        var dateInMS = Date.now();
+        if (selected_timeStamp < dateInMS) {
+            $(TD_item).addClass('pastDue')
+        }
+        if (todo_items_array[i].complete == 1){
+            $(title).addClass('completed_item');
+        }
+        // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+        $(TD_item).append(title, p1_button, delete_button, update_button, complete_button)
+        $('#display_list').append(TD_item);
+
+        delete_button.click(function() {
+            console.log(todo_items_array[1])
+            var index = $(this).parent().attr('data_index');
+            console.log("list item ", index + ' was clicked');
+
+            todo_items_array.splice(index, 1);
+            populate_todo_list();
+            $.ajax({
+                dataType: 'json',
+                url: 'http://s-apis.learningfuze.com/todo/delete',
+                method: 'POST',
+                data: {
+                    userId: response.Id,
+                    postId: global_response.data[0].id,
+                },
+                cache: false,
+                crossDomain: true,
+
+                success: function(response) {
+                    console.log(response)
+                }
             });
+        });
+        p1_button.click(function() {
+            $('.modal-body').html('');
+            var index = $(this).parent().attr('data_index');
+            var title_display = $('<div>').html('title : ' + todo_items_array[index].title);
+            var details_display = $('<div>').html('details : ' + todo_items_array[index].details);
+            var timestamp_display = $('<div>').html('time : ' + todo_items_array[index].timeStamp);
 
-            var delete_button = $("<button>", {
-                type: 'button',
-                class: 'button glyphicon glyphicon-remove-sign',
-                data_index: i
-            });
+            $('.modal-body').append(title_display, details_display, timestamp_display);
+            $('#myModal').modal('show');
+        })
 
-            var p1_button = $("<button>", {
-                type: 'button',
-                class: 'button',
-                text: "show details",
-                data_index: i
-            });
+        update_button.click(function() {
+            $('.modal-body').html('');
+            update_array = [];
+            var index = $(this).parent().attr('data_index');
+            update_array.push(todo_items_array[index]);
+            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update');
+            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update');
+            var time_update = $('<input>').attr('type', 'text').attr('placeholder', 'duedate').addClass('time_update');
+            var submit_update = $('<button>').attr('type', 'submit').text('submit');
 
-            var complete_button = $('<button>').attr('type', 'button').text('complete').attr('data_index', i);
+            submit_update.click(update_item);
 
-            var update_button = $('<button>').attr('type', 'button').text('update').attr('data_index', i);
+            $('.modal-body').append(title_update, details_update, time_update, submit_update);
+            $('#myModal').modal('show');
 
-            // var p2_button = $("<button>", {
-            //     type: 'button',
-            //     class: 'button',
-            //     text: "priority 2",
-            //     data_index: i
+        });
+
+        complete_button.click(function() {
+            $('.modal-body').html('');
+            update_array = [];
+            var index = $(this).parent().attr('data_index');
+            update_array.push(todo_items_array[index]);
+            var item_complete = $('<input>').attr('type', 'text').attr('placeholder', 'input 1 for complete or 0 for incomplete').addClass('item_complete');
+            var submit_complete = $('<button>').attr('type', 'submit').text('submit');
+
+            submit_complete.click(item_complete_function)
+
+            $('.modal-body').append(item_complete, submit_complete);
+            $('#myModal').modal('show');
+             $('.close_button').click(populate_todo_list)
+
+        });
+
+
+
+        // this is being worked on to add priority
+        // p1_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     $(TD_item).addClass('list-group-item list-group-item-danger');
+        //     populate_todo_list();
+        // });
+
+        // p2_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     var priority = $(this).parent().addClass('list-group-item list-group-item-warning');
+        //     populate_todo_list();
+        // });
+
+        // p3_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     var priority = $(this).parent().addClass('list-group-item list-group-item-info');
+        //     populate_todo_list();
+        // });
+
+        // p4_button.click(function() {
+        //     var index = $(this).parent().attr('data_index');
+        //     console.log("list item ", index + ' was clicked');
+        //     var priority = $(this).parent().addClass('list-group-item list-group-item-success');
+        //     populate_todo_list();
+        // });
+    }
+}
+
+function populate_todo_single() {
+
+    var iLN = parseFloat($('#id_LI').val());
+    console.log("item list number chosen: ", iLN);
+    console.log("todo_items_array: ", todo_items_array);
+    for (var i = iLN; i < (iLN + 1); i++) {
+        var TD_item = $("<ul>", {
+            class: 'TD_item list-group',
+            id: todo_items_array[i - 1].id,
+            data_index: (i - 1)
+        });
+
+        var delete_button = $("<button>", {
+            type: 'button',
+            class: 'button glyphicon glyphicon-remove-sign',
+            data_index: i
+        });
+        var list_item_num = $("<li>", {
+            class: 'list_item_num list-group-item',
+            text: "list item number: " + (i)
+        });
+
+        var timestamp = $("<li>", {
+            class: 'to_do_timestamp list-group-item',
+            text: "time: " + todo_items_array[i - 1].timeStamp,
+        });
+
+        var title = $("<li>", {
+            class: 'to_do_title list-group-item',
+            text: "title: " + todo_items_array[i - 1].title,
+        });
+
+        var details = $("<li>", {
+            class: 'to_do_details list-group-item',
+            text: "details: " + todo_items_array[i - 1].details,
+        });
+
+        $(TD_item).append(list_item_num, title, details, timestamp, delete_button);
+        $('#display_list').append(TD_item);
+
+        delete_button.click(function() {
+            var index = $(this).parent().attr('data_index');
+            console.log("list item ", index + ' was clicked');
+            todo_items_array.splice(index, 1);
+            index = $(this).parent().remove();
+            //populate_todo_single();
+        });
+    }
+}
+
+function get_TDL_json_populate_multiple() {
+    console.log("ajax call");
+    $.ajax({
+        dataType: 'json',
+        url: 'http://s-apis.learningfuze.com/todo/get',
+        method: 'POST',
+        data: {
+            userId: parseFloat($('#id').html()),
+        },
+        cache: false,
+        crossDomain: true,
+
+        success: function(response) {
+            todo_items_array = [];
+            global_response = response;
+            todo_items_array = todo_items_array.concat(global_response.data);
+            console.log("response: ", global_response);
+            console.log("response: ", global_response);
+            console.log('todo_items_array: ', todo_items_array);
+            populate_todo_list();
+        }
+    });
+}
+
+function get_TDL_json_populate_single() {
+        console.log("ajax call");
+        $.ajax({
+            dataType: 'json',
+            url: 'get_todo_items.json',
+            method: 'GET',
+            cache: false,
+            crossDomain: true,
+
+            success: function(response) {
+                todo_items_array = [];
+                global_response = response;
+                todo_items_array = todo_items_array.concat(global_response);
+                console.log("response: ", response);
+                console.log("response: ", global_response);
+                console.log('todo_items_array: ', todo_items_array);
+                populate_todo_single();
+            }
+        });
+    }
+    //used to validate username and password before login is successfull
+    // I am not sure what function needs to run on login success commented out so logout would work
+function login_to_server() {
+        console.log("ajax call");
+        $.ajax({
+            dataType: 'json',
+            data: {
+                username: $('#user_name').val(),
+                password: $('#password').val()
+            },
+            url: 'http://s-apis.learningfuze.com/todo/login',
+            method: 'POST',
+            cache: false,
+            crossDomain: true,
+            success: function(response) {
+                window.response = response;
+                if (response.success) {
+                    load_user_data()
+                    session = response.session_id;
+                    name_user = response.username;
+                    $('.alert').remove();
+                } else if (!response.success) {
+                    $('.alert').remove();
+                    var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
+                    $('.form_container').append(alert);
+
+                }
+            }
+        });
+    }
+    //used to validate username and password before login is successfull
+    // I am not sure what function needs to run on login success commented out so logout would work
+    //MK - created logout_server() function
+    //MK- 06/04/15 Fixed logout
+function logout_server() {
+    console.log("ajax logout");
+    console.log('sesssion id#', session)
+    $.ajax({
+        dataType: 'json',
+        url: 'http://s-apis.learningfuze.com/todo/logout',
+        data: {
+            sid: session,
+            username: name_user,
+        },
+        method: 'POST',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            if (response.success) {
+                window.response = response;
+                console.log('logout:', response)
+                logout_to_mainpage();
+
+            } else if (response.success == false) {
+                console.log('logout error:', response.errors)
+            }
+        }
+    });
+}
+
+function load_user_data() {
+    $.ajax({
+        dataType: 'html',
+        url: 'multiple_to_do_item.html',
+        cache: false,
+        success: function(response) {
+            $('.container').html('');
+            $('.container').html(response);
+            $('#logout_button').click(logout_server);
+            // $('#add_LI').click(function() {
+            //     todo_initialize();
+            //     populate_todo_list();
             // });
-
-            // var p3_button = $("<button>", {
-            //     type: 'button',
-            //     class: 'button',
-            //     text: "priority 3",
-            //     data_index: i
-            // });
-
-            // var p4_button = $("<button>", {
-            //     type: 'button',
-            //     class: 'button',
-            //     text: 'priority 4',
-            //     data_index: i
-            // });
-
-            var list_item_num = $("<li>", {
-                class: 'list_item_num list-group-item',
-                text: "list item number: " + (i + 1)
-            });
-
-            var timestamp = $("<li>", {
-                class: 'to_do_timestamp list-group-item',
-                text: "time: " + todo_items_array[i].timeStamp,
-            });
-
-            var title = $("<li>", {
-                class: 'to_do_title list-group-item',
-                text: "title: " + todo_items_array[i].title,
-            });
-
-            var details = $("<li>", {
-                class: 'to_do_details list-group-item',
-                text: "details: " + todo_items_array[i].details,
-            });
-
-            var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
-            var dateInMS = Date.now();
-            if (selected_timeStamp < dateInMS) {
-                $(TD_item).addClass('pastDue')
-            }
-            // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-            $(TD_item).append(title, p1_button, delete_button, update_button)
-            $('#display_list').append(TD_item);
-
-            delete_button.click(function() {
-                    console.log(todo_items_array[1])
-                    var index = $(this).parent().attr('data_index');
-                    console.log("list item ", index + ' was clicked');
-
-                    todo_items_array.splice(index, 1);
-                    populate_todo_list();
-                    $.ajax({
-                        dataType: 'json',
-                        url: 'http://s-apis.learningfuze.com/todo/delete',
-                        method: 'POST',
-                        data: {
-                            userId: response.Id,
-                            postId: global_response.data[0].id,
-                        },
-                        cache: false,
-                        crossDomain: true,
-
-                        success: function(response) {
-                            console.log(response)
-                        }
-                    });
-                });
-                p1_button.click(function() {
-                    $('.modal-body').html('');
-                    var index = $(this).parent().attr('data_index');
-                    var title_display = $('<div>').html('title : ' + todo_items_array[index].title);
-                    var details_display = $('<div>').html('details : ' + todo_items_array[index].details);
-                    var timestamp_display = $('<div>').html('time : ' + todo_items_array[index].timeStamp);
-
-                    $('.modal-body').append(title_display, details_display, timestamp_display);
-                    $('#myModal').modal('show');
-                })
-
-                update_button.click(function() {
-                    $('.modal-body').html('');
-                    update_array = [];
-                    var index = $(this).parent().attr('data_index');
-                    update_array.push(todo_items_array[index]);
-                    var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update');
-                    var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update');
-                    var time_update = $('<input>').attr('type', 'text').attr('placeholder', 'duedate').addClass('time_update');
-                    var submit_update = $('<button>').attr('type', 'submit').text('submit');
-
-                    submit_update.click(update_item);
-
-                    $('.modal-body').append(title_update, details_update, time_update, submit_update);
-                    $('#myModal').modal('show');
-
-
-
-
-                });
-
-
-
-
-                // this is being worked on to add priority
-                // p1_button.click(function() {
-                //     var index = $(this).parent().attr('data_index');
-                //     console.log("list item ", index + ' was clicked');
-                //     $(TD_item).addClass('list-group-item list-group-item-danger');
-                //     populate_todo_list();
-                // });
-
-                // p2_button.click(function() {
-                //     var index = $(this).parent().attr('data_index');
-                //     console.log("list item ", index + ' was clicked');
-                //     var priority = $(this).parent().addClass('list-group-item list-group-item-warning');
-                //     populate_todo_list();
-                // });
-
-                // p3_button.click(function() {
-                //     var index = $(this).parent().attr('data_index');
-                //     console.log("list item ", index + ' was clicked');
-                //     var priority = $(this).parent().addClass('list-group-item list-group-item-info');
-                //     populate_todo_list();
-                // });
-
-                // p4_button.click(function() {
-                //     var index = $(this).parent().attr('data_index');
-                //     console.log("list item ", index + ' was clicked');
-                //     var priority = $(this).parent().addClass('list-group-item list-group-item-success');
-                //     populate_todo_list();
-                // });
-            }
-        }
-
-        function populate_todo_single() {
-
-            var iLN = parseFloat($('#id_LI').val());
-            console.log("item list number chosen: ", iLN);
-            console.log("todo_items_array: ", todo_items_array);
-            for (var i = iLN; i < (iLN + 1); i++) {
-                var TD_item = $("<ul>", {
-                    class: 'TD_item list-group',
-                    id: todo_items_array[i - 1].id,
-                    data_index: (i - 1)
-                });
-
-                var delete_button = $("<button>", {
-                    type: 'button',
-                    class: 'button glyphicon glyphicon-remove-sign',
-                    data_index: i
-                });
-                var list_item_num = $("<li>", {
-                    class: 'list_item_num list-group-item',
-                    text: "list item number: " + (i)
-                });
-
-                var timestamp = $("<li>", {
-                    class: 'to_do_timestamp list-group-item',
-                    text: "time: " + todo_items_array[i - 1].timeStamp,
-                });
-
-                var title = $("<li>", {
-                    class: 'to_do_title list-group-item',
-                    text: "title: " + todo_items_array[i - 1].title,
-                });
-
-                var details = $("<li>", {
-                    class: 'to_do_details list-group-item',
-                    text: "details: " + todo_items_array[i - 1].details,
-                });
-
-                $(TD_item).append(list_item_num, title, details, timestamp, delete_button);
-                $('#display_list').append(TD_item);
-
-                delete_button.click(function() {
-                    var index = $(this).parent().attr('data_index');
-                    console.log("list item ", index + ' was clicked');
-                    todo_items_array.splice(index, 1);
-                    index = $(this).parent().remove();
-                    //populate_todo_single();
-                });
-            }
-        }
-
-        function get_TDL_json_populate_multiple() {
-            console.log("ajax call");
-            $.ajax({
-                dataType: 'json',
-                url: 'http://s-apis.learningfuze.com/todo/get',
-                method: 'POST',
-                data: {
-                    userId: parseFloat($('#id').html()),
-                },
-                cache: false,
-                crossDomain: true,
-
-                success: function(response) {
-                    todo_items_array = [];
-                    global_response = response;
-                    todo_items_array = todo_items_array.concat(global_response.data);
-                    console.log("response: ", global_response);
-                    console.log("response: ", global_response);
-                    console.log('todo_items_array: ', todo_items_array);
-                    populate_todo_list();
-                }
-            });
-        }
-
-        function get_TDL_json_populate_single() {
-                console.log("ajax call");
-                $.ajax({
-                    dataType: 'json',
-                    url: 'get_todo_items.json',
-                    method: 'GET',
-                    cache: false,
-                    crossDomain: true,
-
-                    success: function(response) {
-                        todo_items_array = [];
-                        global_response = response;
-                        todo_items_array = todo_items_array.concat(global_response);
-                        console.log("response: ", response);
-                        console.log("response: ", global_response);
-                        console.log('todo_items_array: ', todo_items_array);
-                        populate_todo_single();
-                    }
-                });
-            }
-            //used to validate username and password before login is successfull
-            // I am not sure what function needs to run on login success commented out so logout would work
-        function login_to_server() {
-                console.log("ajax call");
-                $.ajax({
-                    dataType: 'json',
-                    data: {
-                        username: $('#user_name').val(),
-                        password: $('#password').val()
-                    },
-                    url: 'http://s-apis.learningfuze.com/todo/login',
-                    method: 'POST',
-                    cache: false,
-                    crossDomain: true,
-                    success: function(response) {
-                        window.response = response;
-                        if (response.success) {
-                            load_user_data()
-                            session = response.session_id;
-                            name_user = response.username;
-                            $('.alert').remove();
-                        } else if (!response.success) {
-                            $('.alert').remove();
-                            var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
-                            $('.form_container').append(alert);
-
-                        }
-                    }
-                });
-            }
-            //used to validate username and password before login is successfull
-            // I am not sure what function needs to run on login success commented out so logout would work
-            //MK - created logout_server() function
-            //MK- 06/04/15 Fixed logout
-        function logout_server() {
-            console.log("ajax logout");
-            console.log('sesssion id#', session)
-            $.ajax({
-                dataType: 'json',
-                url: 'http://s-apis.learningfuze.com/todo/logout',
-                data: {
-                    sid: session,
-                    username: name_user,
-                },
-                method: 'POST',
-                cache: false,
-                crossDomain: true,
-                success: function(response) {
-                    if (response.success) {
-                        window.response = response;
-                        console.log('logout:', response)
-                        logout_to_mainpage();
-
-                    } else if (response.success == false) {
-                        console.log('logout error:', response.errors)
-                    }
-                }
-            });
-        }
-
-        function load_user_data() {
-            $.ajax({
-                dataType: 'html',
-                url: 'multiple_to_do_item.html',
-                cache: false,
-                success: function(response) {
-                    $('.container').html('');
-                    $('.container').html(response);
-                    $('#logout_button').click(logout_server);
-                    // $('#add_LI').click(function() {
-                    //     todo_initialize();
-                    //     populate_todo_list();
-                    // });
-                    $('#pull_json').click(function() {
-                        get_TDL_json_populate_multiple();
-
-                    })
-                    $('#single_pull_json').click(function() {
-                        get_TDL_json_populate_single();
-
-                    })
-                    $('#add_LI').click(send_list_items);
-
-                    populate_success_data();
-
-                    $('#sort_button').click(function() {
-                        console.log(todo_items_array.sort(sort_todo));
-                        todo_items_array.sort(sort_todo);
-                        populate_todo_list
-                    });
-
-                }
-            })
-        }
-
-        function logout_to_mainpage() {
-                $.ajax({
-                    dataType: 'html',
-                    url: 'login.html',
-                    cache: false,
-                    success: function(response) {
-                        $('.container').html('');
-                        $('.container').html(response);
-                        $('#login_button').click(login_to_server);
-                        $('#create_account_button').click(function() {
-                            log_to_creation_page();
-                        })
-                    }
-                })
-            }
-            //adding glyph color to create page
-
-        function log_to_creation_page() {
-            $.ajax({
-                dataType: 'html',
-                url: 'creation_page.html',
-                cache: false,
-                success: function(response) {
-                    $('.container').html('');
-                    $('.container').html(response);
-
-                    $("input#N_last_name").change(function() {
-                        $('#N_last_c').addClass('glyphicon glyphicon-check')
-                    });
-                    $('#validate_new_account').click(function() {
-                        create_account();
-                    })
-                }
-            })
-        }
-
-        function send_list_items() {
-            $.ajax({
-                dataType: 'json',
-                data: {
-                    title: $('#title_LI').val(),
-                    dueDate: $('#timeStamp_LI').val(),
-                    details: $('#details_LI').val(),
-                    userId: parseFloat($('#id').html()),
-                },
-                method: 'POST',
-                url: 'http://s-apis.learningfuze.com/todo/create',
-                cache: false,
-                crossDomain: true,
-                success: function(response) {
-                    window.response = response;
-                    if (response.success) {
-                        get_TDL_json_populate_multiple();
-                    } else if (!response.success) {
-                        console.log("error:", response.errors)
-                    }
-                }
-
-            });
-        }
-
-        function create_account() {
-            $.ajax({
-                dataType: 'json',
-                data: {
-                    username: $('#N_user_name').val().toLowerCase(),
-                    password: $('#N_password1').val(),
-                    password2: $('#N_password2').val(),
-                    email: $('#N_user_email').val(),
-                    firstName: $('#N_first_name').val(),
-                    lastName: $('#N_last_name').val(),
-                },
-                method: 'POST',
-                url: 'http://s-apis.learningfuze.com/todo/newAccount',
-                cache: false,
-                crossDomain: true,
-                success: function(response) {
-                    window.response = response;
-                    if (response.success) {
-                        console.log('Success:', response.success);
-                        logout_to_mainpage();
-
-                    } else if (!response.success) {
-                        console.log('failed:', response.errors);
-                        $('.alert').remove();
-                        var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
-                        $('#creation_div > form').append(alert);
-                    }
-                }
-
-            });
-        }
-
-        function update_item() {
-            console.log('ajax getting called')
-            $.ajax({
-                dataType: 'json',
-                data: {
-                    postId: update_array[0].id,
-                    title: $('.title_update').val(),
-                    dueDate: $('.time_update').val(),
-                    details: $('.details_update').val(),
-                    userId: update_array[0].userId,
-                },
-                method: 'POST',
-                url: 'http://s-apis.learningfuze.com/todo/update',
-                cache: false,
-                crossDomain: true,
-                success: function(response) {
-                    window.response = response;
-                    if (response.success) {
-                        $('.modal-body').html('')
-                        $('.modal-body').html('Your item has been updated!');
-                        $('#myModal').modal('show');
-
-                    }
-
-
-                }
-
-            });
-        }
-
-        $(document).ready(function() {
-            $('#create_account_button').click(function() {
-                log_to_creation_page();
-            })
-
-            $('#add_LI').click(function() {
-                todo_initialize();
-                populate_todo_list();
-            });
             $('#pull_json').click(function() {
                 get_TDL_json_populate_multiple();
 
@@ -520,20 +381,213 @@ function populate_todo_list() {
                 get_TDL_json_populate_single();
 
             })
+            $('#add_LI').click(send_list_items);
 
-            $('#login_button').click(login_to_server);
-            $('#logout_button').click(logout_server);
+            populate_success_data();
 
-            $("N_user_name").change(function() {
-                $('N_user_name').addClass('glyphicon glyphicon-ok')
-            })
-        });
+            $('#sort_button').click(function() {
+                console.log(todo_items_array.sort(sort_todo));
+                todo_items_array.sort(sort_todo);
+                populate_todo_list
+            });
 
-        //Parris function creation to populate DOM with response object data
-
-        function populate_success_data() {
-            $('#email').html('Email : ' + response.email);
-            $('#lastName').html(response.lastName);
-            $('#firstName').html(response.firstName);
-            $('#id').html(response.id)
         }
+    })
+}
+
+function logout_to_mainpage() {
+        $.ajax({
+            dataType: 'html',
+            url: 'login.html',
+            cache: false,
+            success: function(response) {
+                $('.container').html('');
+                $('.container').html(response);
+                $('#login_button').click(login_to_server);
+                $('#create_account_button').click(function() {
+                    log_to_creation_page();
+                })
+            }
+        })
+    }
+    //adding glyph color to create page
+
+function log_to_creation_page() {
+    $.ajax({
+        dataType: 'html',
+        url: 'creation_page.html',
+        cache: false,
+        success: function(response) {
+            $('.container').html('');
+            $('.container').html(response);
+
+            $("input#N_last_name").change(function() {
+                $('#N_last_c').addClass('glyphicon glyphicon-check')
+            });
+            $('#validate_new_account').click(function() {
+                create_account();
+            })
+        }
+    })
+}
+
+function send_list_items() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            title: $('#title_LI').val(),
+            dueDate: $('#timeStamp_LI').val(),
+            details: $('#details_LI').val(),
+            userId: parseFloat($('#id').html()),
+        },
+        method: 'POST',
+        url: 'http://s-apis.learningfuze.com/todo/create',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            if (response.success) {
+                get_TDL_json_populate_multiple();
+            } else if (!response.success) {
+                console.log("error:", response.errors)
+            }
+        }
+
+    });
+}
+
+function create_account() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            username: $('#N_user_name').val().toLowerCase(),
+            password: $('#N_password1').val(),
+            password2: $('#N_password2').val(),
+            email: $('#N_user_email').val(),
+            firstName: $('#N_first_name').val(),
+            lastName: $('#N_last_name').val(),
+        },
+        method: 'POST',
+        url: 'http://s-apis.learningfuze.com/todo/newAccount',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            if (response.success) {
+                console.log('Success:', response.success);
+                logout_to_mainpage();
+
+            } else if (!response.success) {
+                console.log('failed:', response.errors);
+                $('.alert').remove();
+                var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
+                $('#creation_div > form').append(alert);
+            }
+        }
+
+    });
+}
+
+function update_item() {
+    console.log('ajax getting called')
+    $.ajax({
+        dataType: 'json',
+        data: {
+            postId: update_array[0].id,
+            title: $('.title_update').val(),
+            dueDate: $('.time_update').val(),
+            details: $('.details_update').val(),
+            userId: update_array[0].userId,
+        },
+        method: 'POST',
+        url: 'http://s-apis.learningfuze.com/todo/update',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            if (response.success) {
+                $('.modal-body').html('')
+                $('.modal-body').html('Your item has been updated!');
+                $('#myModal').modal('show');
+
+            } else if (!response.success) {
+                $('.alert').remove();
+                var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
+                $('.modal-body').append(alert);
+            }
+
+
+        }
+
+    });
+}
+
+function item_complete_function() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            postId: update_array[0].id,
+            complete: $('.item_complete').val(),
+        },
+        method: 'POST',
+        url: 'http://s-apis.learningfuze.com/todo/updateCompleteStatus',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            if (response.success) {
+                console.log(response);
+                $('.modal-body').html('')
+                $('.modal-body').html('Your item has been updated!');
+                $('#myModal').modal('show');
+
+            } else if (!response.success) {
+                console.log(response)
+                $('.alert').remove();
+                var alert = $('<div>').addClass('alert alert-danger').html(response.errors);
+                $('.modal-body').append(alert);
+            }
+
+
+        }
+
+    });
+}
+
+
+
+
+$(document).ready(function() {
+    $('#create_account_button').click(function() {
+        log_to_creation_page();
+    })
+
+    $('#add_LI').click(function() {
+        todo_initialize();
+        populate_todo_list();
+    });
+    $('#pull_json').click(function() {
+        get_TDL_json_populate_multiple();
+
+    })
+    $('#single_pull_json').click(function() {
+        get_TDL_json_populate_single();
+
+    })
+
+    $('#login_button').click(login_to_server);
+    $('#logout_button').click(logout_server);
+
+    $("N_user_name").change(function() {
+        $('N_user_name').addClass('glyphicon glyphicon-ok')
+    })
+});
+
+//Parris function creation to populate DOM with response object data
+
+function populate_success_data() {
+    $('#email').html('Email : ' + response.email);
+    $('#lastName').html(response.lastName);
+    $('#firstName').html(response.firstName);
+    $('#id').html(response.id)
+}
