@@ -1,7 +1,9 @@
 body {
     background: black;
 }
-
+#id {
+    display: none;
+}
 .list-group {
     margin-top: 45px;
 }
