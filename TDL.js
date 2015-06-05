@@ -280,6 +280,9 @@ function populate_todo_single() {
     if (selected_timeStamp < dateInMS) {
         $(TD_item).addClass('pastDue');
     }
+    if (todo_items_array[0].complete == 1) {
+            $(title).addClass('completed_item');
+        }
     // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
     $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
     $('#display_list').append(TD_item);
