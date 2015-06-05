@@ -94,17 +94,17 @@ function populate_todo_list() {
             text: "details: " + todo_items_array[i].details,
         });
 
-<<<<<<< HEAD
+ 
 
        //Janet made changes to remove the priority buttons
 
         $(TD_item).append(list_item_num, title, details, timestamp, delete_button );
        // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
 
-=======
+ 
         // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
         $(TD_item).append(title, p1_button)
->>>>>>> 1febbdd03a7cc54d83558404906eba4c7b446d04
+ 
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {
@@ -302,14 +302,14 @@ function login_to_server() {
                     $('.alert').remove();
                 } else if (!response.success) {
                     $('.alert').remove();
-<<<<<<< HEAD
+
                           var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
                         $('.form_container').append(alert);
                     
-=======
+
                     var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
                     $('.form_container').append(alert);
->>>>>>> 1febbdd03a7cc54d83558404906eba4c7b446d04
+
 
                 }
             }
@@ -455,7 +455,7 @@ function create_account() {
             if (response.success) {
                 console.log(response);
                 logout_to_mainpage();
-<<<<<<< HEAD
+ 
                 
             }
             else if(!response.success){
@@ -472,14 +472,13 @@ function create_account() {
                           var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
                         $('#creation_div > form').append(alert);
 
-=======
-
+ 
             } else if (!response.success) {
                 console.log(response);
                 $('.alert').remove();
                 var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
                 $('#creation_div > form').append(alert);
->>>>>>> 1febbdd03a7cc54d83558404906eba4c7b446d04
+ 
             }
         }
 

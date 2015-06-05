@@ -34,10 +34,7 @@
 </div>
 <div class="container">
     <div class="list_container">
-        <button id="add_LI">Add list item</button>
-        <button id="pull_json">Pull json list</button>
-
-         <button id='logout_button'>logout</button>
+            <button id='logout_button'>logout</button>
             <div id='user_login'>
                 <div id="email" class=''></div>
                 <div id="lastName" class=''></div>
@@ -51,7 +48,7 @@
                    <div class="panel-group" id="accordionTwo">
                     <div class="panel panel-default">
                         <h4 class="panel-title">
-                          <a class="accordion-toggle list-group" data-toggle="collapse" data-parent="#accordionTwo" href="#collapseFour">
+                          <a class="accordion-toggle list-group" data-toggle="expanded" data-parent="#accordionTwo" href="#collapseFour">
                           <input type='text' id="title_LI" placeholder="Add new title"> </a> 
                         </h4>
                     </div>
@@ -61,28 +58,44 @@
                             <a href="#" class="list-group-item"><input type= 'date' class="" id="timeStamp_LI" placeholder="Add date"> <span></span></a>
                         </div>
                         </div>
-                           <a class="accordion-toggle list-group" data-toggle="collapse" data-parent="#accordionTwo" href="#collapseFour">
-                            <button type="button" class="btn  btn-info btn-sm  input-btn" id="btn"><span class="more-btn"></span> more </button> </a>
+                         
                     </div>  
-         
+               
+                 <a class="accordion-toggle list-group" data-toggle="collapse" data-parent="#accordionTwo" href="#collapseFour">
+                            <button type="button" class="btn  btn-info btn-sm  input-btn" id="btn"><span class="more-btn"></span> more </button> </a>
              </div>
+                    <button class= "btn btn-danger add-button btn-sm "id="add_LI"> Add </button>
+                    <button id="pull_json btn-sm pull-right">Pull json list</button>   
      
                
     
     
    <!-- <button type="button" class="btn btn-danger  btn-md "  id="add_LI">Add</button> -->
-   
+   <div class="panel-group" id="accordion">
+  <div class="panel panel-default" id="panel2">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+      -table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
     <div id="display_list" class='list-group'>  </div>
     </div>
-<<<<<<< HEAD
- </div>
  
-</body>
-</body>
+ 
 
-</html>
- 
-=======
 </div>
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -102,4 +115,7 @@
 
   </div>
 </div>
->>>>>>> 1febbdd03a7cc54d83558404906eba4c7b446d04
+
+</body>
+
+</html>

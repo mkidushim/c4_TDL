@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 #input-container {
     
     border: 5px solid #7FFF00  ;
@@ -59,10 +54,10 @@ body {
     color: #707070  ;
     font-size: 22px;
     border: none;
-    margin-left: 7px;
+    margin-left: 5px;
     height: 55px;
-  border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
     width: 810px;
     background-color: white;
     border-bottom-color: white;
