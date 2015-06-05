@@ -584,6 +584,9 @@ function send_list_items() {
                 get_TDL_json_populate_multiple();
             } else if (!response.success) {
                 console.log("error:", response.errors)
+                $('.alert').remove();
+                var alert = $('<div>').addClass('alert alert-danger').html(response.errors);
+                $('.list_container').append(alert);
             }
         }
 
