@@ -172,7 +172,7 @@ function populate_todo_list() {
                 populate_todo_list();
             }
 
-            submit_complete.click(item_complete_function)
+            item_complete_function();
 
         });
 
@@ -534,7 +534,7 @@ function item_complete_function() {
         dataType: 'json',
         data: {
             postId: update_array[0].id,
-            complete: $('.item_complete').val(),
+            complete: update_array[0].complete,
         },
         method: 'POST',
         url: 'http://s-apis.learningfuze.com/todo/updateCompleteStatus',
