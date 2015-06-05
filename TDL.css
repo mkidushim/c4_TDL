@@ -90,6 +90,18 @@ legend {
     margin-left: 9px;
 }
 
+span.glyphicon-check {
+
+padding: 5px;
+display: block;
+}
+.red{
+color: red;
+}
+.green{
+    color: green;
+}
 .pastDue {
 	background-color: red;
+
 }
