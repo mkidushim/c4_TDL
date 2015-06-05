@@ -99,11 +99,8 @@ function populate_todo_list() {
         if (selected_timeStamp < dateInMS) {
             $(TD_item).addClass('pastDue')
         }
-        if (todo_items_array[i].complete == 1){
-            $(title).addClass('completed_item');
-        }
         // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-        $(TD_item).append(title, p1_button, delete_button, update_button, complete_button)
+        $(TD_item).append(title, p1_button, delete_button, update_button)
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {
@@ -141,7 +138,6 @@ function populate_todo_list() {
         })
 
         update_button.click(function() {
-            $('.modal-title').html('')
             $('.modal-body').html('');
             update_array = [];
             var index = $(this).parent().attr('data_index');
@@ -152,28 +148,15 @@ function populate_todo_list() {
             var submit_update = $('<button>').attr('type', 'submit').text('submit');
 
             submit_update.click(update_item);
-            $('.modal-title').html('Update for : ' + update_array[0].title)
+
             $('.modal-body').append(title_update, details_update, time_update, submit_update);
             $('#myModal').modal('show');
 
-        });
 
-        complete_button.click(function() {
-            $('.modal-title').html('');
-            $('.modal-body').html('');
-            update_array = [];
-            var index = $(this).parent().attr('data_index');
-            update_array.push(todo_items_array[index]);
-            var item_complete = $('<input>').attr('type', 'text').attr('placeholder', 'input 1 for complete or 0 for incomplete').addClass('item_complete');
-            var submit_complete = $('<button>').attr('type', 'submit').text('submit');
 
-            submit_complete.click(item_complete_function)
-            $('.modal-title').html('Complete for : ' + update_array[0].title)
-            $('.modal-body').append(item_complete, submit_complete);
-            $('#myModal').modal('show');
-             $('.close_button').click(populate_todo_list)
 
         });
+
 
 
 
@@ -422,12 +405,10 @@ function log_to_creation_page() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
-
-            $("input#N_last_name").change(function() {
-                $('#N_last_c').addClass('glyphicon glyphicon-check')
-            });
+            $('form input.col-md-6').change(validate_create);
             $('#validate_new_account').click(function() {
                 create_account();
+                //validate_create();
             })
         }
     })
@@ -512,10 +493,6 @@ function update_item() {
                 $('.modal-body').html('Your item has been updated!');
                 $('#myModal').modal('show');
 
-            } else if (!response.success) {
-                $('.alert').remove();
-                var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
-                $('.modal-body').append(alert);
             }
 
 
@@ -523,41 +500,6 @@ function update_item() {
 
     });
 }
-
-function item_complete_function() {
-    $.ajax({
-        dataType: 'json',
-        data: {
-            postId: update_array[0].id,
-            complete: $('.item_complete').val(),
-        },
-        method: 'POST',
-        url: 'http://s-apis.learningfuze.com/todo/updateCompleteStatus',
-        cache: false,
-        crossDomain: true,
-        success: function(response) {
-            window.response = response;
-            if (response.success) {
-                console.log(response);
-                $('.modal-body').html('')
-                $('.modal-body').html('Your item has been updated!');
-                $('#myModal').modal('show');
-
-            } else if (!response.success) {
-                console.log(response)
-                $('.alert').remove();
-                var alert = $('<div>').addClass('alert alert-danger').html(response.errors);
-                $('.modal-body').append(alert);
-            }
-
-
-        }
-
-    });
-}
-
-
-
 
 $(document).ready(function() {
     $('#create_account_button').click(function() {
@@ -580,9 +522,7 @@ $(document).ready(function() {
     $('#login_button').click(login_to_server);
     $('#logout_button').click(logout_server);
 
-    $("N_user_name").change(function() {
-        $('N_user_name').addClass('glyphicon glyphicon-ok')
-    })
+
 });
 
 //Parris function creation to populate DOM with response object data
@@ -593,3 +533,42 @@ function populate_success_data() {
     $('#firstName').html(response.firstName);
     $('#id').html(response.id)
 }
+
+function validate_create() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            username: $('#N_user_name').val(),
+            password: $('#N_password1').val(),
+            password2: $('#N_password2').val(),
+            email: $('#N_user_email').val(),
+            firstName: $('#N_first_name').val(),
+            lastName: $('#N_last_name').val()
+        },
+        method: 'POST',
+        url: "http://s-apis.learningfuze.com/todo/validateUserInfo",
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.validate_response = response;
+            if (validate_response.success == true) {
+                $('form span').addClass('glyphicon glyphicon-check green')
+            } else if (validate_response == false) {
+                $('form span').addClass('glyphicon glyphicon-check red')
+                console.log('validate:', validate_response)
+            }
+        }
+    });
+
+
+
+}
+
+
+
+
+
+
+$("input#N_user_email").change(function() {
+    $('#N_user_email_c').addClass('glyphicon glyphicon-check')
+});
