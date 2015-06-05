@@ -53,26 +53,10 @@ function populate_todo_list() {
 
         var update_button = $('<button>').attr('type', 'button').text('update').attr('data_index', i);
 
-        // var p2_button = $("<button>", {
-        //     type: 'button',
-        //     class: 'button',
-        //     text: "priority 2",
-        //     data_index: i
-        // });
-
-        // var p3_button = $("<button>", {
-        //     type: 'button',
-        //     class: 'button',
-        //     text: "priority 3",
-        //     data_index: i
-        // });
-
-        // var p4_button = $("<button>", {
-        //     type: 'button',
-        //     class: 'button',
-        //     text: 'priority 4',
-        //     data_index: i
-        // });
+        var postId_num = $("<li>", {
+            class: 'list_item_num list-group-item',
+            text: "Post Id number: " + todo_items_array[i].id,
+        });
 
         var list_item_num = $("<li>", {
             class: 'list_item_num list-group-item',
@@ -93,11 +77,11 @@ function populate_todo_list() {
             class: 'to_do_details list-group-item',
             text: "details: " + todo_items_array[i].details,
         });
-
+        // Parris created comparison between timestamp and current date and will highlight red if current date has past
         var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
         var dateInMS = Date.now();
         if (selected_timeStamp < dateInMS) {
-            $(TD_item).addClass('pastDue')
+            $(TD_item).addClass('pastDue');
         }
         // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
         $(TD_item).append(title, p1_button, delete_button, update_button)
@@ -132,8 +116,9 @@ function populate_todo_list() {
             var title_display = $('<div>').html('title : ' + todo_items_array[index].title);
             var details_display = $('<div>').html('details : ' + todo_items_array[index].details);
             var timestamp_display = $('<div>').html('time : ' + todo_items_array[index].timeStamp);
+            var postId_display = $('<div>').html('postId : ' + todo_items_array[index].id);
 
-            $('.modal-body').append(title_display, details_display, timestamp_display);
+            $('.modal-body').append(title_display, details_display, timestamp_display, postId_display);
             $('#myModal').modal('show');
         })
 
@@ -145,99 +130,162 @@ function populate_todo_list() {
             var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update');
             var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update');
             var time_update = $('<input>').attr('type', 'text').attr('placeholder', 'duedate').addClass('time_update');
+            var postId_display = $('<div>').html('postId : ' + todo_items_array[index].id);
             var submit_update = $('<button>').attr('type', 'submit').text('submit');
 
             submit_update.click(update_item);
 
             $('.modal-body').append(title_update, details_update, time_update, submit_update);
             $('#myModal').modal('show');
-
-
-
-
         });
-
-
-
-        // this is being worked on to add priority
-        // p1_button.click(function() {
-        //     var index = $(this).parent().attr('data_index');
-        //     console.log("list item ", index + ' was clicked');
-        //     $(TD_item).addClass('list-group-item list-group-item-danger');
-        //     populate_todo_list();
-        // });
-
-        // p2_button.click(function() {
-        //     var index = $(this).parent().attr('data_index');
-        //     console.log("list item ", index + ' was clicked');
-        //     var priority = $(this).parent().addClass('list-group-item list-group-item-warning');
-        //     populate_todo_list();
-        // });
-
-        // p3_button.click(function() {
-        //     var index = $(this).parent().attr('data_index');
-        //     console.log("list item ", index + ' was clicked');
-        //     var priority = $(this).parent().addClass('list-group-item list-group-item-info');
-        //     populate_todo_list();
-        // });
-
-        // p4_button.click(function() {
-        //     var index = $(this).parent().attr('data_index');
-        //     console.log("list item ", index + ' was clicked');
-        //     var priority = $(this).parent().addClass('list-group-item list-group-item-success');
-        //     populate_todo_list();
-        // });
     }
 }
 
 function populate_todo_single() {
-
+    $('#display_list').empty();
     var iLN = parseFloat($('#input_search_id').val());
     console.log("item list number chosen: ", iLN);
     console.log("todo_items_array: ", todo_items_array);
-    for (var i = iLN; i < (iLN + 1); i++) {
+    // for (var i = iLN; i < (iLN + 1); i++) {
+        $('#display_list').empty();
         var TD_item = $("<ul>", {
             class: 'TD_item list-group',
-            id: todo_items_array[i - 1].id,
-            data_index: (i - 1)
+            id: todo_items_array[0].id,
+            data_index: 0
         });
 
         var delete_button = $("<button>", {
             type: 'button',
             class: 'button glyphicon glyphicon-remove-sign',
-            data_index: i
+            data_index: 0
         });
+
+        var p1_button = $("<button>", {
+            type: 'button',
+            class: 'button',
+            text: "show details",
+            data_index: 0
+        });
+
+        var complete_button = $('<button>').attr('type', 'button').text('complete').attr('data_index', 0);
+
+        var update_button = $('<button>').attr('type', 'button').text('update').attr('data_index', 0);
+
+        var postId_num = $("<li>", {
+            class: 'list_item_num list-group-item',
+            text: "Post Id number: " + todo_items_array[0].id,
+        });
+
         var list_item_num = $("<li>", {
             class: 'list_item_num list-group-item',
-            text: "list item number: " + (i)
+            text: "list item number: " + (1)
         });
 
         var timestamp = $("<li>", {
             class: 'to_do_timestamp list-group-item',
-            text: "time: " + todo_items_array[i - 1].timeStamp,
+            text: "time: " + todo_items_array[0].timeStamp,
         });
 
         var title = $("<li>", {
             class: 'to_do_title list-group-item',
-            text: "title: " + todo_items_array[i - 1].title,
+            text: "title: " + todo_items_array[0].title,
         });
 
         var details = $("<li>", {
             class: 'to_do_details list-group-item',
-            text: "details: " + todo_items_array[i - 1].details,
+            text: "details: " + todo_items_array[0].details,
         });
 
-        $(TD_item).append(list_item_num, title, details, timestamp, delete_button);
+        var selected_timeStamp = Date.parse(todo_items_array[0].timeStamp);
+        var dateInMS = Date.now();
+        if (selected_timeStamp < dateInMS) {
+            $(TD_item).addClass('pastDue');
+        }
+        // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+        $(TD_item).append(title, p1_button, delete_button, update_button)
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {
+            console.log(todo_items_array[0])
             var index = $(this).parent().attr('data_index');
             console.log("list item ", index + ' was clicked');
+
             todo_items_array.splice(index, 1);
-            index = $(this).parent().remove();
-            //populate_todo_single();
+            populate_todo_list();
+            $.ajax({
+                dataType: 'json',
+                url: 'http://s-apis.learningfuze.com/todo/delete',
+                method: 'POST',
+                data: {
+                    userId: response.Id,
+                    postId: global_response.data[0].id,
+                },
+                cache: false,
+                crossDomain: true,
+
+                success: function(response) {
+                    console.log(response)
+                }
+            });
         });
-    }
+        p1_button.click(function() {
+            $('.modal-body').html('');
+            var index = $(this).parent().attr('data_index');
+            var title_display = $('<div>').html('title : ' + todo_items_array[index].title);
+            var details_display = $('<div>').html('details : ' + todo_items_array[index].details);
+            var timestamp_display = $('<div>').html('time : ' + todo_items_array[index].timeStamp);
+            var postId_display = $('<div>').html('postId : ' + todo_items_array[index].id);
+
+            $('.modal-body').append(title_display, details_display, timestamp_display, postId_display);
+            $('#myModal').modal('show');
+        })
+
+        update_button.click(function() {
+            $('.modal-body').html('');
+            update_array = [];
+            var index = $(this).parent().attr('data_index');
+            update_array.push(todo_items_array[index]);
+            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update');
+            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update');
+            var time_update = $('<input>').attr('type', 'text').attr('placeholder', 'duedate').addClass('time_update');
+            var postId_display = $('<div>').html('postId : ' + todo_items_array[index].id);
+
+            var submit_update = $('<button>').attr('type', 'submit').text('submit');
+
+            submit_update.click(update_item);
+
+            $('.modal-body').append(title_update, details_update, time_update, submit_update, postId_display);
+            $('#myModal').modal('show');
+        });
+    // }
+}
+
+function postId_single() {
+    console.log("ajax call");
+    $.ajax({
+        dataType: 'json',
+        url: 'http://s-apis.learningfuze.com/todo/getByPostId',
+        method: 'POST',
+        data: {
+            postId: $('#input_search_id').val(),
+        },
+        cache: false,
+        crossDomain: true,
+
+        success: function(response) {
+            global_1response = response.data;
+            console.log('postid response : ', global_1response);
+            todo_items_array = [];
+            global_1response = response;
+            todo_items_array = todo_items_array.concat(global_1response.data);
+            console.log("response: ", global_1response);
+            console.log('todo_items_array: ', todo_items_array);
+            populate_todo_single();
+
+        }
+
+    });
+
 }
 
 function get_TDL_json_populate_multiple() {
@@ -374,7 +422,7 @@ function logout_server() {
             }
         }
     });
-} 
+}
 
 function load_user_data() {
     $.ajax({
@@ -406,6 +454,9 @@ function load_user_data() {
                 todo_items_array.sort(sort_todo);
                 populate_todo_list
             });
+            $('#search_id_button').click(function() {
+                postId_single();
+            })
 
         }
     })
@@ -535,6 +586,8 @@ function update_item() {
 }
 
 $(document).ready(function() {
+
+
     $('#create_account_button').click(function() {
         log_to_creation_page();
     })
