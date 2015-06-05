@@ -7,6 +7,9 @@ var todo_items_object = {
 };
 var todo_items_array = [];
 var update_array = [];
+var session;
+var name_user;
+
 
 function todo_initialize() {
         var todo_initialize = Object.create(todo_items_object);
@@ -99,11 +102,11 @@ function populate_todo_list() {
         if (selected_timeStamp < dateInMS) {
             $(TD_item).addClass('pastDue')
         }
-        if (todo_items_array[i].complete == 1){
+        if (todo_items_array[i].complete == 1) {
             $(title).addClass('completed_item');
         }
         // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-        $(TD_item).append(title, p1_button, delete_button, update_button, complete_button)
+        $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {
@@ -155,19 +158,16 @@ function populate_todo_list() {
             $('.modal-title').html('Update for : ' + update_array[0].title)
             $('.modal-body').append(title_update, details_update, time_update, submit_update);
             $('#myModal').modal('show');
-
         });
         //***********complete function needs to be added******************//
         complete_button.click(function() {
             update_array = [];
             var index = $(this).parent().attr('data_index');
             update_array.push(todo_items_array[index]);
-            if(update_array[0].complete == 0){
+            if (update_array[0].complete == 0) {
                 update_array[0].complete = 1;
                 populate_todo_list();
-            }
-
-            else if(update_array[0].complete == 1){
+            } else if (update_array[0].complete == 1) {
                 update_array[0].complete = 0;
                 populate_todo_list();
             }
@@ -324,9 +324,10 @@ function login_to_server() {
             success: function(response) {
                 window.response = response;
                 if (response.success) {
-                    load_user_data()
-                    session = response.session_id;
-                    name_user = response.username;
+                    delete
+                    load_user_data();
+                    document.cookie = 'sessionid=' + response.session_id;
+                    document.cookie = 'username=' + response.username;
                     $('.alert').remove();
                 } else if (!response.success) {
                     $('.alert').remove();
@@ -348,8 +349,8 @@ function logout_server() {
         dataType: 'json',
         url: 'http://s-apis.learningfuze.com/todo/logout',
         data: {
-            sid: session,
-            username: name_user,
+            sid: getCookie('sessionid'),
+            username: getCookie('username'),
         },
         method: 'POST',
         cache: false,
@@ -397,6 +398,8 @@ function load_user_data() {
                 todo_items_array.sort(sort_todo);
                 populate_todo_list
             });
+            get_TDL_json_populate_multiple();
+
 
         }
     })
@@ -516,6 +519,7 @@ function update_item() {
                 $('.modal-body').html('')
                 $('.modal-body').html('Your item has been updated!');
                 $('#myModal').modal('show');
+                get_TDL_json_populate_multiple();
 
             } else if (!response.success) {
                 $('.alert').remove();
@@ -558,6 +562,44 @@ function item_complete_function() {
     });
 }
 
+function keep_user_logged_in() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            session_id: getCookie('sessionid'),
+        },
+        method: 'POST',
+        url: 'http://s-apis.learningfuze.com/todo/getLoggedInUserInfo',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            if (response.success) {
+                console.log(response);
+                load_user_data();
+
+            } else if (!response.success) {
+
+                logout_to_mainpage();
+
+            }
+
+
+        }
+
+    });
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}
 
 
 
@@ -585,6 +627,9 @@ $(document).ready(function() {
     $("N_user_name").change(function() {
         $('N_user_name').addClass('glyphicon glyphicon-ok')
     })
+    keep_user_logged_in();
+
+
 });
 
 //Parris function creation to populate DOM with response object data
