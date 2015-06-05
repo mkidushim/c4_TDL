@@ -5,8 +5,10 @@
 
 .list-group-item {
 
-    background-color: black;
-    margin-left: -10px;
+    background-color: white;
+    margin-left: 85px;
+    width: 300;
+    border: 4px solid #6FD0FF;
 
 }
 
@@ -28,7 +30,7 @@
     
     border: 15px solid #7FFF00;
     border-radius:  10px;
-    width: 850px;
+    width: 950px;
     background-color: white;
  
  }
@@ -60,9 +62,12 @@ textarea:focus, input:focus, .list-group-item:focus{
 	border-radius: 0;
 	border-left: none;
 	border-right: none;
+    width: 850px;
     background-color: white;
     border-bottom-color: white;
     border-top-color: gray;
+  
+    margin-left :5px;
     
     
 }
@@ -91,9 +96,9 @@ textarea:focus, input:focus, .list-group-item:focus{
 
 
    #title_LI  { 
-    margin-left: 1px;
+    margin-left: 5px;
     border: 1px solid white;
-    width: 782px;
+    width: 800px;
     font-family: "Comic Sans MS", cursive, sans-serif;
     color:   #663399;
     font-size: 24px;
@@ -116,9 +121,11 @@ textarea:focus, input:focus, .list-group-item:focus{
    height: 50px;
     border: 1px solid white;
     font-weight: bolder;
-    margin-left: 1px;
+    margin-left: -8px;
     border: 1px solid white;
-    width: 782px;
+ 
+    border: 1px solid white;
+    width: 800px;
     word-wrap: break-word;
    
   }
@@ -146,10 +153,11 @@ textarea:focus, input:focus, .list-group-item:focus{
 .input-btn {
    
    
-    margin-left: 749px;
-    border-radius: 16px;
+    margin-left: 835px;
+    border-radius: 10px;
     height: 35px;
-    width:55px;
+    width:70px;
+    text-align: center;
 
  
 }
@@ -174,10 +182,10 @@ margin-right
 }
 #pull_json {
    margin-top:  8px;
-   margin-left: 150px;
+   margin-left: 15px;
    border-radius: 10px;
    height: 35px;
-   width:95px;
+   width:115px;
    background-color:#FF0080;
    color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
@@ -189,10 +197,10 @@ margin-right
 
 #sort_button {
    margin-top: 8px;
-   margin-left: 8px;
+   margin-left: 15px;
    border-radius: 10px;
    height: 35px;
-   width:95px;
+   width:115px;
    background-color:#660099;
    color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
@@ -204,11 +212,11 @@ margin-right
 #input_search_id {
    text-align: center;
    margin-top:  8px;
-   margin-left: 8px;
+   margin-left: 25px;
    border-radius: 10px;
    height: 35px;
-   width:95px;
-   background-color: #6666FF;
+   width:115px;
+   background-color: #CAFFFF;
    color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
    font-size: 14px;
@@ -221,10 +229,10 @@ margin-right
 #search_id_button {
    text-align: center;
    margin-top:  8px;
-   margin-left: 8px;
+   margin-left: 15px;
    border-radius: 10px;
    height: 35px;
-   width:95px;
+   width:115px;
    background-color: #00D0D0;
    color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
@@ -234,13 +242,13 @@ margin-right
        
 }
 
-.pull_json_list {
+.pull_json_update {
    text-align: center;
-   margin-left: 3px;
+   margin-left: 7px;
    margin-top:  8px;
    border-radius: 10px;
    height: 35px;
-   width:95px;
+   width:115px;
    background-color: #FFFF00;
    color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
@@ -254,8 +262,8 @@ margin-right
 #add_LI {
    text-align: center;
    margin-top: 3px;
-   margin-left: 8px;
-   border-radius: 10px;
+   margin-left: 120px;
+   border-radius: 8px;
    height: 35px;
    width:115px;
    background-color: #BC1D71;
@@ -269,10 +277,42 @@ margin-right
 } 
 
 
+
+.TD_item > button {
+   margin-top: 8px;
+   margin-left: 80px;
+   border-radius: 10px;
+   height: 35px;
+   width:115px;
+   background-color:#660099;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+
+        
+}
+
+.logon_title {
+
+  background-color:  #33A1DE;
+
+
+}
+
+
+
+
+
+
+
+
 body {
     background: black;
 }
-
+#id {
+    display: none;
+}
 .list-group {
     margin-top: 45px;
 
@@ -370,25 +410,35 @@ legend {
  
 
 span.glyphicon-check {
+    padding: 5px;
+    display: block;
+}
 
-padding: 5px;
-display: block;
+.red {
+    color: red;
 }
-.red{
-color: red;
-}
-.green{
+
+.green {
     color: green;
 }
-.pastDue {
-	background-color: red;
 
+.pastDue {
+    background-color: red;
 }
- 
-.item_complete{
+
+
+.item_complete {
     width: 100%;
 }
-.completed_item{
+
+.completed_item {
     text-decoration: line-through;
 }
- 
+
+
+#logout_button {
+    margin-left: 1%;
+    border-radius: 5px;
+    background: rgb(73, 73, 255);
+    color: white;
+}

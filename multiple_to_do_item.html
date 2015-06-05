@@ -1,48 +1,17 @@
-<!DOCTYPE html>
-<html>
-<link rel="stylesheet" type="text/css" href="TDL.css">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="TDL.js">
-</script>
 
-<head>
-    <title></title>
-</head>
-
-<body>
-    <script>
-        /*$(document).ready(function(){
-          $("#input-btn").on("hide.bs.collapse", function(){
-            $(".btn").html( 'more');
-          });
-          $("#input-btn").on("show.bs.collapse", function(){
-            $(".btn").html('less');
-          });
-        }); */
-    </script>
-   
  
 <div class = "main-container col-12-sm">
-<div class="col-xs-12 well">
+<div class="col-xs-12 well logon_title">
+    <button id='logout_button' class="pull-right">logout</button>
     <div id="lastName" class='pull-right'></div>
     <div id="firstName" class='pull-right'></div>
     <i class="fa fa-user fa-2x pull-right"></i>
+    <div id="id" class=''></div>
 </div>
 <div class="container">
     <div class="list_container">
-<<<<<<< HEAD
-
-            <button id='logout_button'>logout</button>
-            <div id='user_login'>
-                <div id="email" class=''></div>
-                <div id="lastName" class=''></div>
-                <div id="firstName" class=''></div>
-                <div id="id" class=''></div>
-            </div>
+ 
+ 
    <!--Janets code -->
 
       <p id="main-title">TO do LIST</p>
@@ -70,23 +39,38 @@
      
                
        
-       
-        <button class="pull_json_update" id="pull_json">Update list</button>
-
+        <button id="add_LI">Add list item</button>
+        <button class="pull_json_update" id="pull_json">List Items</button>
+        <button id='sort_button'>Sort</button>
+        <input class="" id="input_search_id" placeholder="Input Id">
+          
+ 
+        <button id="search_id_button">Search ID</button>
+        
+        
+       <!--
+        <div id='user_login'>
+ 
+        <button id="add_LI">Add list item</button>
+        <button id="pull_json">Update list</button>
+        <input class="" id="title_LI" placeholder="Add title">
+        <input class="" id="details_LI" placeholder="Add details">
+        <input class='' id='timeStamp_LI'  type="datetime-local">
         <button id='sort_button'>Sort</button>
         <input class="" id="input_search_id" placeholder="Id Search">
         <button id="search_id_button">Search ID</button>
-        <button id="add_LI">Add list item</button>
-        <button  class="pull_json_list" id="pull_json">Pull json list</button> 
-       
-        <div id='user_login'>
+        <!--<div id='user_login'>
+ 
             <div id="email" class=''></div>
             <!--   <div id="lastName" class=''></div>
-                <div id="firstName" class=''></div> -->
-            <div id="id" class=''></div>
+                <div id="firstName" class=''></div> 
+            
         </div>
-        <div id="display_list" class='list-group'> </div>
+ -->
 
+        <div id="display_list" class='list-group'>
+        </div>
+ 
     </div>
   </div>
 </div>
@@ -113,6 +97,3 @@
   </div>
 </div>
 
-</body>
-
-</html>
