@@ -106,7 +106,7 @@ function populate_todo_list() {
             $(title).addClass('completed_item');
         }
         // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-        $(TD_item).append(title, p1_button, delete_button, update_button, complete_button)
+        $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
         $('#display_list').append(TD_item);
 
         delete_button.click(function() {

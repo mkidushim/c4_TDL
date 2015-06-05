@@ -91,23 +91,33 @@ legend {
 }
 
 span.glyphicon-check {
+    padding: 5px;
+    display: block;
+}
 
-padding: 5px;
-display: block;
+.red {
+    color: red;
 }
-.red{
-color: red;
-}
-.green{
+
+.green {
     color: green;
 }
-.pastDue {
-	background-color: red;
 
+.pastDue {
+    background-color: red;
 }
-.item_complete{
+
+.item_complete {
     width: 100%;
 }
-.completed_item{
+
+.completed_item {
     text-decoration: line-through;
+}
+
+#logout_button {
+    margin-left: 1%;
+    border-radius: 5px;
+    background: rgb(73, 73, 255);
+    color: white;
 }
