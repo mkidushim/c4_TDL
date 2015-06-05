@@ -1,9 +1,11 @@
 body {
     background: black;
 }
+
 #id {
     display: none;
 }
+
 .list-group {
     margin-top: 45px;
 }
@@ -46,15 +48,16 @@ body {
 
 .form_container {
     margin-left: 38%;
-    background: lavender;
     padding-top: 1%;
     padding-bottom: 2%;
     border-radius: 10px;
+    border: 10px solid rgb(255, 71, 103);
+    background: white;
 }
 
 .list_container > div > h1 {
     color: #F3EDAF;
-    font-family: 'Playball', cursive;
+    font-family: "Comic Sans MS", cursive, sans-serif;
     text-align: center;
     font-size: 45px;
     font-weight: 900;
@@ -69,54 +72,45 @@ body {
 }
 
 legend {
-    color: rgb(194, 175, 243);
+    color: #33A1DE;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    border-bottom: 1px solid #33A1DE;
 }
-
 .list_font {
     text-align: center;
     margin-top: 4%;
     margin-bottom: 4%;
 }
-
 .fa-list {
     color: #F3EDAF;
 }
-
 #lastName {
     margin-left: 5px;
     font-size: 20px;
 }
-
 #firstName {
     font-size: 20px;
     margin-left: 9px;
 }
-
 span.glyphicon-check {
     padding: 5px;
     display: block;
 }
-
 .red {
     color: red;
 }
-
 .green {
     color: green;
 }
-
 .pastDue {
     background-color: red;
 }
-
 .item_complete {
     width: 100%;
 }
-
 .completed_item {
     text-decoration: line-through;
 }
-
 #logout_button {
     margin-left: 1%;
     border-radius: 5px;
