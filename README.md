@@ -68,7 +68,7 @@ todo_items[
         - 'password' input: holds hte password of the user
         - 'login' button: triggers the ajax call to the server to log in
     - AJAX request to server to log in:
-        - request URL: http://learningfuze.com/todo/login
+        - request URL: http://s-apis.learningfuze.com/todo/login
         - input (POST):
             - username
             - password
@@ -80,3 +80,97 @@ todo_items[
             - firstName: string - the user's first name
             - id: number - the user's ID number
             - errors: array - an array of strings, each holding an error that occurred during the login
+            - session_id: string - the new session ID for this user session
+- LOGOUT:
+    - add logout button
+    - AJAX request to server to log out:
+        - request URL: http://s-apis.learningfuze.com/todo/logout
+        - input (POST):
+            - username: string - the current user's username
+            - **NEW AS OF 1.5** sid: string - the session id for the current user session.  Yes, sid.  Life sucks.
+        - output:
+            - success: true/false - whether or not the login was successful
+            - msgs: string - logout message, if successful
+            - errors: string: error that occurred during the logout
+            - session_id: string - the current session ID for this user session
+
+# TODO 1.5 (Group Project)
+- tie in "create todo" frontend to backend
+    - request URL: http://s-apis.learningfuze.com/todo/create
+    - input (POST):
+        - title: string - title of the todo post
+        - dueDate: string - any valid date format as specified in the PHP strtotime specs
+        - details: string - todo list details
+        - userId: number - User's ID
+    - output (JSON):
+        - success: boolean - true or false
+        - errors: array - array of error messages, if any
+- tie in "list all todo items" frontend to backend
+    - request URL: http://s-apis.learningfuze.com/todo/get
+    - input (POST):
+        - userId: number - User's ID to fetch todo items for
+    - output (JSON):
+        - data: array of objects
+            - id: int - todo item ID
+            - userID: int - todo item's owner
+            - title: string - title of the todo item
+            - timeStamp: int - unix timestamp of the duedate
+            - details: string - details of the todo item
+        - success: boolean - success or failure of the operation
+        - errors: array - array of error messages, if any
+
+
+# TODO 1.6 (Group Project)
+
+- login
+	- User should be able to log into their account with a username / password
+	- Incorrect usernames/passwords should return an error message provided by the server
+	- Correct logins should result in users being shown/directed to a landing page for their todo items
+	
+- logout
+	- User should be able to log out of their account
+	- Logging out would show / direct the user towards a default landing page for non-logged in users
+	
+- account creation
+	- User should be able to create a user account including:
+		- user name (must not already exist)
+		- password (must be a valid password)
+		- confirmation password (must be the same as password)
+		- first name (must be at least 2 characters)
+		- last name (must be at least 2 characters)
+		- user email (must be a valid email)
+ 	- request URL: http://s-apis.learningfuze.com/todo/newAccount
+ 	- input (POST):
+		- username: string - chosen username
+		- password: string - chosen password
+		- password2: string - verification of password
+		- email: string - user’s email address
+		- firstName: string - user’s first name
+		- lastName: string - user’s last name
+	- output (JSON):
+		- success: boolean - true or false
+		- errors: array - array of error messages, if any
+	
+- Create todo item
+	- User should be able to create a new todo item with:
+		- title
+		- due date
+		- details
+
+- List all todo items
+	- User should be able to see all of their todo items
+	- User should be able to filter those that are past the due date / completed
+
+- Show individual todo item
+	- Focus on one todo item
+	- does not leave the original list.  Allows one item to be viewed in greater detail and then closed without modifying list
+
+- Delete individual todo item
+	- request URL: http://s-apis.learningfuze.com/todo/delete
+	- input (POST):
+		- postId: id of the todo item to delete
+		- userId: user id of the post to delete
+	- output (JSON):
+			- success: boolean - true or false
+			- msgs: string - success message
+			- errors: array - error messages
