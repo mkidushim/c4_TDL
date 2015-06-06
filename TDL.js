@@ -506,10 +506,12 @@ function load_user_data() {
             // });
             $('#pull_json').click(function() {
                 get_TDL_json_populate_multiple();
+                $('.list_container .alert.alert-danger').remove();
 
             })
             $('#single_pull_json').click(function() {
                 get_TDL_json_populate_single();
+
 
             })
             $('#add_LI').click(send_list_items);
@@ -740,9 +742,11 @@ $(document).ready(function() {
     $('#add_LI').click(function() {
         todo_initialize();
         populate_todo_list();
+
     });
     $('#pull_json').click(function() {
         get_TDL_json_populate_multiple();
+
 
     })
     $('#single_pull_json').click(function() {
