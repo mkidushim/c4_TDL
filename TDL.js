@@ -446,7 +446,6 @@ function login_to_server() {
             success: function(response) {
                 window.response = response;
                 if (response.success) {
-                    delete
                     load_user_data();
                     document.cookie = 'sessionid=' + response.session_id;
                     document.cookie = 'username=' + response.username;
@@ -555,9 +554,9 @@ function log_to_creation_page() {
             $('.container').html('');
             $('.container').html(response);
 
-            $("input#N_last_name").change(function() {
-                $('#N_last_c').addClass('glyphicon glyphicon-check')
-            });
+            $("#N_user_name").change(function() {
+        validate_create();
+    })
             $('#validate_new_account').click(function() {
                 create_account();
             })
@@ -785,9 +784,9 @@ function validate_create() {
         success: function(response) {
             window.validate_response = response;
             if (validate_response.success == true) {
-                $('.check').addClass('glyphicon glyphicon-check green')
+                $('span.check').addClass('glyphicon glyphicon-check green')
             } else if (validate_response == false) {
-                $('form span').addClass('glyphicon glyphicon-check red')
+                $('span.check').addClass('glyphicon glyphicon-check red')
                 console.log('validate:', validate_response)
             }
         }
