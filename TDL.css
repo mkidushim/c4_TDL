@@ -1,3 +1,313 @@
+ body {
+   background-color: black;
+ 
+ }
+
+.list-group-item {
+
+    background-color: white;
+    margin-left: 85px;
+    width: 300;
+    border: 4px solid #6FD0FF;
+
+}
+
+.modal-body {
+   margin-left: 40px;
+   width: 700px;
+
+}
+
+
+ .main-container {
+   background-color: black;
+
+ }
+
+
+
+ #input-container {
+    
+    border: 15px solid #7FFF00;
+    border-radius:  10px;
+    width: 950px;
+    background-color: white;
+ 
+ }
+#main-title {
+
+    color: #33A1DE;
+    font-size: 400%;
+    margin-bottom: 10px;
+    margin-left: 655px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bolder;
+    
+}
+
+
+textarea:focus, input:focus, .list-group-item:focus{
+    outline: 0;
+    background:white;
+    border: 1px solid white;
+}
+ 
+
+.panel-group .list-group {
+	margin-bottom: 0;
+
+}
+
+.panel-group .list-group .list-group-item {
+	border-radius: 0;
+	border-left: none;
+	border-right: none;
+    width: 850px;
+    background-color: white;
+    border-bottom-color: white;
+    border-top-color: gray;
+  
+    margin-left :5px;
+    
+    
+}
+
+.panel-group .list-group .list-group-item:last-child {
+	border-bottom: none;
+     height: 40px;
+
+}
+
+#title_LI:focus, #details_LI:focus, #timeStamp_LI:focus{
+    outline: 0;
+    background:white;
+ 
+}
+
+#title_LI::-webkit-input-placeholder {
+    color: #BDBDBD;
+}
+#details_LI::-webkit-input-placeholder {
+    color: #BDBDBD;
+}
+#timeStamp_LI::-webkit-input-placeholder {
+    color: #BDBDBD;
+}
+
+
+   #title_LI  { 
+    margin-left: 5px;
+    border: 1px solid white;
+    width: 800px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color:   #663399;
+    font-size: 24px;
+    border: none;
+    height: 55px;
+	border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-top: 5px;
+
+    border-bottom-color: white;
+    margin-bottom: -20px;
+    font-weight: bolder;
+ 
+}
+
+ #details_LI {
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   color: #663399;
+   font-size: 24px;
+   height: 50px;
+    border: 1px solid white;
+    font-weight: bolder;
+    margin-left: -8px;
+    border: 1px solid white;
+ 
+    border: 1px solid white;
+    width: 800px;
+    word-wrap: break-word;
+   
+  }
+ 
+ 
+ #timeStamp_LI {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #663399;
+    font-size: 24px;
+    height: 50px;
+    border: 1px solid white;
+    font-weight: bolder;
+
+}
+
+
+.panel-group {
+
+   background: white;
+
+
+} 
+
+ 
+.input-btn {
+   
+   
+    margin-left: 835px;
+    border-radius: 10px;
+    height: 35px;
+    width:70px;
+    text-align: center;
+
+ 
+}
+
+.btn-danger {
+ margin-left: 900px;
+ margin-top: -110px;
+ 
+}
+
+#logout_button {
+margin-right 
+
+}
+
+.add_button {
+  
+    margin-top: -70px;
+    margin-left: 100px;
+    width: 60px;
+    background-color:  #A528A5;
+}
+#pull_json {
+   margin-top:  8px;
+   margin-left: 15px;
+   border-radius: 10px;
+   height: 35px;
+   width:115px;
+   background-color:#FF0080;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+
+        
+}
+
+#sort_button {
+   margin-top: 8px;
+   margin-left: 15px;
+   border-radius: 10px;
+   height: 35px;
+   width:115px;
+   background-color:#660099;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+
+        
+}
+#input_search_id {
+   text-align: center;
+   margin-top:  8px;
+   margin-left: 25px;
+   border-radius: 10px;
+   height: 35px;
+   width:115px;
+   background-color: #CAFFFF;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+   color: white;
+       
+}
+
+
+#search_id_button {
+   text-align: center;
+   margin-top:  8px;
+   margin-left: 15px;
+   border-radius: 10px;
+   height: 35px;
+   width:115px;
+   background-color: #00D0D0;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+   color: white;
+       
+}
+
+.pull_json_update {
+   text-align: center;
+   margin-left: 7px;
+   margin-top:  8px;
+   border-radius: 10px;
+   height: 35px;
+   width:115px;
+   background-color: #FFFF00;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+   color: white;
+
+        
+} 
+
+#add_LI {
+   text-align: center;
+   margin-top: 3px;
+   margin-left: 120px;
+   border-radius: 8px;
+   height: 35px;
+   width:115px;
+   background-color: #BC1D71;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+   color: white;
+
+        
+} 
+
+
+
+.TD_item > button {
+   margin-top: 8px;
+   mar
+   margin-left: 80px;
+   border-radius: 10px;
+   height: 35px;
+   width:115px;
+   background-color:#660099;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+
+        
+}
+
+.logon_title {
+
+  background-color:  #33A1DE;
+
+
+}
+
+
+
+
+
+
+
+
 body {
     background: black;
 }
@@ -18,7 +328,9 @@ h3, h6 {
 
 .list-group {
     margin-top: 45px;
+
 }
+
 
 #password {
     color: white;
@@ -47,6 +359,7 @@ h3, h6 {
     margin: 5px;
 }
 
+
 #create_account_button {
     color: white;
     background-color: rgba(194, 175, 243, 1.0);
@@ -55,6 +368,7 @@ h3, h6 {
     box-shadow: 3px 3px 8px 4px #888888;
     margin: 5px;
 }
+
 
 .form_container {
     margin-left: 38%;
@@ -101,7 +415,10 @@ legend {
 #firstName {
     font-size: 20px;
     margin-left: 9px;
+ 
+
 }
+ 
 span.glyphicon-check {
     padding: 5px;
     display: block;
@@ -115,12 +432,15 @@ span.glyphicon-check {
 .pastDue {
     background-color: red;
 }
+ 
+ 
 .item_complete {
     width: 100%;
 }
 .completed_item {
     text-decoration: line-through;
 }
+ 
 #logout_button {
     margin-left: 1%;
     border-radius: 5px;
