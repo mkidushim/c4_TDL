@@ -446,6 +446,7 @@ function login_to_server() {
             success: function(response) {
                 window.response = response;
                 if (response.success) {
+                    delete
                     load_user_data();
                     document.cookie = 'sessionid=' + response.session_id;
                     document.cookie = 'username=' + response.username;
