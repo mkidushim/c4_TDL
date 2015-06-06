@@ -281,8 +281,8 @@ function populate_todo_single() {
         $(TD_item).addClass('pastDue');
     }
     if (todo_items_array[0].complete == 1) {
-            $(title).addClass('completed_item');
-        }
+        $(title).addClass('completed_item');
+    }
     // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
     $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
     $('#display_list').append(TD_item);
@@ -340,22 +340,23 @@ function populate_todo_single() {
         $('#myModal').modal('show');
     });
     complete_button.click(function() {
-            update_array = [];
-            var index = $(this).parent().attr('data_index');
-            update_array.push(todo_items_array[index]);
-            if (update_array[0].complete == 0) {
-                update_array[0].complete = 1;
-                populate_todo_list();
-            } else if (update_array[0].complete == 1) {
-                update_array[0].complete = 0;
-                populate_todo_list();
-            }
+        update_array = [];
+        var index = $(this).parent().attr('data_index');
+        update_array.push(todo_items_array[index]);
+        if (update_array[0].complete == 0) {
+            update_array[0].complete = 1;
+            populate_todo_list();
+        } else if (update_array[0].complete == 1) {
+            update_array[0].complete = 0;
+            populate_todo_list();
+        }
 
-            item_complete_function();
+        item_complete_function();
 
-        });
+    });
 
 }
+
 function postId_single() {
     console.log("ajax call");
     $.ajax({
@@ -505,10 +506,12 @@ function load_user_data() {
             // });
             $('#pull_json').click(function() {
                 get_TDL_json_populate_multiple();
+                $('.list_container .alert.alert-danger').remove();
 
             })
             $('#single_pull_json').click(function() {
                 get_TDL_json_populate_single();
+
 
             })
             $('#add_LI').click(send_list_items);
@@ -555,8 +558,9 @@ function log_to_creation_page() {
             $('.container').html('');
             $('.container').html(response);
 
-            $("input#N_last_name").change(function() {
-                $('#N_last_c').addClass('glyphicon glyphicon-check')
+            
+            $("form input").change(function() {
+                validate_create();
             });
             $('#validate_new_account').click(function() {
                 create_account();
@@ -738,9 +742,11 @@ $(document).ready(function() {
     $('#add_LI').click(function() {
         todo_initialize();
         populate_todo_list();
+
     });
     $('#pull_json').click(function() {
         get_TDL_json_populate_multiple();
+
 
     })
     $('#single_pull_json').click(function() {
@@ -751,8 +757,8 @@ $(document).ready(function() {
     $('#login_button').click(login_to_server);
     $('#logout_button').click(logout_server);
 
-    $("N_user_name").change(function() {
-        $('N_user_name').addClass('glyphicon glyphicon-ok')
+    $("form input").change(function() {
+        validate_create();
     })
     keep_user_logged_in();
 
@@ -766,4 +772,39 @@ function populate_success_data() {
     $('#lastName').html(response.lastName);
     $('#firstName').html(response.firstName);
     $('#id').html(response.id)
+}
+
+function validate_create() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            username: $('#N_user_name').val(),
+            password: $('#N_password1').val(),
+            password2: $('#N_password2').val(),
+            email: $('#N_user_email').val(),
+            firstName: $('#N_first_name').val(),
+            lastName: $('#N_last_name').val()
+        },
+        method: 'POST',
+        url: "http://s-apis.learningfuze.com/todo/validateUserInfo",
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            $("form").change(function() {
+                $('form span').addClass('glyphicon glyphicon-check')
+            });
+            window.validate_response = response;
+            if (validate_response.success == true) {
+                $("form input").change(function() {
+                    $('form span').addClass('glyphicon glyphicon-check green')
+                });
+            } else if (validate_response.success == false) {
+                $('form span').addClass('glyphicon glyphicon-check')
+                console.log('validate:', validate_response)
+            }
+        }
+    });
+
+
+
 }
