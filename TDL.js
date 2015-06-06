@@ -751,7 +751,7 @@ $(document).ready(function() {
     $('#login_button').click(login_to_server);
     $('#logout_button').click(logout_server);
 
-    $("N_user_name").change(function() {
+    $("form input").change(function() {
         validate_create();
     })
     keep_user_logged_in();
@@ -785,7 +785,7 @@ function validate_create() {
         success: function(response) {
             window.validate_response = response;
             if (validate_response.success == true) {
-                $('form span').addClass('glyphicon glyphicon-check green')
+                $('.check').addClass('glyphicon glyphicon-check green')
             } else if (validate_response == false) {
                 $('form span').addClass('glyphicon glyphicon-check red')
                 console.log('validate:', validate_response)
