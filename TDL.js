@@ -281,8 +281,8 @@ function populate_todo_single() {
         $(TD_item).addClass('pastDue');
     }
     if (todo_items_array[0].complete == 1) {
-            $(title).addClass('completed_item');
-        }
+        $(title).addClass('completed_item');
+    }
     // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
     $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
     $('#display_list').append(TD_item);
@@ -340,22 +340,23 @@ function populate_todo_single() {
         $('#myModal').modal('show');
     });
     complete_button.click(function() {
-            update_array = [];
-            var index = $(this).parent().attr('data_index');
-            update_array.push(todo_items_array[index]);
-            if (update_array[0].complete == 0) {
-                update_array[0].complete = 1;
-                populate_todo_list();
-            } else if (update_array[0].complete == 1) {
-                update_array[0].complete = 0;
-                populate_todo_list();
-            }
+        update_array = [];
+        var index = $(this).parent().attr('data_index');
+        update_array.push(todo_items_array[index]);
+        if (update_array[0].complete == 0) {
+            update_array[0].complete = 1;
+            populate_todo_list();
+        } else if (update_array[0].complete == 1) {
+            update_array[0].complete = 0;
+            populate_todo_list();
+        }
 
-            item_complete_function();
+        item_complete_function();
 
-        });
+    });
 
 }
+
 function postId_single() {
     console.log("ajax call");
     $.ajax({
@@ -555,8 +556,9 @@ function log_to_creation_page() {
             $('.container').html('');
             $('.container').html(response);
 
-            $("input#N_last_name").change(function() {
-                $('#N_last_c').addClass('glyphicon glyphicon-check')
+            
+            $("form input").change(function() {
+                validate_create();
             });
             $('#validate_new_account').click(function() {
                 create_account();
@@ -767,6 +769,7 @@ function populate_success_data() {
     $('#firstName').html(response.firstName);
     $('#id').html(response.id)
 }
+
 function validate_create() {
     $.ajax({
         dataType: 'json',
@@ -783,11 +786,16 @@ function validate_create() {
         cache: false,
         crossDomain: true,
         success: function(response) {
+            $("form").change(function() {
+                $('form span').addClass('glyphicon glyphicon-check')
+            });
             window.validate_response = response;
             if (validate_response.success == true) {
-                $('.check').addClass('glyphicon glyphicon-check green')
-            } else if (validate_response == false) {
-                $('form span').addClass('glyphicon glyphicon-check red')
+                $("form input").change(function() {
+                    $('form span').addClass('glyphicon glyphicon-check green')
+                });
+            } else if (validate_response.success == false) {
+                $('form span').addClass('glyphicon glyphicon-check')
                 console.log('validate:', validate_response)
             }
         }
