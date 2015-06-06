@@ -2,7 +2,9 @@
    background-color: black;
  
  }
-
+.submit_btn {
+display: block;
+}
 .list-group-item {
 
     background-color: white;

@@ -159,7 +159,7 @@ function populate_todo_list() {
             var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update');
             var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update');
             var time_update = $('<input>').attr('type', 'datetime-local').attr('placeholder', 'duedate').addClass('time_update');
-            var submit_update = $('<button>').attr('type', 'submit').text('submit');
+            var submit_update = $('<button>').attr('type', 'submit').text('submit').addClass('submit_btn');
 
             submit_update.click(update_item);
             $('.modal-title').html('Update for : ' + update_array[0].title)
