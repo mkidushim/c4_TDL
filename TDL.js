@@ -41,14 +41,14 @@ function populate_todo_list() {
 
         var delete_button = $("<button>", {
             type: 'button',
-            class: 'button glyphicon glyphicon-remove-sign',
-            data_index: i
+            data_index: i,
+            text: 'Delete'
         });
 
         var p1_button = $("<button>", {
             type: 'button',
             class: 'button',
-            text: "show details",
+            text: "Details",
             data_index: i
         });
 
@@ -106,7 +106,7 @@ function populate_todo_list() {
         var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
         var dateInMS = Date.now();
         if (selected_timeStamp < dateInMS) {
-            $(TD_item).addClass('pastDue')
+            $('.to_do_title').addClass('pastDue')
         }
         if (todo_items_array[i].complete == 1) {
             $(title).addClass('completed_item');
@@ -237,14 +237,14 @@ function populate_todo_single() {
 
     var delete_button = $("<button>", {
         type: 'button',
-        class: 'button glyphicon glyphicon-remove-sign',
+        text: 'Delete',
         data_index: 0
     });
 
     var p1_button = $("<button>", {
         type: 'button',
         class: 'button',
-        text: "show details",
+        text: "Details",
         data_index: 0
     });
 
@@ -278,10 +278,10 @@ function populate_todo_single() {
     });
 
     var selected_timeStamp = Date.parse(todo_items_array[0].timeStamp);
-    var dateInMS = Date.now();
-    if (selected_timeStamp < dateInMS) {
-        $(TD_item).addClass('pastDue');
-    }
+        var dateInMS = Date.now();
+        if (selected_timeStamp < dateInMS) {
+            $('.to_do_title').addClass('pastDue');
+        }
     if (todo_items_array[0].complete == 1) {
         $(title).addClass('completed_item');
     }
