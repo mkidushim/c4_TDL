@@ -127,13 +127,14 @@ function populate_todo_list() {
                 url: 'http://s-apis.learningfuze.com/todo/delete',
                 method: 'POST',
                 data: {
-                    userId: response.Id,
-                    postId: global_response.data[0].id,
+                    userId: global_response.data[index].userId,
+                    postId: global_response.data[index].id,
                 },
                 cache: false,
                 crossDomain: true,
 
                 success: function(response) {
+
                     console.log(response)
                 }
             });
