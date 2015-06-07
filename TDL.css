@@ -3,14 +3,7 @@
  
  }
 
-.list-group-item {
 
-    background-color: white;
-    margin-left: 85px;
-    width: 300;
-    border: 4px solid #6FD0FF;
-
-}
 
 .modal-body {
    margin-left: 40px;
@@ -23,31 +16,30 @@
    background-color: black;
 
  }
-
+ 
 
 
  #input-container {
-    margin-left: -10;
-    
+    text-align: left;
     border: 15px solid #7FFF00;
     border-radius:  10px;
-    width: 995px;
     background-color: white;
+
+
  
  }
 #main-title {
-
+    text-align: left;
     color: #33A1DE;
     font-size: 400%;
     margin-bottom: 10px;
-    margin-left: 655px;
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-weight: bolder;
     
 }
 
 
-textarea:focus, input:focus, .list-group-item:focus{
+textarea:focus, input:focus, .list-group-item:focus {
     outline: 0;
     background:white;
     border: 1px solid white;
@@ -55,33 +47,30 @@ textarea:focus, input:focus, .list-group-item:focus{
  
 
 .panel-group .list-group {
-	margin-bottom: 0;
+  	margin-bottom: 0;
 
 }
 
 .panel-group .list-group .list-group-item {
-	border-radius: 0;
-	border-left: none;
-	border-right: none;
-    width: 850px;
+  	border-radius: 0;
+  	border-left: none;
+  	border-right: none;
     background-color: white;
     border-bottom-color: white;
     border-top-color: gray;
-  
-    margin-left :5px;
-    
+   
     
 }
 
 .panel-group .list-group .list-group-item:last-child {
-	border-bottom: none;
+	   border-bottom: none;
      height: 40px;
+     width: 800px;
 
 }
 
 #title_LI:focus, #details_LI:focus, #timeStamp_LI:focus{
-    outline: 0;
-    background:white;
+     background:white;
  
 }
 
@@ -95,22 +84,31 @@ textarea:focus, input:focus, .list-group-item:focus{
     color: #BDBDBD;
 }
 
+.list-group-item {
 
+    background-color: white;
+    border: 5px solid #6FD0FF;
+   
+
+}
+ 
+.list-group-item:first-child {
+  border-radius: 10px;
+ 
+}
+
+ 
    #title_LI  { 
-    margin-left: 5px;
+   
     border: 1px solid white;
-    width: 800px;
     font-family: "Comic Sans MS", cursive, sans-serif;
     color:   #663399;
     font-size: 24px;
-    border: none;
     height: 55px;
-	border-top-left-radius: 15px;
+	  border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     margin-top: 5px;
-
     border-bottom-color: white;
-    margin-bottom: -20px;
     font-weight: bolder;
  
 }
@@ -120,14 +118,12 @@ textarea:focus, input:focus, .list-group-item:focus{
    color: #663399;
    font-size: 24px;
    height: 50px;
-    border: 1px solid white;
-    font-weight: bolder;
-    margin-left: -8px;
-    border: 1px solid white;
- 
-    border: 1px solid white;
-    width: 800px;
-    word-wrap: break-word;
+   border: 1px solid white;
+   font-weight: bolder;
+   margin-left: -8px;
+   border: 1px solid white;
+   border: 1px solid white;
+   word-wrap: break-word;
    
   }
  
@@ -147,18 +143,18 @@ textarea:focus, input:focus, .list-group-item:focus{
 
    background: white;
 
-
 } 
 
- 
+ .well {
+  background-color: #9595FF;
+ }
+
 .input-btn {
-   
-   
-    margin-left: 835px;
+    margin-left: 10px;
     border-radius: 10px;
     height: 35px;
     width:70px;
-    text-align: center;
+    text-align: left;
 
  
 }
@@ -174,19 +170,14 @@ margin-right
 
 }
 
-.add_button {
-  
-    margin-top: -70px;
-    margin-left: 100px;
-    width: 60px;
-    background-color:  #A528A5;
-}
+ 
 #pull_json {
-   margin-top:  8px;
-   margin-left: 15px;
-   border-radius: 10px;
-   height: 35px;
-   width:115px;
+   text-align: center;
+   margin-top: 5px;
+   margin-left: 8px;
+   border-radius: 5px;
+   height: 25px;
+   width:105px;
    background-color:#FF0080;
    color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
@@ -197,11 +188,13 @@ margin-right
 }
 
 #sort_button {
-   margin-top: 8px;
-   margin-left: 15px;
-   border-radius: 10px;
-   height: 35px;
-   width:115px;
+   text-align: left;
+   border: 1px solid gray;
+   margin-top: 5px;
+   margin-left: 8px;
+   border-radius: 5px;
+   height: 25px;
+   width:105px;
    background-color:#660099;
    color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
@@ -212,30 +205,30 @@ margin-right
 }
 #input_search_id {
    text-align: center;
-   margin-top:  8px;
-   margin-left: 25px;
-   border-radius: 10px;
-   height: 35px;
-   width:115px;
+   margin-top: 5px;
+   margin-left: -85px;
+   border-radius: 5px;
+   height: 25px;
+   border: 1px solid gray;
+   width:100px; 
    background-color: #CAFFFF;
-   color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
    font-size: 14px;
    font-size: bolder;
-   color: white;
+   color: gray;
        
 }
 
 
 #search_id_button {
    text-align: center;
-   margin-top:  8px;
-   margin-left: 15px;
-   border-radius: 10px;
-   height: 35px;
-   width:115px;
+   margin-top: 5px;
+   margin-left: 400px;
+   border:2px solid gray;
+   border-radius: 5px;
+   height: 25px;
+   width:105px;
    background-color: #00D0D0;
-   color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
    font-size: 14px;
    font-size: bolder;
@@ -245,67 +238,92 @@ margin-right
 
 .pull_json_update {
    text-align: center;
-   margin-left: 7px;
-   margin-top:  8px;
-   border-radius: 10px;
-   height: 35px;
-   width:115px;
+   margin-top: 5px;
+   border: 2px solid gray;
+   margin-left: 8px;
+   border-radius: 5px;
+   height: 25px;
+   width:105px;
    background-color: #FFFF00;
    color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
    font-size: 14px;
    font-size: bolder;
-   color: white;
-
-        
+           
 } 
 
 #add_LI {
    text-align: center;
-   margin-top: 3px;
-   margin-left: 120px;
-   border-radius: 8px;
-   height: 35px;
-   width:115px;
+   margin-top: 5px;
+   margin-left: 8px;
+   border: 2px solid gray;
+   border-radius: 5px;
+   height: 25px;
+   width:105px;
    background-color: #BC1D71;
-   color: white;
    font-family: "Comic Sans MS", cursive, sans-serif;
    font-size: 14px;
    font-size: bolder;
    color: white;
+   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
         
 } 
 
+ 
 
 
 .TD_item > button {
-   margin-top: 8px;
-   mar
-   margin-left: 80px;
-   border-radius: 10px;
-   height: 35px;
-   width:115px;
-   background-color:#660099;
-   color: white;
+   text-align: left;
+   margin-left: -20px;
+   margin-top: 3px;
+   margin-left: 7px;
+   border: 2px solid gray;
+   border-radius: 6px;
+   height: 25px;
+   width:70px;
+   background-color: #6666FF;
+   color: white; 
    font-family: "Comic Sans MS", cursive, sans-serif;
    font-size: 14px;
    font-size: bolder;
+   float: right;
 
         
 }
 
 .logon_title {
 
-  background-color:  #33A1DE;
+  background-color:   logon_title;
 
 
 }
 
 
 
+.button  .btn {
+    -webkit-box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+     border-radius: 7px;
+}
 
 
+.button:active  .btn:active { position: relative; top: 3px;
+    -webkit-box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+    -moz-box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+    box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+     border-radius: 7px;
+}
+
+
+.button:active:after   .btn:active:after{ content: ""; width: 100%; height: 3px; background: #fff; position: absolute; bottom: -1px; left: 0; 
+ border-radius: 7px;}
+ }
 
 
 
@@ -316,9 +334,9 @@ button, input {
     border-radius: 10px;
 
 }
-input#title_LI, input#details_LI, input#input_search_id {
+/*input#title_LI, input#details_LI  {
     height: 40px;
-}
+}  */
 h3, h6 {
     color: white;
     font: comic Sans MS, Cursive, sans-serif;
@@ -329,6 +347,7 @@ h3, h6 {
 
 .list-group {
     margin-top: 45px;
+
 
 }
 
