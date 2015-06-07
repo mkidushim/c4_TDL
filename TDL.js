@@ -41,14 +41,14 @@ function populate_todo_list() {
 
         var delete_button = $("<button>", {
             type: 'button',
-            class: 'button glyphicon glyphicon-remove-sign',
-            data_index: i
+            data_index: i,
+            text: 'Delete'
         });
 
         var p1_button = $("<button>", {
             type: 'button',
             class: 'button',
-            text: "show details",
+            text: "Details",
             data_index: i
         });
 
@@ -106,7 +106,7 @@ function populate_todo_list() {
         var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
         var dateInMS = Date.now();
         if (selected_timeStamp < dateInMS) {
-            $(TD_item).addClass('pastDue')
+            $('.to_do_title').addClass('pastDue')
         }
         if (todo_items_array[i].complete == 1) {
             $(title).addClass('completed_item');
@@ -158,10 +158,10 @@ function populate_todo_list() {
             update_array = [];
             var index = $(this).parent().attr('data_index');
             update_array.push(todo_items_array[index]);
-            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update col-xs-12 col-md-12');
-            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update col-xs-12 col-md-12');
-            var time_update = $('<input>').attr('type', 'datetime-local').attr('placeholder', 'duedate').addClass('time_update');
-            var submit_update = $('<button>').attr('type', 'submit').text('submit');
+            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update col-xs-7 col-md-7');
+            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update col-xs-7 col-md-7');
+            var time_update = $('<input>').attr('type', 'datetime-local').attr('placeholder', 'duedate').addClass('time_update col-md-7');
+            var submit_update = $('<button>').attr('type', 'submit').text('submit').addClass('col-md-3 col-md-offset-4');
 
             submit_update.click(update_item);
             $('.modal-title').html('Update for : ' + update_array[0].title)
@@ -237,14 +237,14 @@ function populate_todo_single() {
 
     var delete_button = $("<button>", {
         type: 'button',
-        class: 'button glyphicon glyphicon-remove-sign',
+        text: 'Delete',
         data_index: 0
     });
 
     var p1_button = $("<button>", {
         type: 'button',
         class: 'button',
-        text: "show details",
+        text: "Details",
         data_index: 0
     });
 
@@ -278,10 +278,10 @@ function populate_todo_single() {
     });
 
     var selected_timeStamp = Date.parse(todo_items_array[0].timeStamp);
-    var dateInMS = Date.now();
-    if (selected_timeStamp < dateInMS) {
-        $(TD_item).addClass('pastDue');
-    }
+        var dateInMS = Date.now();
+        if (selected_timeStamp < dateInMS) {
+            $('.to_do_title').addClass('pastDue');
+        }
     if (todo_items_array[0].complete == 1) {
         $(title).addClass('completed_item');
     }
