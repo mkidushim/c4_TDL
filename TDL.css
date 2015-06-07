@@ -1,4 +1,5 @@
- body {
+
+body {
    background-color: black;
  
  }
@@ -328,7 +329,6 @@ margin-right
  }
 
 
-
 body {
     background: black;
 }
@@ -349,10 +349,7 @@ h3, h6 {
 
 .list-group {
     margin-top: 45px;
-
-
 }
-
 
 #password {
     color: white;
@@ -381,7 +378,6 @@ h3, h6 {
     margin: 5px;
 }
 
-
 #create_account_button {
     color: white;
     background-color: rgba(194, 175, 243, 1.0);
@@ -390,7 +386,6 @@ h3, h6 {
     box-shadow: 3px 3px 8px 4px #888888;
     margin: 5px;
 }
-
 
 .form_container {
     margin-left: 38%;
@@ -437,12 +432,9 @@ legend {
 #firstName {
     font-size: 20px;
     margin-left: 9px;
- 
-
 }
- 
 span.glyphicon-check {
-    padding: 5px;
+    padding: 6px;
     display: block;
 }
 .red {
@@ -454,18 +446,20 @@ span.glyphicon-check {
 .pastDue {
     background-color: red;
 }
- 
- 
 .item_complete {
     width: 100%;
 }
 .completed_item {
     text-decoration: line-through;
 }
- 
 #logout_button {
     margin-left: 1%;
     border-radius: 5px;
     background: rgb(73, 73, 255);
     color: white;
+}
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
 }

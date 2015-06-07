@@ -139,14 +139,15 @@ function populate_todo_list() {
             });
         });
         p1_button.click(function() {
+            $('.modal-header').html('');
             $('.modal-body').html('');
             var index = $(this).parent().attr('data_index');
             var title_display = $('<div>').html('title : ' + todo_items_array[index].title);
             var details_display = $('<div>').html('details : ' + todo_items_array[index].details);
             var timestamp_display = $('<div>').html('time : ' + todo_items_array[index].timeStamp);
             var postId_display = $('<div>').html('PostId : ' + todo_items_array[index].id);
-
-            $('.modal-body').append(title_display, details_display, timestamp_display, postId_display);
+            $('.modal-header').append(title_display);
+            $('.modal-body').append(details_display, timestamp_display, postId_display);
             $('#myModal').modal('show');
         })
 
@@ -156,8 +157,8 @@ function populate_todo_list() {
             update_array = [];
             var index = $(this).parent().attr('data_index');
             update_array.push(todo_items_array[index]);
-            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update');
-            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update');
+            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update col-xs-12 col-md-12');
+            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update col-xs-12 col-md-12');
             var time_update = $('<input>').attr('type', 'datetime-local').attr('placeholder', 'duedate').addClass('time_update');
             var submit_update = $('<button>').attr('type', 'submit').text('submit').addClass('submit_btn');
 
@@ -281,8 +282,8 @@ function populate_todo_single() {
         $(TD_item).addClass('pastDue');
     }
     if (todo_items_array[0].complete == 1) {
-            $(title).addClass('completed_item');
-        }
+        $(title).addClass('completed_item');
+    }
     // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
     $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
     $('#display_list').append(TD_item);
@@ -340,22 +341,23 @@ function populate_todo_single() {
         $('#myModal').modal('show');
     });
     complete_button.click(function() {
-            update_array = [];
-            var index = $(this).parent().attr('data_index');
-            update_array.push(todo_items_array[index]);
-            if (update_array[0].complete == 0) {
-                update_array[0].complete = 1;
-                populate_todo_list();
-            } else if (update_array[0].complete == 1) {
-                update_array[0].complete = 0;
-                populate_todo_list();
-            }
+        update_array = [];
+        var index = $(this).parent().attr('data_index');
+        update_array.push(todo_items_array[index]);
+        if (update_array[0].complete == 0) {
+            update_array[0].complete = 1;
+            populate_todo_list();
+        } else if (update_array[0].complete == 1) {
+            update_array[0].complete = 0;
+            populate_todo_list();
+        }
 
-            item_complete_function();
+        item_complete_function();
 
-        });
+    });
 
 }
+
 function postId_single() {
     console.log("ajax call");
     $.ajax({
@@ -446,6 +448,7 @@ function login_to_server() {
             success: function(response) {
                 window.response = response;
                 if (response.success) {
+                    delete
                     load_user_data();
                     document.cookie = 'sessionid=' + response.session_id;
                     document.cookie = 'username=' + response.username;
@@ -471,7 +474,7 @@ function logout_server() {
         url: 'http://s-apis.learningfuze.com/todo/logout',
         data: {
             sid: getCookie('sessionid'),
-            username: getCookie('username'),
+            username: getCookie('username').toLowerCase(),
         },
         method: 'POST',
         cache: false,
@@ -504,10 +507,12 @@ function load_user_data() {
             // });
             $('#pull_json').click(function() {
                 get_TDL_json_populate_multiple();
+                $('.list_container .alert.alert-danger').remove();
 
             })
             $('#single_pull_json').click(function() {
                 get_TDL_json_populate_single();
+
 
             })
             $('#add_LI').click(send_list_items);
@@ -553,10 +558,9 @@ function log_to_creation_page() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
-
-            $("#N_user_name").change(function() {
-        validate_create();
-    })
+            $("form input").change(function() {
+                validate_create();
+            });
             $('#validate_new_account').click(function() {
                 create_account();
             })
@@ -737,9 +741,11 @@ $(document).ready(function() {
     $('#add_LI').click(function() {
         todo_initialize();
         populate_todo_list();
+
     });
     $('#pull_json').click(function() {
         get_TDL_json_populate_multiple();
+
 
     })
     $('#single_pull_json').click(function() {
@@ -750,9 +756,7 @@ $(document).ready(function() {
     $('#login_button').click(login_to_server);
     $('#logout_button').click(logout_server);
 
-    $("form input").change(function() {
-        validate_create();
-    })
+    
     keep_user_logged_in();
 
 
@@ -766,6 +770,7 @@ function populate_success_data() {
     $('#firstName').html(response.firstName);
     $('#id').html(response.id)
 }
+
 function validate_create() {
     $.ajax({
         dataType: 'json',
@@ -784,9 +789,10 @@ function validate_create() {
         success: function(response) {
             window.validate_response = response;
             if (validate_response.success == true) {
+                console.log('validate:', validate_response)
                 $('span.check').addClass('glyphicon glyphicon-check green')
-            } else if (validate_response == false) {
-                $('span.check').addClass('glyphicon glyphicon-check red')
+            }  else if (validate_response.success == false) {
+                //$('form span').addClass('glyphicon glyphicon-check')
                 console.log('validate:', validate_response)
             }
         }
