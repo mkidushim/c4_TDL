@@ -27,10 +27,11 @@
 
 
  #input-container {
+    margin-left: -10;
     
     border: 15px solid #7FFF00;
     border-radius:  10px;
-    width: 950px;
+    width: 995px;
     background-color: white;
  
  }
