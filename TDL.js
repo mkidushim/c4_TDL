@@ -758,9 +758,7 @@ $(document).ready(function() {
     $('#login_button').click(login_to_server);
     $('#logout_button').click(logout_server);
 
-    $("form input").change(function() {
-        validate_create();
-    })
+    
     keep_user_logged_in();
 
 
@@ -799,6 +797,7 @@ function validate_create() {
                 $("form input").change(function() {
                     $('form span').addClass('glyphicon glyphicon-check green')
                 });
+                console.log('validate:', validate_response)
             } else if (validate_response.success == false) {
                 $('form span').addClass('glyphicon glyphicon-check')
                 console.log('validate:', validate_response)
