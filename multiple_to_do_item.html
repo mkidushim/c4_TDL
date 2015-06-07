@@ -8,19 +8,18 @@
     <i class="fa fa-user fa-2x pull-right"></i>
     <div id="id" class=''></div>
 </div>
-<div class="container">
-    <div class="list_container">
+<div class="container col-xs-12  text-center pagination-centered">
+    <div class="list_container col-xs-12">
  
- 
-   <!--Janets code -->
+       <!--Janets code --> 
 
-      <p id="main-title">TO do LIST</p>
-        <div class="container" id="input-container" >
-             <div class="panel-group" id="accordionTwo">
+      <p class= "col-xs-12"  id="main-title">TO do LIST</p>
+        <div class="container col-xs-12" id="input-container" >
+             <div class="panel-group col-xs-12" id="accordionTwo">
                  <div class="panel panel-default">
                         <h4 class="panel-title">
                             <a class="accordion-toggle list-group" data-toggle="collapse" data-parent="#accordionTwo" href="#collapseFour">
-                            <input type='text' id="title_LI" placeholder="Add new title"> </a> 
+                            <input type='text' id="title_LI" placeholder="Add new title" maxlength="30"> </a> 
                         </h4>
                   </div>
                     <div class="panel-collapse collapse out" id="collapseFour">
@@ -28,25 +27,22 @@
                             <a href="#" class="list-group-item input-list" id="detail"><textarea  class="" id="details_LI" placeholder="Add detail"></textarea></a>
                             <a href="#" class="list-group-item"><input type= 'date' class="" id="timeStamp_LI" placeholder="Add date"> <span></span></a>
                         </div>
-                        </div>
+                    </div>
                          
               </div>  
                
                             <a class="accordion-toggle list-group" data-toggle="collapse" data-parent="#accordionTwo" href="#collapseFour">
-                            <button type="button" class="btn  btn-info btn-md  input-btn" id="btn"><span class="more-btn"></span> more </button> </a>
+                            <button type="button" class="btn  btn-info btn-sm  input-btn pull-right" id="btn"><span class="more-btn"></span> Less </button> </a>
          </div>
                                
      
-               
        
-        <button id="add_LI">Add list item</button>
-        <button class="pull_json_update" id="pull_json">List Items</button>
-        <button id='sort_button'>Sort</button>
-        <input class="" id="input_search_id" placeholder="Input Id">
-          
- 
-        <button id="search_id_button">Search ID</button>
-        
+            <button type="button" class="btn pull-left btn-xs pull-left" id="add_LI">Add list item</button>
+            <button type="button" class="btn pull-left btn-xs pull_json_update pull-left" id="pull_json">List Items</button>
+            <button type="button" class="btn pull-left btn-xs pull-left" id='sort_button'>Sort</button>
+            <button  type="button" class="btn pull-left btn-xs pull-left"  id="search_id_button">Search ID</button>
+            <input  type="number" id="input_search_id" placeholder="Input Id">
+      
         
       
         <div id="display_list" class='list-group'>
