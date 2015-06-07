@@ -127,13 +127,14 @@ function populate_todo_list() {
                 url: 'http://s-apis.learningfuze.com/todo/delete',
                 method: 'POST',
                 data: {
-                    userId: response.Id,
-                    postId: global_response.data[0].id,
+                    userId: global_response.data[index].userId,
+                    postId: global_response.data[index].id,
                 },
                 cache: false,
                 crossDomain: true,
 
                 success: function(response) {
+
                     console.log(response)
                 }
             });
@@ -157,10 +158,10 @@ function populate_todo_list() {
             update_array = [];
             var index = $(this).parent().attr('data_index');
             update_array.push(todo_items_array[index]);
-            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update col-xs-12 col-md-12');
-            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update col-xs-12 col-md-12');
-            var time_update = $('<input>').attr('type', 'datetime-local').attr('placeholder', 'duedate').addClass('time_update');
-            var submit_update = $('<button>').attr('type', 'submit').text('submit');
+            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update col-xs-7 col-md-7');
+            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update col-xs-7 col-md-7');
+            var time_update = $('<input>').attr('type', 'datetime-local').attr('placeholder', 'duedate').addClass('time_update col-md-7');
+            var submit_update = $('<button>').attr('type', 'submit').text('submit').addClass('col-md-3 col-md-offset-4');
 
             submit_update.click(update_item);
             $('.modal-title').html('Update for : ' + update_array[0].title)
@@ -758,9 +759,7 @@ $(document).ready(function() {
     $('#login_button').click(login_to_server);
     $('#logout_button').click(logout_server);
 
-    $("form input").change(function() {
-        validate_create();
-    })
+    
     keep_user_logged_in();
 
 
@@ -799,6 +798,7 @@ function validate_create() {
                 $("form input").change(function() {
                     $('form span').addClass('glyphicon glyphicon-check green')
                 });
+                console.log('validate:', validate_response)
             } else if (validate_response.success == false) {
                 $('form span').addClass('glyphicon glyphicon-check')
                 console.log('validate:', validate_response)
