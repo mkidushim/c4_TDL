@@ -139,14 +139,15 @@ function populate_todo_list() {
             });
         });
         p1_button.click(function() {
+            $('.modal-header').html('');
             $('.modal-body').html('');
             var index = $(this).parent().attr('data_index');
             var title_display = $('<div>').html('title : ' + todo_items_array[index].title);
             var details_display = $('<div>').html('details : ' + todo_items_array[index].details);
             var timestamp_display = $('<div>').html('time : ' + todo_items_array[index].timeStamp);
             var postId_display = $('<div>').html('PostId : ' + todo_items_array[index].id);
-
-            $('.modal-body').append(title_display, details_display, timestamp_display, postId_display);
+            $('.modal-header').append(title_display);
+            $('.modal-body').append(details_display, timestamp_display, postId_display);
             $('#myModal').modal('show');
         })
 
@@ -156,8 +157,8 @@ function populate_todo_list() {
             update_array = [];
             var index = $(this).parent().attr('data_index');
             update_array.push(todo_items_array[index]);
-            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update');
-            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update');
+            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update col-xs-12 col-md-12');
+            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update col-xs-12 col-md-12');
             var time_update = $('<input>').attr('type', 'datetime-local').attr('placeholder', 'duedate').addClass('time_update');
             var submit_update = $('<button>').attr('type', 'submit').text('submit');
 
@@ -473,7 +474,7 @@ function logout_server() {
         url: 'http://s-apis.learningfuze.com/todo/logout',
         data: {
             sid: getCookie('sessionid'),
-            username: getCookie('username'),
+            username: getCookie('username').toLowerCase(),
         },
         method: 'POST',
         cache: false,
