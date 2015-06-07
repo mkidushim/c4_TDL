@@ -89,7 +89,10 @@ textarea:focus, input:focus, .list-group-item:focus {
 
     background-color: white;
     border: 5px solid #6FD0FF;
-   
+    text-align: -webkit-left;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #2C2C85;
+    font-size: 20px;
 
 }
  
@@ -112,7 +115,7 @@ textarea:focus, input:focus, .list-group-item:focus {
     border-bottom-color: white;
     font-weight: bolder;
     text-align: left;
-    width: 980px;
+   /* width: 980px; */
 }
 
  #details_LI {
@@ -209,7 +212,7 @@ margin-right
 #input_search_id {
    text-align: center;
    margin-top: 5px;
-   margin-left: -85px;
+   margin-left: -20px; 
    border-radius: 5px;
    height: 25px;
    border: 1px solid gray;
@@ -225,8 +228,8 @@ margin-right
 
 #search_id_button {
    text-align: center;
-   margin-top: 5px;
-   margin-left: 400px;
+   margin-top: -1px;
+   margin-left: 10px;
    border:2px solid gray;
    border-radius: 5px;
    height: 25px;
