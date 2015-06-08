@@ -110,7 +110,7 @@ function populate_todo_list() {
         var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
         var dateInMS = Date.now();
            if (selected_timeStamp < dateInMS) {
-            $('.to_do_title').addClass('pastDue')
+            $(title).addClass('pastDue')
         }
         if (todo_items_array[i].complete == 1) {
             $(title).addClass('completed_item');
@@ -286,7 +286,7 @@ function populate_todo_single() {
     var selected_timeStamp = Date.parse(todo_items_array[0].timeStamp);
         var dateInMS = Date.now();
         if (selected_timeStamp < dateInMS) {
-            $('.to_do_title').addClass('pastDue');
+            $(title).addClass('pastDue');
         }
     if (todo_items_array[0].complete == 1) {
         $(title).addClass('completed_item');
@@ -590,12 +590,13 @@ function send_list_items() {
         success: function(response) {
             window.response = response;
             if (response.success) {
+                $('.alert').remove();
                 get_TDL_json_populate_multiple();
             } else if (!response.success) {
                 console.log("error:", response.errors)
                 $('.alert').remove();
                 var alert = $('<div>').addClass('alert alert-danger').html(response.errors);
-                $('.list_container').append(alert);
+                $('.send_item_alert').append(alert);
             }
         }
 
