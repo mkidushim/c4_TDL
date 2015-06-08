@@ -470,7 +470,9 @@ function postId_single() {
 
 }
 
-
+//input: takes in the userid which is found from the #id container on the DOM and sends to server
+//output: retrieves the users item list from the server and places them in new array.
+//function populate todo list called to list the items onto the DOM
 function get_TDL_json_populate_multiple() {
     console.log("ajax call");
     $.ajax({
@@ -494,7 +496,10 @@ function get_TDL_json_populate_multiple() {
         }
     });
 }
-
+//retreiving the todo items from the server
+//putting the item in an array and calling populate todo single function which will creating the list dynamically
+//and append to the list container
+//No longer being used.
 function get_TDL_json_populate_single() {
         console.log("ajax call");
         $.ajax({
@@ -516,7 +521,9 @@ function get_TDL_json_populate_single() {
         });
     }
     //used to validate username and password before login is successfull
-    // I am not sure what function needs to run on login success commented out so logout would work
+    //takes input from username and password input fields
+    //stores the session id and username as cookies when received from response as key value pairs
+    //these cookies will be used later in keepuser logged in function and logout functions
 function login_to_server() {
         console.log("ajax call");
         $.ajax({
@@ -532,7 +539,6 @@ function login_to_server() {
             success: function(response) {
                 window.response = response;
                 if (response.success) {
-                    delete
                     load_user_data();
                     document.cookie = 'sessionid=' + response.session_id;
                     document.cookie = 'username=' + response.username;
@@ -575,7 +581,8 @@ function logout_server() {
         }
     });
 }
-
+//upon logging in the load_user_data function is called to replace the index.html 'container' with multiple_to_do html.
+//click handlers are created on all the new buttons in multiple to do html after it is loaded
 function load_user_data() {
     $.ajax({
         dataType: 'html',
@@ -616,7 +623,7 @@ function load_user_data() {
         }
     })
 }
-
+//upon clicking logout button the ajax call will use the login.html page to fill in the index.html container with response
 function logout_to_mainpage() {
         $.ajax({
             dataType: 'html',
@@ -633,7 +640,8 @@ function logout_to_mainpage() {
         })
     }
     //adding glyph color to create page
-
+//input: when clicking create account the user will be redirected to a new page
+//output: new page loaded with creation_page.html
 function log_to_creation_page() {
     $.ajax({
         dataType: 'html',
@@ -651,7 +659,9 @@ function log_to_creation_page() {
         }
     })
 }
-
+//input: takes in the values from the input of the add list inputs.
+//output: if the item is successfully added on the server side then it will repopulate the list. If not then 
+//an alert will show.
 function send_list_items() {
     $.ajax({
         dataType: 'json',
@@ -680,7 +690,8 @@ function send_list_items() {
 
     });
 }
-
+//input: takes in value of inputs from account creation page;
+//output: if response.success then account is created and user is redirected to login page using logout_to_mainpage function;
 function create_account() {
     $.ajax({
         dataType: 'json',
@@ -712,7 +723,9 @@ function create_account() {
 
     });
 }
-
+//input: The item clicked will get its information stored into a new object in update_array and the value of id and userId
+//is used to send to server as well as the values of the input fields from the modal
+//output: if item was successfully changed then user is notified of change and get_TDL function will repopulate list
 function update_item() {
     console.log('ajax getting called')
     $.ajax({
@@ -747,7 +760,8 @@ function update_item() {
 
     });
 }
-
+//input: update_array contains the object of list item and it sends the data id and complete value to the server
+//output: response will notify if the item was successfully changed to 1 for complete or 0 for incomplete
 function item_complete_function() {
     $.ajax({
         dataType: 'json',
@@ -776,7 +790,10 @@ function item_complete_function() {
 
     });
 }
-
+//runs on document ready
+//input: uses the function getCookie to check the sessionid and compares to server of current session id using an ajax call
+//output: if sessionids match then it will call function load_user_data upon response.success to reveal multiple_todo_list. If it doesn't match
+//then it will call logout_to_mainpage which will load the login.html page for the user to login.
 function keep_user_logged_in() {
     $.ajax({
         dataType: 'json',
@@ -804,7 +821,8 @@ function keep_user_logged_in() {
 
     });
 }
-
+//input: takes in cookie key of sessionid 
+//output: returns the value of the cookie name
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -855,7 +873,8 @@ function populate_success_data() {
     $('#firstName').html(response.firstName);
     $('#id').html(response.id)
 }
-
+//input: takes in the values from the inputs of create account page
+//output: reveals a green check if the response returns true for user account creation
 function validate_create() {
     $.ajax({
         dataType: 'json',
