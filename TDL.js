@@ -31,6 +31,9 @@ function sort_todo(a, b) {
 
 
 function populate_todo_list() {
+    $('#details_LI').val('');
+    $('#title_LI').val('');
+    $('#timeStamp_LI').val('');
     $('#display_list').empty();
     for (var i = 0; i < todo_items_array.length; i++) {
         var TD_item = $("<ul>", {
@@ -52,9 +55,9 @@ function populate_todo_list() {
             data_index: i
         });
 
-        var complete_button = $('<button>').attr('type', 'button').text('complete').attr('data_index', i);
+        var complete_button = $('<button>').attr('type', 'button').text('Complete').attr('data_index', i);
 
-        var update_button = $('<button>').attr('type', 'button').text('update').attr('data_index', i);
+        var update_button = $('<button>').attr('type', 'button').text('Update').attr('data_index', i);
 
         // var p2_button = $("<button>", {
         //     type: 'button',
@@ -79,18 +82,18 @@ function populate_todo_list() {
 
         var postId_num = $("<li>", {
             class: 'list_item_num list-group-item',
-            text: "Post Id number: " + todo_items_array[i].id,
+            text: "Post Id Number: " + todo_items_array[i].id,
         });
 
 
         var list_item_num = $("<li>", {
             class: 'list_item_num list-group-item',
-            text: "list item number: " + (i + 1)
+            text: "List Item Number: " + (i + 1)
         });
 
         var timestamp = $("<li>", {
             class: 'to_do_timestamp list-group-item',
-            text: "time: " + todo_items_array[i].timeStamp,
+            text: "Time: " + todo_items_array[i].timeStamp,
         });
 
         var title = $("<li>", {
@@ -100,26 +103,24 @@ function populate_todo_list() {
 
         var details = $("<li>", {
             class: 'to_do_details list-group-item',
-            text: "details: " + todo_items_array[i].details,
+            text: "Details: " + todo_items_array[i].details,
         });
 
-        
+
         // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
         $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
         $('#display_list').append(TD_item);
         var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
         var dateInMS = Date.now();
 
-
         if (selected_timeStamp < dateInMS) {
-            console.log(dateInMS);
             $(title).addClass('pastDue')
         }
 
         if (todo_items_array[i].complete == 1) {
             $(title).addClass('completed_item');
         }
-     
+
 
         delete_button.click(function() {
             console.log(todo_items_array[1])
@@ -149,9 +150,9 @@ function populate_todo_list() {
             $('.modal-header').html('');
             $('.modal-body').html('');
             var index = $(this).parent().attr('data_index');
-            var title_display = $('<div>').html('title : ' + todo_items_array[index].title);
-            var details_display = $('<div>').html('details : ' + todo_items_array[index].details);
-            var timestamp_display = $('<div>').html('time : ' + todo_items_array[index].timeStamp);
+            var title_display = $('<div>').html('Title : ' + todo_items_array[index].title);
+            var details_display = $('<div>').html('Details : ' + todo_items_array[index].details);
+            var timestamp_display = $('<div>').html('Time : ' + todo_items_array[index].timeStamp);
             var postId_display = $('<div>').html('PostId : ' + todo_items_array[index].id);
             $('.modal-header').append(title_display);
             $('.modal-body').append(details_display, timestamp_display, postId_display);
@@ -164,10 +165,10 @@ function populate_todo_list() {
             update_array = [];
             var index = $(this).parent().attr('data_index');
             update_array.push(todo_items_array[index]);
-            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update col-xs-7 col-md-7');
-            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update col-xs-7 col-md-7');
+            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'Title').addClass('title_update col-xs-7 col-md-7');
+            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'Details').addClass('details_update col-xs-7 col-md-7');
             var time_update = $('<input>').attr('type', 'datetime-local').attr('placeholder', 'duedate').addClass('time_update col-md-7');
-            var submit_update = $('<button>').attr('type', 'submit').text('submit').addClass('col-md-3 col-md-offset-4');
+            var submit_update = $('<button>').attr('type', 'submit').text('Submit').addClass('col-md-3 col-md-offset-4');
 
             submit_update.click(update_item);
             $('.modal-title').html('Update for : ' + update_array[0].title)
@@ -254,44 +255,44 @@ function populate_todo_single() {
         data_index: 0
     });
 
-    var complete_button = $('<button>').attr('type', 'button').text('complete').attr('data_index', 0);
+    var complete_button = $('<button>').attr('type', 'button').text('Complete').attr('data_index', 0);
 
-    var update_button = $('<button>').attr('type', 'button').text('update').attr('data_index', 0);
+    var update_button = $('<button>').attr('type', 'button').text('Update').attr('data_index', 0);
 
     var postId_num = $("<li>", {
         class: 'list_item_num list-group-item',
-        text: "Post Id number: " + todo_items_array[0].id,
+        text: "Post Id Number: " + todo_items_array[0].id,
     });
 
     var list_item_num = $("<li>", {
         class: 'list_item_num list-group-item',
-        text: "list item number: " + (1)
+        text: "List Item Number: " + (1)
     });
 
     var timestamp = $("<li>", {
         class: 'to_do_timestamp list-group-item',
-        text: "time: " + todo_items_array[0].timeStamp,
+        text: "Time: " + todo_items_array[0].timeStamp,
     });
 
     var title = $("<li>", {
         class: 'to_do_title list-group-item',
-        text: "title: " + todo_items_array[0].title + " Post_Id: " + todo_items_array[0].id,
+        text: "Title: " + todo_items_array[0].title + " Post_Id: " + todo_items_array[0].id,
     });
 
     var details = $("<li>", {
         class: 'to_do_details list-group-item',
-        text: "details: " + todo_items_array[0].details,
+        text: "Details: " + todo_items_array[0].details,
     });
 
-    
+
     // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
     $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
     $('#display_list').append(TD_item);
     var selected_timeStamp = Date.parse(todo_items_array[0].timeStamp);
-        var dateInMS = Date.now();
-        if (selected_timeStamp < dateInMS) {
-            $('.to_do_title').addClass('pastDue');
-        }
+    var dateInMS = Date.now();
+    if (selected_timeStamp < dateInMS) {
+        $(title).addClass('pastDue');
+    }
     if (todo_items_array[0].complete == 1) {
         $(title).addClass('completed_item');
     }
@@ -322,10 +323,10 @@ function populate_todo_single() {
     p1_button.click(function() {
         $('.modal-body').html('');
         var index = $(this).parent().attr('data_index');
-        var title_display = $('<div>').html('title : ' + todo_items_array[index].title);
-        var details_display = $('<div>').html('details : ' + todo_items_array[index].details);
-        var timestamp_display = $('<div>').html('time : ' + todo_items_array[index].timeStamp);
-        var postId_display = $('<div>').html('postId : ' + todo_items_array[index].id);
+        var title_display = $('<div>').html('Title : ' + todo_items_array[index].title);
+        var details_display = $('<div>').html('Details : ' + todo_items_array[index].details);
+        var timestamp_display = $('<div>').html('Time : ' + todo_items_array[index].timeStamp);
+        var postId_display = $('<div>').html('PostId : ' + todo_items_array[index].id);
 
         $('.modal-body').append(title_display, details_display, timestamp_display, postId_display);
         $('#myModal').modal('show');
@@ -336,12 +337,12 @@ function populate_todo_single() {
         update_array = [];
         var index = $(this).parent().attr('data_index');
         update_array.push(todo_items_array[index]);
-        var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'title').addClass('title_update');
-        var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'details').addClass('details_update');
+        var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'Title').addClass('title_update');
+        var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'Details').addClass('details_update');
         var time_update = $('<input>').attr('type', 'text').attr('placeholder', 'duedate').addClass('time_update');
-        var postId_display = $('<div>').html('postId : ' + todo_items_array[index].id);
+        var postId_display = $('<div>').html('PostId : ' + todo_items_array[index].id);
 
-        var submit_update = $('<button>').attr('type', 'submit').text('submit');
+        var submit_update = $('<button>').attr('type', 'submit').text('Submit');
 
         submit_update.click(update_item);
 
@@ -566,8 +567,6 @@ function log_to_creation_page() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
-
-            
             $("form input").change(function() {
                 validate_create();
             });
@@ -594,12 +593,13 @@ function send_list_items() {
         success: function(response) {
             window.response = response;
             if (response.success) {
+                $('.alert').remove();
                 get_TDL_json_populate_multiple();
             } else if (!response.success) {
                 console.log("error:", response.errors)
                 $('.alert').remove();
                 var alert = $('<div>').addClass('alert alert-danger').html(response.errors);
-                $('.list_container').append(alert);
+                $('.send_item_alert').append(alert);
             }
         }
 
@@ -766,7 +766,7 @@ $(document).ready(function() {
     $('#login_button').click(login_to_server);
     $('#logout_button').click(logout_server);
 
-    
+
     keep_user_logged_in();
 
 
@@ -812,7 +812,4 @@ function validate_create() {
             }
         }
     });
-
-
-
 }
