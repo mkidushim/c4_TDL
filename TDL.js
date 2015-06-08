@@ -10,7 +10,9 @@ var update_array = [];
 var session;
 var name_user;
 
-
+//Input: input values from title, details, timestamp inputs
+//Output: pushing values into the todo_initialize object
+//Result: pushing object into todo_items_array
 function todo_initialize() {
         var todo_initialize = Object.create(todo_items_object);
         todo_initialize.title = $('#title_LI').val();
@@ -19,7 +21,10 @@ function todo_initialize() {
         console.log("todo_object: ", todo_items_object);
         todo_items_array.push(todo_initialize);
     }
-    //Parris sort function
+    //Input: takes in the selected to do items timestamp (date due)
+    //Output: the comparison of the timestamp due date vs the current date
+    //Result: if timestamp < current date/time = past due date
+    //Not CURRENTLY IN USE
 function sort_todo(a, b) {
         if (parseFloat(a.timeStamp) < parseFloat(b.timeStamp))
             return -1;
@@ -29,7 +34,10 @@ function sort_todo(a, b) {
     }
     //Parris end sort function
 
-
+//Input: selected todo list object values (title, details, timestamp)
+//Output: pushing values into the todo_initialize object onto the DOM
+//Result: display the todo_items_array objects (to do list items) onto the DOM
+// this is done upon the document loading the original page
 function populate_todo_list() {
     $('#details_LI').val('');
     $('#title_LI').val('');
@@ -110,15 +118,32 @@ function populate_todo_list() {
         // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
         $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
         $('#display_list').append(TD_item);
+
+        // This is what dilineates if the timestamp is past due
+        // input: timestamp due date
+        // result: if the to do list item timestamp is past due 
+        // add class pastDue which makes the text color red
         var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
         var dateInMS = Date.now();
+
         if (selected_timeStamp < dateInMS) {
             $(title).addClass('pastDue')
         }
+
+        // This is what dilineates if the to do list item is complete
+        // input: to do list item
+        // result: if the to do list item is considered complete
+        // add text decoration of line through
+
         if (todo_items_array[i].complete == 1) {
             $(title).addClass('completed_item');
         }
 
+        //Result: It splices off the the selected index item based on its clicking 
+        // of the selected delete button 
+        // ajax POST call that sends to the delete url
+        // the userId and postId to the server.
+        // response is Object {success: true, msgs: "Successfully deleted todo item, #"}
 
         delete_button.click(function() {
             console.log(todo_items_array[1])
@@ -144,6 +169,11 @@ function populate_todo_list() {
                 }
             });
         });
+
+        // Result: upon clicking of the p1 button for the selected to do list
+        // item it will post the to do list object info and append it into the modal
+        // the title, details, timestamp, and postId of the selected array index items
+        // based on its index = $(this).parent().attr('data_index');
         p1_button.click(function() {
             $('.modal-header').html('');
             $('.modal-body').html('');
@@ -157,6 +187,10 @@ function populate_todo_list() {
             $('#myModal').modal('show');
         })
 
+        // Result: upon clicking of the update button it will clear the title, details and
+        // timestamp of the selected to do list items on the DOM. If the user adds text into 
+        // the Modal it will take the input and push the data into the the array and refresh
+        // the DOM to show the updated information inputted by the user.
         update_button.click(function() {
             $('.modal-title').html('')
             $('.modal-body').html('');
@@ -174,6 +208,11 @@ function populate_todo_list() {
             $('#myModal').modal('show');
         });
         //***********complete function needs to be added******************//
+        // This is what dilineates if the to do list item is complete
+        // input: to do list item
+        // result: if the to do list item is considered complete
+        // add text decoration of line through and recall the 
+        // populate_todo_list function to reload the DOM
         complete_button.click(function() {
             update_array = [];
             var index = $(this).parent().attr('data_index');
@@ -227,6 +266,10 @@ function populate_todo_list() {
     }
 }
 
+//Input: selected todo list object values (title, details, timestamp) based
+// on the input in the selected input and when the search id button is clicked
+//Output: pushing the values into the todo_initialize object onto the DOM
+//Result: display the todo_items_array object (to do list items) onto the DOM
 function populate_todo_single() {
     $('#display_list').empty();
     var iLN = parseFloat($('#input_search_id').val());
@@ -286,11 +329,22 @@ function populate_todo_single() {
     // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
     $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
     $('#display_list').append(TD_item);
+
+    // This is what dilineates if the timestamp is past due
+    // input: timestamp due date
+    // result: if the to do list item timestamp is past due 
+    // add class pastDue which makes the text color red
     var selected_timeStamp = Date.parse(todo_items_array[0].timeStamp);
     var dateInMS = Date.now();
     if (selected_timeStamp < dateInMS) {
         $(title).addClass('pastDue');
     }
+
+
+    // This is what dilineates if the to do list item is complete
+    // input: to do list item
+    // result: if the to do list item is considered complete
+    // add text decoration of line through
     if (todo_items_array[0].complete == 1) {
         $(title).addClass('completed_item');
     }
@@ -318,6 +372,12 @@ function populate_todo_single() {
             }
         });
     });
+
+
+    // Result: upon clicking of the p1 button for the selected to do list
+    // item it will post the to do list object info and append it into the modal
+    // the title, details, timestamp, and postId of the selected array index items
+    // based on its index = $(this).parent().attr('data_index');
     p1_button.click(function() {
         $('.modal-body').html('');
         var index = $(this).parent().attr('data_index');
@@ -329,6 +389,11 @@ function populate_todo_single() {
         $('.modal-body').append(title_display, details_display, timestamp_display, postId_display);
         $('#myModal').modal('show');
     })
+
+    // Result: upon clicking of the update button it will clear the title, details and
+    // timestamp of the selected to do list items on the DOM. If the user adds text into 
+    // the Modal it will take the input and push the data into the the array and refresh
+    // the DOM to show the updated information inputted by the user.
 
     update_button.click(function() {
         $('.modal-body').html('');
@@ -347,6 +412,13 @@ function populate_todo_single() {
         $('.modal-body').append(title_update, details_update, time_update, submit_update, postId_display);
         $('#myModal').modal('show');
     });
+
+    //***********complete function needs to be added******************//
+    // This is what dilineates if the to do list item is complete
+    // input: to do list item
+    // result: if the to do list item is considered complete
+    // add text decoration of line through and recall the 
+    // populate_todo_list function to reload the DOM
     complete_button.click(function() {
         update_array = [];
         var index = $(this).parent().attr('data_index');
@@ -364,6 +436,11 @@ function populate_todo_single() {
     });
 
 }
+
+//Result: AJAX POST call that sends the id from the input search id val
+// the response is the object values from the sent postId,
+//Output: call populate single function that will display the object values
+// onto the DOM
 
 function postId_single() {
     console.log("ajax call");
@@ -810,7 +887,4 @@ function validate_create() {
             }
         }
     });
-
-
-
 }
