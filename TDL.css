@@ -444,7 +444,7 @@ span.glyphicon-check {
     color: green;
 }
 .pastDue {
-    background-color: red;
+    color: red;
 }
 .item_complete {
     width: 100%;

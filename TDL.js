@@ -105,9 +105,12 @@ function populate_todo_list() {
 
         var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
         var dateInMS = Date.now();
+
         if (selected_timeStamp < dateInMS) {
+            console.log(dateInMS);
             $(TD_item).addClass('pastDue')
         }
+
         if (todo_items_array[i].complete == 1) {
             $(title).addClass('completed_item');
         }
