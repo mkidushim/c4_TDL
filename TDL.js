@@ -103,17 +103,19 @@ function populate_todo_list() {
             text: "details: " + todo_items_array[i].details,
         });
 
+        
+        // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+        $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
+        $('#display_list').append(TD_item);
         var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
         var dateInMS = Date.now();
-        if (selected_timeStamp < dateInMS) {
+           if (selected_timeStamp < dateInMS) {
             $('.to_do_title').addClass('pastDue')
         }
         if (todo_items_array[i].complete == 1) {
             $(title).addClass('completed_item');
         }
-        // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-        $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
-        $('#display_list').append(TD_item);
+     
 
         delete_button.click(function() {
             console.log(todo_items_array[1])
@@ -277,6 +279,10 @@ function populate_todo_single() {
         text: "details: " + todo_items_array[0].details,
     });
 
+    
+    // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+    $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
+    $('#display_list').append(TD_item);
     var selected_timeStamp = Date.parse(todo_items_array[0].timeStamp);
         var dateInMS = Date.now();
         if (selected_timeStamp < dateInMS) {
@@ -285,9 +291,6 @@ function populate_todo_single() {
     if (todo_items_array[0].complete == 1) {
         $(title).addClass('completed_item');
     }
-    // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-    $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
-    $('#display_list').append(TD_item);
 
     delete_button.click(function() {
         console.log(todo_items_array[0])
