@@ -1,3 +1,337 @@
+
+body {
+   background-color: black;
+ 
+ }
+
+
+
+.modal-body {
+   margin-left: 40px;
+   width: 700px;
+
+}
+
+
+ .main-container {
+   background-color: black;
+
+ }
+ 
+
+
+ #input-container {
+    text-align: left;
+    border: 15px solid #7FFF00;
+    border-radius:  10px;
+    background-color: white;
+
+
+ 
+ }
+#main-title {
+    text-align: left;
+    color: #33A1DE;
+    font-size: 400%;
+    margin-bottom: 10px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bolder;
+    
+}
+
+
+textarea:focus, input:focus, .list-group-item:focus {
+ 
+    background:white;
+    border: 1px solid white;
+}
+ 
+
+.panel-group .list-group {
+  	margin-bottom: 0;
+
+}
+
+.panel-group .list-group .list-group-item {
+  	border-radius: 0;
+  	border-left: none;
+  	border-right: none;
+    background-color: white;
+    border-bottom-color: white;
+    border-top-color: gray;
+   
+    
+}
+
+.panel-group .list-group .list-group-item:last-child {
+	   border-bottom: none;
+     height: 40px;
+
+
+}
+
+#title_LI:focus, #details_LI:focus, #timeStamp_LI:focus{
+     background:white;
+ 
+}
+
+#title_LI::-webkit-input-placeholder {
+    color: #BDBDBD;
+}
+#details_LI::-webkit-input-placeholder {
+    color: #BDBDBD;
+}
+#timeStamp_LI::-webkit-input-placeholder {
+    color: #BDBDBD;
+}
+
+.list-group-item {
+
+    background-color: white;
+    border: 5px solid #6FD0FF;
+    text-align: -webkit-left;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #2C2C85;
+    font-size: 20px;
+
+}
+ 
+.list-group-item:first-child {
+  border-radius: 10px;
+ 
+}
+
+ 
+   #title_LI  { 
+   
+    border: 1px solid white;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color:   #663399;
+    font-size: 24px;
+    height: 55px;
+	  border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-top: 5px;
+    border-bottom-color: white;
+    font-weight: bolder;
+    text-align: left;
+   /* width: 980px; */
+}
+
+ #details_LI {
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   color: #663399;
+   font-size: 24px;
+   height: 50px;
+   border: 1px solid white;
+   font-weight: bolder;
+   word-wrap: break-word;
+   width: 980px;
+   
+  }
+ 
+ 
+ #timeStamp_LI {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #663399;
+    font-size: 24px;
+    height: 50px;
+    border: 1px solid white;
+    font-weight: bolder;
+    width: 400px;
+
+}
+
+
+.panel-group {
+
+   background: white;
+
+} 
+
+ .well {
+  background-color: #9595FF;
+ }
+
+.input-btn {
+    
+    border-radius: 5px;
+    height: 30px;
+    width: 65px;
+    margin-right: -15px;
+  
+    text-align: center;
+
+ 
+}
+
+.btn-danger {
+ margin-left: 900px;
+ margin-top: -110px;
+ 
+}
+
+#logout_button {
+margin-right 
+
+}
+
+ 
+#pull_json {
+   text-align: center;
+   margin-top: 5px;
+   margin-left: 8px;
+   border-radius: 5px;
+   height: 25px;
+   width:105px;
+   background-color:#FF0080;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+
+        
+}
+
+#sort_button {
+   text-align: left;
+   border: 1px solid gray;
+   margin-top: 5px;
+   margin-left: 8px;
+   border-radius: 5px;
+   height: 25px;
+   width:105px;
+   background-color:#660099;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+
+        
+}
+#input_search_id {
+   text-align: center;
+   margin-top: 5px;
+   margin-left: -20px; 
+   border-radius: 5px;
+   height: 25px;
+   border: 1px solid gray;
+   width:100px; 
+   background-color: #CAFFFF;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+   color: gray;
+       
+}
+
+
+#search_id_button {
+   text-align: center;
+   margin-top: -1px;
+   margin-left: 10px;
+   border:2px solid gray;
+   border-radius: 5px;
+   height: 25px;
+   width:105px;
+   background-color: #00D0D0;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+   color: white;
+       
+}
+
+.pull_json_update {
+   text-align: center;
+   margin-top: 5px;
+   border: 2px solid gray;
+   margin-left: 8px;
+   border-radius: 5px;
+   height: 25px;
+   width:105px;
+   background-color: #FFFF00;
+   color: white;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+           
+} 
+
+#add_LI {
+   text-align: center;
+   margin-top: 5px;
+   margin-left: 8px;
+   border: 2px solid gray;
+   border-radius: 5px;
+   height: 25px;
+   width:105px;
+   background-color: #BC1D71;
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+   color: white;
+   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+        
+} 
+
+ 
+
+
+.TD_item > button {
+   text-align: left;
+   margin-left: -20px;
+   margin-top: 3px;
+   margin-left: 7px;
+   border: 2px solid gray;
+   border-radius: 6px;
+   height: 25px;
+   width:70px;
+   background-color: #6666FF;
+   color: white; 
+   font-family: "Comic Sans MS", cursive, sans-serif;
+   font-size: 14px;
+   font-size: bolder;
+   float: right;
+
+        
+}
+
+.logon_title {
+
+  background-color:   logon_title;
+
+
+}
+
+
+
+.button  .btn {
+    -webkit-box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0px -3px 1px rgba(0, 0, 0, 0.45), 0px 2px 2px rgba(0, 0, 0, 0.25);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+     border-radius: 7px;
+}
+
+
+.button:active  .btn:active { position: relative; top: 3px;
+    -webkit-box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+    -moz-box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+    box-shadow: inset 0px -3px 1px rgba(255, 255, 255, 1), inset 0 0px 3px rgba(0, 0, 0, 0.9);
+     border-radius: 7px;
+}
+
+
+.button:active:after   .btn:active:after{ content: ""; width: 100%; height: 3px; background: #fff; position: absolute; bottom: -1px; left: 0; 
+ border-radius: 7px;}
+ }
+
+
 body {
     background: black;
 }
@@ -5,9 +339,9 @@ button, input {
     border-radius: 10px;
 
 }
-input#title_LI, input#details_LI, input#input_search_id {
+/*input#title_LI, input#details_LI  {
     height: 40px;
-}
+}  */
 h3, h6 {
     color: white;
     font: comic Sans MS, Cursive, sans-serif;
@@ -113,7 +447,7 @@ span.glyphicon-check {
     color: green;
 }
 .pastDue {
-    background-color: red;
+    color: red;
 }
 .item_complete {
     width: 100%;
