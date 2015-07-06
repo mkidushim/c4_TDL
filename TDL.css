@@ -74,7 +74,17 @@ textarea:focus, input:focus, .list-group-item:focus {
      background:white;
  
 }
+#title_LI {
 
+}
+#details_LI {
+  width:200px;
+  
+}
+#timeStamp_LI {
+  width:200px;
+
+}
 #title_LI::-webkit-input-placeholder {
     color: #BDBDBD;
 }
@@ -369,7 +379,7 @@ h3, h6 {
     -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     box-shadow: 3px 3px 8px 4px #888888;
-    margin-bottom: 10%;
+    margin-bottom: 10px;
 }
 
 #login_button {
