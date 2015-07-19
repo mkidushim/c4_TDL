@@ -1,13 +1,16 @@
+
+
 body {
     background: darkgray;
+
 }
 button, input {
     border-radius: 10px;
 
 }
-input#title_LI, input#details_LI, input#input_search_id {
+/*input#title_LI, input#details_LI  {
     height: 40px;
-}
+}  */
 h3, h6 {
     color: white;
     font: comic Sans MS, Cursive, sans-serif;
@@ -113,7 +116,7 @@ span.glyphicon-check {
     color: green;
 }
 .pastDue {
-    background-color: red;
+    color: red;
 }
 .item_complete {
     width: 100%;
@@ -128,6 +131,10 @@ span.glyphicon-check {
     color: white;
 }
 
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
 .modal-body {
     max-height: calc(100vh - 210px);
     overflow-y: auto;
