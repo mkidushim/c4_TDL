@@ -1,5 +1,4 @@
 
-
 body {
     background: darkgray;
 
@@ -8,9 +7,7 @@ button, input {
     border-radius: 10px;
 
 }
-/*input#title_LI, input#details_LI  {
-    height: 40px;
-}  */
+
 h3, h6 {
     color: white;
     font: comic Sans MS, Cursive, sans-serif;
