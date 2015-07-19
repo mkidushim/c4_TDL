@@ -48,14 +48,14 @@ textarea:focus, input:focus, .list-group-item:focus {
  
 
 .panel-group .list-group {
-  	margin-bottom: 0;
+    margin-bottom: 0;
 
 }
 
 .panel-group .list-group .list-group-item {
-  	border-radius: 0;
-  	border-left: none;
-  	border-right: none;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
     background-color: white;
     border-bottom-color: white;
     border-top-color: gray;
@@ -64,7 +64,7 @@ textarea:focus, input:focus, .list-group-item:focus {
 }
 
 .panel-group .list-group .list-group-item:last-child {
-	   border-bottom: none;
+     border-bottom: none;
      height: 40px;
 
 
@@ -74,17 +74,7 @@ textarea:focus, input:focus, .list-group-item:focus {
      background:white;
  
 }
-#title_LI {
 
-}
-#details_LI {
-  width:200px;
-  
-}
-#timeStamp_LI {
-  width:200px;
-
-}
 #title_LI::-webkit-input-placeholder {
     color: #BDBDBD;
 }
@@ -119,7 +109,7 @@ textarea:focus, input:focus, .list-group-item:focus {
     color:   #663399;
     font-size: 24px;
     height: 55px;
-	  border-top-left-radius: 15px;
+    border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     margin-top: 5px;
     border-bottom-color: white;
@@ -343,7 +333,7 @@ margin-right
 
 
 body {
-    background: deepskyblue;
+    background: black;
 }
 button, input {
     border-radius: 10px;
@@ -379,7 +369,7 @@ h3, h6 {
     -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     box-shadow: 3px 3px 8px 4px #888888;
-    margin-bottom: 10px;
+    margin-bottom: 10%;
 }
 
 #login_button {
@@ -401,7 +391,7 @@ h3, h6 {
 }
 
 .form_container {
-    
+    margin-left: 38%;
     padding-top: 1%;
     padding-bottom: 2%;
     border-radius: 10px;
@@ -472,6 +462,10 @@ span.glyphicon-check {
     color: white;
 }
 
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
 .modal-body {
     max-height: calc(100vh - 210px);
     overflow-y: auto;

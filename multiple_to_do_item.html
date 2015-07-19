@@ -9,18 +9,18 @@
     <div class="list_container col-xs-12">
         <!--Janets code -->
         <p class="col-xs-12" id="main-title">To Do List</p>
-        <div class="container hidden-xs" id="input-container">
+        <div class="container col-xs-12" id="input-container">
             <div class="panel-group col-xs-12" id="accordionTwo">
                 <div class="panel panel-default">
-                    <h4 class="panel-title">
-                            <a class="accordion-toggle list-group col-xs-12" data-toggle="collapse" data-parent="#accordionTwo" href="#collapseFour">
-                            <input type='text' class="col-xs-12" id="title_LI" placeholder="Add new title" maxlength="30"> </a> 
+                    <h4 class="panel-title col-xs-12">
+                            <a class="accordion-toggle list-group" data-toggle="collapse" data-parent="#accordionTwo" href="#collapseFour">
+                            <input type='text' id="title_LI" placeholder="Add new title" maxlength="30"> </a> 
                         </h4>
                 </div>
                 <div class="panel-collapse collapse out" id="collapseFour">
                     <div class="list-group">
-                        <a href="#" class="list-group-item input-list col-xs-12" id="detail">
-                            <textarea class="col-xs-12" id="details_LI" placeholder="Add detail" maxlength="number"></textarea>
+                        <a href="#" class="list-group-item input-list" id="detail">
+                            <textarea class="" id="details_LI" placeholder="Add detail" maxlength="number"></textarea>
                         </a>
                         <a href="#" class="list-group-item">
                             <input type='datetime-local' class="" id="timeStamp_LI" placeholder="Add date"> <span></span></a>
@@ -31,11 +31,6 @@
                 <button type="button" class="btn  btn-info btn-sm  input-btn pull-right" id="btn"><span class="more-btn"></span> Less </button>
             </a>
         </div>
-        <!--<div id="input-container">
-            <input type='text' class="col-xs-12" id="title_LI" placeholder="Add new title" maxlength="30">
-            <textarea class="col-xs-12" id="details_LI" placeholder="Add detail" maxlength="number" style="width: 200px"></textarea>
-            <input type='datetime-local' class="" id="timeStamp_LI" placeholder="Add date" style="width: 200px">
-        </div>-->
         <button type="button" class="btn pull-left btn-xs pull-left" id="add_LI">Add List Item</button>
         <button type="button" class="btn pull-left btn-xs pull_json_update pull-left" id="pull_json">List Items</button>
         
