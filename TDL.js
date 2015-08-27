@@ -14,25 +14,25 @@ var name_user;
 //Output: pushing values into the todo_initialize object
 //Result: pushing object into todo_items_array
 function todo_initialize() {
-        var todo_initialize = Object.create(todo_items_object);
-        todo_initialize.title = $('#title_LI').val();
-        todo_initialize.details = $('#details_LI').val();
-        todo_initialize.timeStamp = parseFloat($('#timeStamp_LI').val());
-        console.log("todo_object: ", todo_items_object);
-        todo_items_array.push(todo_initialize);
-    }
-    //Input: takes in the selected to do items timestamp (date due)
-    //Output: the comparison of the timestamp due date vs the current date
-    //Result: if timestamp < current date/time = past due date
-    //Not CURRENTLY IN USE
+    var todo_initialize = Object.create(todo_items_object);
+    todo_initialize.title = $('#title_LI').val();
+    todo_initialize.details = $('#details_LI').val();
+    todo_initialize.timeStamp = parseFloat($('#timeStamp_LI').val());
+    console.log("todo_object: ", todo_items_object);
+    todo_items_array.push(todo_initialize);
+}
+//Input: takes in the selected to do items timestamp (date due)
+//Output: the comparison of the timestamp due date vs the current date
+//Result: if timestamp < current date/time = past due date
+//Not CURRENTLY IN USE
 function sort_todo(a, b) {
-        if (parseFloat(a.timeStamp) < parseFloat(b.timeStamp))
-            return -1;
-        if (parseFloat(a.timeStamp) > parseFloat(b.timeStamp))
-            return 1;
-        return 0;
-    }
-    //Parris end sort function
+    if (parseFloat(a.timeStamp) < parseFloat(b.timeStamp))
+        return -1;
+    if (parseFloat(a.timeStamp) > parseFloat(b.timeStamp))
+        return 1;
+    return 0;
+}
+//Parris end sort function
 
 //Input: selected todo list object values (title, details, timestamp)
 //Output: pushing values into the todo_initialize object onto the DOM
@@ -501,61 +501,61 @@ function get_TDL_json_populate_multiple() {
 //and append to the list container
 //No longer being used.
 function get_TDL_json_populate_single() {
-        console.log("ajax call");
-        $.ajax({
-            dataType: 'json',
-            url: 'get_todo_items.json',
-            method: 'GET',
-            cache: false,
-            crossDomain: true,
+    console.log("ajax call");
+    $.ajax({
+        dataType: 'json',
+        url: 'get_todo_items.json',
+        method: 'GET',
+        cache: false,
+        crossDomain: true,
 
-            success: function(response) {
-                todo_items_array = [];
-                global_response = response;
-                todo_items_array = todo_items_array.concat(global_response);
-                console.log("response: ", response);
-                console.log("response: ", global_response);
-                console.log('todo_items_array: ', todo_items_array);
-                populate_todo_single();
-            }
-        });
-    }
-    //used to validate username and password before login is successfull
-    //takes input from username and password input fields
-    //stores the session id and username as cookies when received from response as key value pairs
-    //these cookies will be used later in keepuser logged in function and logout functions
+        success: function(response) {
+            todo_items_array = [];
+            global_response = response;
+            todo_items_array = todo_items_array.concat(global_response);
+            console.log("response: ", response);
+            console.log("response: ", global_response);
+            console.log('todo_items_array: ', todo_items_array);
+            populate_todo_single();
+        }
+    });
+}
+//used to validate username and password before login is successfull
+//takes input from username and password input fields
+//stores the session id and username as cookies when received from response as key value pairs
+//these cookies will be used later in keepuser logged in function and logout functions
 function login_to_server() {
-        console.log("ajax call");
-        $.ajax({
-            dataType: 'json',
-            data: {
-                username: $('#user_name').val(),
-                password: $('#password').val()
-            },
-            url: 'http://s-apis.learningfuze.com/todo/login',
-            method: 'POST',
-            cache: false,
-            crossDomain: true,
-            success: function(response) {
-                window.response = response;
-                if (response.success) {
-                    load_user_data();
-                    document.cookie = 'sessionid=' + response.session_id;
-                    document.cookie = 'username=' + response.username;
-                    $('.alert').remove();
-                } else if (!response.success) {
-                    $('.alert').remove();
-                    var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
-                    $('.form_container').append(alert);
+    console.log("ajax call");
+    $.ajax({
+        dataType: 'json',
+        data: {
+            username: $('#user_name').val(),
+            password: $('#password').val()
+        },
+        url: 'http://s-apis.learningfuze.com/todo/login',
+        method: 'POST',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            if (response.success) {
+                load_user_data();
+                document.cookie = 'sessionid=' + response.session_id;
+                document.cookie = 'username=' + response.username;
+                $('.alert').remove();
+            } else if (!response.success) {
+                $('.alert').remove();
+                var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
+                $('.form_container').append(alert);
 
-                }
             }
-        });
-    }
-    //used to validate username and password before login is successfull
-    // I am not sure what function needs to run on login success commented out so logout would work
-    //MK - created logout_server() function
-    //MK- 06/04/15 Fixed logout
+        }
+    });
+}
+//used to validate username and password before login is successfull
+// I am not sure what function needs to run on login success commented out so logout would work
+//MK - created logout_server() function
+//MK- 06/04/15 Fixed logout
 function logout_server() {
     console.log("ajax logout");
     console.log('sesssion id#', session)
@@ -625,21 +625,41 @@ function load_user_data() {
 }
 //upon clicking logout button the ajax call will use the login.html page to fill in the index.html container with response
 function logout_to_mainpage() {
-        $.ajax({
-            dataType: 'html',
-            url: 'login.html',
-            cache: false,
-            success: function(response) {
-                $('.container').html('');
-                $('.container').html(response);
-                $('#login_button').click(login_to_server);
-                $('#create_account_button').click(function() {
-                    log_to_creation_page();
-                })
-            }
-        })
-    }
-    //adding glyph color to create page
+    $.ajax({
+        dataType: 'html',
+        url: 'login.html',
+        cache: false,
+        success: function(response) {
+            $('.container').html('');
+            $('.container').html(response);
+            $('#login_button').click(login_to_server);
+            $('#create_account_button').click(function() {
+                log_to_creation_page();
+            })
+        }
+    })
+}
+function nacc_to_login() {
+    $.ajax({
+        dataType: 'html',
+        url: 'login.html',
+        cache: false,
+        success: function(response) {
+            $('.container').html('');
+            $('.container').html(response);
+            var info = $("<h2>",{
+                class: "col-md-7 col-mdoffset-3 text-success",
+                text: ""
+            })
+            $('body').append("<h2 class='col-md-7 col-md-offset-3 .text-success'>hi</h2>")
+            $('#login_button').click(login_to_server);
+            $('#create_account_button').click(function() {
+                log_to_creation_page();
+            })
+        }
+    })
+}
+//adding glyph color to create page
 //input: when clicking create account the user will be redirected to a new page
 //output: new page loaded with creation_page.html
 function log_to_creation_page() {
@@ -655,6 +675,9 @@ function log_to_creation_page() {
             });
             $('#validate_new_account').click(function() {
                 create_account();
+            })
+            $('#to_login').click(function(){
+                logout_to_mainpage();
             })
         }
     })
@@ -696,7 +719,7 @@ function create_account() {
     $.ajax({
         dataType: 'json',
         data: {
-            username: $('#N_user_name').val().toLowerCase(),
+            username: $('#N_user_name').val(),
             password: $('#N_password1').val(),
             password2: $('#N_password2').val(),
             email: $('#N_user_email').val(),
@@ -708,12 +731,12 @@ function create_account() {
         cache: false,
         crossDomain: true,
         success: function(response) {
-            window.response = response;
-            if (response.success) {
+            window.newacc_response = response;
+            if (response.success == true) {
                 console.log('Success:', response.success);
                 logout_to_mainpage();
 
-            } else if (!response.success) {
+            } else if (!response.success == true) {
                 console.log('failed:', response.errors);
                 $('.alert').remove();
                 var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
@@ -837,32 +860,7 @@ function getCookie(cname) {
 
 
 $(document).ready(function() {
-    $('#create_account_button').click(function() {
-        log_to_creation_page();
-    })
-
-    $('#add_LI').click(function() {
-        todo_initialize();
-        populate_todo_list();
-
-    });
-    $('#pull_json').click(function() {
-        get_TDL_json_populate_multiple();
-
-
-    })
-    $('#single_pull_json').click(function() {
-        get_TDL_json_populate_single();
-
-    })
-
-    $('#login_button').click(login_to_server);
-    $('#logout_button').click(logout_server);
-
-
     keep_user_logged_in();
-
-
 });
 
 //Parris function creation to populate DOM with response object data
@@ -897,11 +895,6 @@ function validate_create() {
             window.validate_response = response;
             console.log(response.success)
             if (validate_response.success === true) {
-                // $("form input").change(function() {
-                //     $('form span').addClass('glyphicon glyphicon-check green')
-                // });
-                $('form').remove('#to_login')
-                $('form').append('<button class="col-md-3 col-md-offset-3" id="validate_new_account">Create New Account</button>');
                 $('form span').addClass('glyphicon glyphicon-check green')
                 console.log('validate:', validate_response)
             } else if (validate_response.success === false) {

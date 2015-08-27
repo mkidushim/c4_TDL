@@ -37,7 +37,11 @@ h3, h6 {
     box-shadow: 3px 3px 8px 4px #888888;
     margin-bottom: 10%;
 }
-
+#to_login, #validate_new_account {
+    margin-top: 20px;
+    background-color: #33A1DE;
+    color: white;
+}
 #login_button {
     color: white;
     background-color:rgb(255, 71, 103);
@@ -78,13 +82,15 @@ h3, h6 {
 }
 
 #user_name::-webkit-input-placeholder {
-    color: #754b23;
+    color: white;
 }
 
 #password::-webkit-input-placeholder {
-    color: #754b23;
+    color: white;
 }
-
+#creation_div form input {
+    margin-top: 10px;
+}
 legend {
     color: #33A1DE;
     font-family: "Comic Sans MS", cursive, sans-serif;
@@ -139,4 +145,7 @@ span.glyphicon-check {
 .modal-body {
     max-height: calc(100vh - 210px);
     overflow-y: auto;
+}
+#N_user_name input-placeholder {
+    color: black;
 }
