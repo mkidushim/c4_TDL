@@ -22,7 +22,7 @@ h3, h6 {
 
 #password {
     color: white;
-    background-color: rgba(194, 175, 243, 1.0);
+    background-color: #33A1DE;
     -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     box-shadow: 3px 3px 8px 4px #888888;
@@ -31,7 +31,7 @@ h3, h6 {
 
 #user_name {
     color: white;
-    background-color: rgba(194, 175, 243, 1.0);
+    background-color: #33A1DE;
     -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     box-shadow: 3px 3px 8px 4px #888888;
@@ -40,20 +40,24 @@ h3, h6 {
 
 #login_button {
     color: white;
-    background-color: rgba(194, 175, 243, 1.0);
+    background-color:rgb(255, 71, 103);
     -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     box-shadow: 3px 3px 8px 4px #888888;
     margin: 5px;
+    position: relative;
+    left: 45px;
 }
 
 #create_account_button {
     color: white;
-    background-color: rgba(194, 175, 243, 1.0);
+    background-color: rgb(255, 71, 103);
     -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
     box-shadow: 3px 3px 8px 4px #888888;
     margin: 5px;
+    position: relative;
+    left: 30px;
 }
 
 .form_container {

@@ -891,17 +891,21 @@ function validate_create() {
         cache: false,
         crossDomain: true,
         success: function(response) {
-            $("form").change(function() {
-                $('form span').addClass('glyphicon glyphicon-check')
-            });
+            // $("form").change(function() {
+            //     $('form span').addClass('glyphicon glyphicon-check')
+            // });
             window.validate_response = response;
-            if (validate_response.success == true) {
-                $("form input").change(function() {
-                    $('form span').addClass('glyphicon glyphicon-check green')
-                });
+            console.log(response.success)
+            if (validate_response.success === true) {
+                // $("form input").change(function() {
+                //     $('form span').addClass('glyphicon glyphicon-check green')
+                // });
+                $('form').remove('#to_login')
+                $('form').append('<button class="col-md-3 col-md-offset-3" id="validate_new_account">Create New Account</button>');
+                $('form span').addClass('glyphicon glyphicon-check green')
                 console.log('validate:', validate_response)
-            } else if (validate_response.success == false) {
-                $('form span').addClass('glyphicon glyphicon-check')
+            } else if (validate_response.success === false) {
+                // $('form span').addClass('glyphicon glyphicon-check')
                 console.log('validate:', validate_response)
             }
         }
