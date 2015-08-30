@@ -19,7 +19,26 @@ h3, h6 {
 .list-group {
     margin-top: 45px;
 }
+#password_m {
+    color: white;
+    background-color: #33A1DE;
+    -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    box-shadow: 3px 3px 8px 4px #888888;
+    margin-bottom: 10%;
+    left: 20px;
+}
 
+#user_name_m {
+    color: white;
+    background-color: #33A1DE;
+    -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    box-shadow: 3px 3px 8px 4px #888888;
+    position: relative;
+    left: 20px;
+    margin-bottom: 10%;
+}
 #password {
     color: white;
     background-color: #33A1DE;
@@ -50,7 +69,7 @@ h3, h6 {
     box-shadow: 3px 3px 8px 4px #888888;
     margin: 5px;
     position: relative;
-    left: 45px;
+    left: 35px;
 }
 
 #create_account_button {
@@ -61,7 +80,30 @@ h3, h6 {
     box-shadow: 3px 3px 8px 4px #888888;
     margin: 5px;
     position: relative;
-    left: 30px;
+    left: 50px;
+}
+
+#login_button_m {
+    color: white;
+    background-color:rgb(255, 71, 103);
+    -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    box-shadow: 3px 3px 8px 4px #888888;
+    margin: 5px;
+    position: relative;
+    
+}
+
+#create_account_button_m {
+    color: white;
+    background-color: rgb(255, 71, 103);
+    -webkit-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    -moz-box-shadow: 3px 3px 8px 4px rgba(0, 0, 0, 1.0);
+    box-shadow: 3px 3px 8px 4px #888888;
+    margin: 5px;
+    position: relative;
+    left: 80px;
+    bottom: 40px;
 }
 
 .form_container {
@@ -72,7 +114,11 @@ h3, h6 {
     border: 10px solid rgb(255, 71, 103);
     background: white;
 }
-
+.form_container_m {
+    border-radius: 10px;
+    border: 10px solid rgb(255, 71, 103);
+    background: white;
+}
 .list_container > div > h1 {
     color: #F3EDAF;
     font-family: "Comic Sans MS", cursive, sans-serif;
@@ -86,6 +132,13 @@ h3, h6 {
 }
 
 #password::-webkit-input-placeholder {
+    color: white;
+}
+#user_name_m::-webkit-input-placeholder {
+    color: white;
+}
+
+#password_m::-webkit-input-placeholder {
     color: white;
 }
 #creation_div form input {

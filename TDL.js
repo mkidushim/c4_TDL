@@ -529,8 +529,8 @@ function login_to_server() {
     $.ajax({
         dataType: 'json',
         data: {
-            username: $('#user_name').val(),
-            password: $('#password').val()
+            username: $('#user_name_m').val(),
+            password: $('#password_m').val()
         },
         url: 'http://s-apis.learningfuze.com/todo/login',
         method: 'POST',
@@ -633,7 +633,11 @@ function logout_to_mainpage() {
             $('.container').html('');
             $('.container').html(response);
             $('#login_button').click(login_to_server);
+            $('#login_button_m').click(login_to_server);
             $('#create_account_button').click(function() {
+                log_to_creation_page();
+            })
+            $('#create_account_button_m').click(function() {
                 log_to_creation_page();
             })
         }
@@ -653,6 +657,10 @@ function nacc_to_login() {
             })
             $('body').append("<h2 class='col-md-7 col-md-offset-3 .text-success'>hi</h2>")
             $('#login_button').click(login_to_server);
+            $('#login_button_m').click(login_to_server);
+            $('#create_account_button_m').click(function() {
+                log_to_creation_page();
+            })
             $('#create_account_button').click(function() {
                 log_to_creation_page();
             })
@@ -700,10 +708,10 @@ function send_list_items() {
         crossDomain: true,
         success: function(response) {
             window.response = response;
-            if (response.success) {
+            if (response.success == true) {
                 $('.alert').remove();
                 get_TDL_json_populate_multiple();
-            } else if (!response.success) {
+            } else if (!response.success == true) {
                 console.log("error:", response.errors)
                 $('.alert').remove();
                 var alert = $('<div>').addClass('alert alert-danger').html(response.errors);
