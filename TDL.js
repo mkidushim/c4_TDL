@@ -10,11 +10,11 @@ var update_array = [];
 var session;
 var name_user;
 var create_clicked = false;
-var user; 
-var mail; 
+var user;
+var mail;
 var fname;
 var lname;
-var pass1; 
+var pass1;
 var pass2;
 var from_create_page;
 
@@ -236,41 +236,6 @@ function populate_todo_list() {
             item_complete_function();
 
         });
-
-        //***********complete function needs to be added******************//
-
-
-
-
-
-        // this is being worked on to add priority
-        // p1_button.click(function() {
-        //     var index = $(this).parent().attr('data_index');
-        //     console.log("list item ", index + ' was clicked');
-        //     $(TD_item).addClass('list-group-item list-group-item-danger');
-        //     populate_todo_list();
-        // });
-
-        // p2_button.click(function() {
-        //     var index = $(this).parent().attr('data_index');
-        //     console.log("list item ", index + ' was clicked');
-        //     var priority = $(this).parent().addClass('list-group-item list-group-item-warning');
-        //     populate_todo_list();
-        // });
-
-        // p3_button.click(function() {
-        //     var index = $(this).parent().attr('data_index');
-        //     console.log("list item ", index + ' was clicked');
-        //     var priority = $(this).parent().addClass('list-group-item list-group-item-info');
-        //     populate_todo_list();
-        // });
-
-        // p4_button.click(function() {
-        //     var index = $(this).parent().attr('data_index');
-        //     console.log("list item ", index + ' was clicked');
-        //     var priority = $(this).parent().addClass('list-group-item list-group-item-success');
-        //     populate_todo_list();
-        // });
     }
 }
 
@@ -539,7 +504,7 @@ function login_to_server_m() {
         data: {
             username: $('#user_name_m').val(),
             password: $('#password_m').val(),
-                    },
+        },
         url: 'http://s-apis.learningfuze.com/todo/login',
         method: 'POST',
         cache: false,
@@ -568,7 +533,7 @@ function login_to_server() {
         data: {
             username: $('#user_name').val(),
             password: $('#password').val(),
-                    },
+        },
         url: 'http://s-apis.learningfuze.com/todo/login',
         method: 'POST',
         cache: false,
@@ -667,8 +632,8 @@ function logout_to_mainpage() {
         url: 'login.html',
         cache: false,
         success: function(response) {
-            if (from_create_page == true){
-                var alert = $('<div>').addClass('alert alert-success').html("Account for Username: "+ user + " ceated successfully.");
+            if (from_create_page == true) {
+                var alert = $('<div>').addClass('alert alert-success').html("Account for Username: " + user + " ceated successfully.");
                 $('body').append(alert);
             }
             $('.container').html('');
@@ -684,6 +649,7 @@ function logout_to_mainpage() {
         }
     })
 }
+
 function nacc_to_login() {
     $.ajax({
         dataType: 'html',
@@ -692,7 +658,7 @@ function nacc_to_login() {
         success: function(response) {
             $('.container').html('');
             $('.container').html(response);
-            var info = $("<h2>",{
+            var info = $("<h2>", {
                 class: "col-md-7 col-mdoffset-3 text-success",
                 text: ""
             })
@@ -720,25 +686,25 @@ function log_to_creation_page() {
             from_create_page = true;
             $('.container').html('');
             $('.container').html(response);
-            if (create_clicked == false){
+            if (create_clicked == false) {
                 $("form input").change(function() {
-                validate_create();
-            });
+                    validate_create();
+                });
             }
-            
+
             $('#validate_new_account').click(function() {
                 user = $('#N_user_name').val();
                 mail = $('#N_user_email').val();
                 fname = $('#N_first_name').val();
                 lname = $('#N_last_name').val();
-               pass1 = $('#N_password1').val();
+                pass1 = $('#N_password1').val();
                 pass2 = $('#N_password2').val();
                 setTimeout(function() {
                     create_account();
                     create_clicked = true;
                 }, 10000);
             })
-            $('#to_login').click(function(){
+            $('#to_login').click(function() {
                 logout_to_mainpage();
             })
         }
