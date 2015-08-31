@@ -532,14 +532,43 @@ function get_TDL_json_populate_single() {
 //takes input from username and password input fields
 //stores the session id and username as cookies when received from response as key value pairs
 //these cookies will be used later in keepuser logged in function and logout functions
-function login_to_server() {
+function login_to_server_m() {
     console.log("ajax call");
     $.ajax({
         dataType: 'json',
         data: {
             username: $('#user_name_m').val(),
-            password: $('#password_m').val()
-        },
+            password: $('#password_m').val(),
+                    },
+        url: 'http://s-apis.learningfuze.com/todo/login',
+        method: 'POST',
+        cache: false,
+        crossDomain: true,
+        success: function(response) {
+            window.response = response;
+            if (response.success) {
+                load_user_data();
+                document.cookie = 'sessionid=' + response.session_id;
+                document.cookie = 'username=' + response.username;
+                $('.alert').remove();
+            } else if (!response.success) {
+                $('.alert').remove();
+                var alert = $('<div>').addClass('alert alert-danger').html(response.errors[0]);
+                $('.form_container').append(alert);
+
+            }
+        }
+    });
+}
+
+function login_to_server() {
+    console.log("ajax call");
+    $.ajax({
+        dataType: 'json',
+        data: {
+            username: $('#user_name').val(),
+            password: $('#password').val(),
+                    },
         url: 'http://s-apis.learningfuze.com/todo/login',
         method: 'POST',
         cache: false,
@@ -645,7 +674,7 @@ function logout_to_mainpage() {
             $('.container').html('');
             $('.container').html(response);
             $('#login_button').click(login_to_server);
-            $('#login_button_m').click(login_to_server);
+            $('#login_button_m').click(login_to_server_m);
             $('#create_account_button').click(function() {
                 log_to_creation_page();
             })
@@ -725,7 +754,7 @@ function send_list_items() {
             title: $('#title_LI').val(),
             dueDate: $('#timeStamp_LI').val(),
             details: $('#details_LI').val(),
-            userId: parseFloat($('#id').html()),
+            userId: $('#id').html()
         },
         method: 'POST',
         url: 'http://s-apis.learningfuze.com/todo/create',
@@ -736,7 +765,7 @@ function send_list_items() {
             if (response.success == true) {
                 $('.alert').remove();
                 get_TDL_json_populate_multiple();
-            } else if (!response.success == true) {
+            } else if (response.success == false) {
                 console.log("error:", response.errors)
                 $('.alert').remove();
                 var alert = $('<div>').addClass('alert alert-danger').html(response.errors);

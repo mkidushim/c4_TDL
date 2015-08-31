@@ -1,4 +1,4 @@
-<div class="col-xs-12 well">
+<div class="col-xs-12 col-md-12 well">
     <button id='logout_button' class="pull-right">Logout</button>
     <div id="lastName" class='pull-right'></div>
     <div id="firstName" class='pull-right'></div>
@@ -7,11 +7,11 @@
 </div>
 <div class="container">
     <div class="list_container">
-        <input class="col-xs-6" id="title_LI" placeholder="Add title">
-        <input class="col-xs-6" id="details_LI" placeholder="Add details">
-        <input class="col-xs-9 col-xs-offset-1" id="timeStamp_LI" type="datetime-local">
-        <button class="col-xs-6" id="add_LI">Add list item</button>
-        <button id="pull_json" class="col-xs-6">Update list</button>
+        <input class="col-xs-6 col-md-2 col-md-offset-1" id="title_LI" placeholder="Add title">
+        <input class="col-xs-6 col-md-2 col-md-offset-1" id="details_LI" placeholder="Add details">
+        <input class="col-md-3 col-xs-9 col-xs-offset-1 " id="timeStamp_LI" type="datetime-local">
+        <button class="col-xs-6 col-md-3 col-md-offset-2" id="add_LI">Add list item</button>
+        <button id="pull_json" class="col-md-3 col-xs-6">Update list</button>
         
         <!--<div id='user_login'>
             <div id="email" class=''></div>
@@ -20,12 +20,14 @@
            -->
     </div>
     <div id="search_post" class="col-xs-12">
-        <input id="input_search_id" placeholder="Id Search">
+        <input id="input_search_id" class="pull-right" placeholder="Post ID">
         <button id="search_id_button" class="pull-right">Search ID</button>
     </div>
     <div id="display_list" class='list-group'>
     </div>
 </div>
+</div>
+<div class="send_item_alert">
 </div>
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">

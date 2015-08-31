@@ -184,6 +184,12 @@ span.glyphicon-check {
 .completed_item {
     text-decoration: line-through;
 }
+#pull_json, #add_LI{
+background-color: white;
+margin-top: 20px;
+margin-bottom: 20px; 
+}
+
 #logout_button {
     margin-left: 1%;
     border-radius: 5px;
