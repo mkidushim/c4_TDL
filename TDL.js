@@ -9,6 +9,14 @@ var todo_items_array = [];
 var update_array = [];
 var session;
 var name_user;
+var create_clicked = false;
+var user; 
+var mail; 
+var fname;
+var lname;
+var pass1; 
+var pass2;
+var from_create_page;
 
 //Input: input values from title, details, timestamp inputs
 //Output: pushing values into the todo_initialize object
@@ -630,6 +638,10 @@ function logout_to_mainpage() {
         url: 'login.html',
         cache: false,
         success: function(response) {
+            if (from_create_page == true){
+                var alert = $('<div>').addClass('alert alert-success').html("Account for Username: "+ user + " ceated successfully.");
+                $('body').append(alert);
+            }
             $('.container').html('');
             $('.container').html(response);
             $('#login_button').click(login_to_server);
@@ -676,13 +688,26 @@ function log_to_creation_page() {
         url: 'creation_page.html',
         cache: false,
         success: function(response) {
+            from_create_page = true;
             $('.container').html('');
             $('.container').html(response);
-            $("form input").change(function() {
+            if (create_clicked == false){
+                $("form input").change(function() {
                 validate_create();
             });
+            }
+            
             $('#validate_new_account').click(function() {
-                create_account();
+                user = $('#N_user_name').val();
+                mail = $('#N_user_email').val();
+                fname = $('#N_first_name').val();
+                lname = $('#N_last_name').val();
+               pass1 = $('#N_password1').val();
+                pass2 = $('#N_password2').val();
+                setTimeout(function() {
+                    create_account();
+                    create_clicked = true;
+                }, 10000);
             })
             $('#to_login').click(function(){
                 logout_to_mainpage();
