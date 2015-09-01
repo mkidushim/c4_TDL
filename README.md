@@ -1,5 +1,5 @@
 # c4_TDL
-I created a To Do List web application along with 3 other people.  I was the team leader in charge of dividing up the tasks as well as keeping track of issues pull requests and merging on git through the terminal.  Below is a list of the features we had to include to complete the challenge. 
+I created a To Do List web application along with 3 other people.  I was the group leader and did all manual merging, handling of pull requests. As well as creating and resolving issues to organize the project.  Below is a list of the features we had to include to complete the challenge.   I am now remaking the API used for the backend.  
 
 #Live Version: http://52.26.217.22/c4_TDL/
 
