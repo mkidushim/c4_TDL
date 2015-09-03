@@ -18,6 +18,7 @@ var pass1;
 var pass2;
 var from_create_page;
 var h2_exists = false;
+var create_exists = false;
 //Input: input values from title, details, timestamp inputs
 //Output: pushing values into the todo_initialize object
 //Result: pushing object into todo_items_array
@@ -469,7 +470,7 @@ function postId_single() {
                     console.log("response: ", global_1response);
                     console.log('todo_items_array: ', todo_items_array);
                     populate_todo_single();
-                } else if (response.data[0].userId != $('#id').html()){
+                } else if (response.data[0].userId != $('#id').html()) {
                     console.log('user not the same')
                     return
                 }
@@ -581,6 +582,7 @@ function login_to_server() {
         success: function(response) {
             window.response = response;
             if (response.success) {
+                $('.alert.alert-success').hide();
                 load_user_data();
                 document.cookie = 'sessionid=' + response.session_id;
                 document.cookie = 'username=' + response.username;
@@ -615,6 +617,8 @@ function logout_server() {
             if (response.success) {
                 window.response = response;
                 console.log('logout:', response)
+                $('#no_todo').remove();
+                h2_exists = false;
                 logout_to_mainpage();
 
             } else if (response.success == false) {
@@ -673,9 +677,13 @@ function logout_to_mainpage() {
         cache: false,
         success: function(response) {
             if (from_create_page == true) {
+                if(create_exists == false){
                 var alert = $('<div>').addClass('alert alert-success').html("Account for Username: " + user + " ceated successfully.");
                 $('body').append(alert);
+                create_exists = true;
             }
+            }
+            
             $('.container').html('');
             $('.container').html(response);
             $('#login_button').click(login_to_server);
@@ -696,21 +704,28 @@ function nacc_to_login() {
         url: 'login.html',
         cache: false,
         success: function(response) {
+            if (create_exists == false) {
+                var info = $("<h2>", {
+                    class: "col-md-7 col-mdoffset-3 text-success",
+                    text: ""
+                })
+                $('body').append("<h2 class='col-md-7 col-md-offset-3 .text-success'>hi</h2>")
+                create_exists = true;
+            } else if (create_exists == true){
+                console.log('exists')
+            }
             $('.container').html('');
-            $('.container').html(response);
-            var info = $("<h2>", {
-                class: "col-md-7 col-mdoffset-3 text-success",
-                text: ""
-            })
-            $('body').append("<h2 class='col-md-7 col-md-offset-3 .text-success'>hi</h2>")
-            $('#login_button').click(login_to_server);
-            $('#login_button_m').click(login_to_server);
-            $('#create_account_button_m').click(function() {
-                log_to_creation_page();
-            })
-            $('#create_account_button').click(function() {
-                log_to_creation_page();
-            })
+                $('.container').html(response);
+
+
+                $('#login_button').click(login_to_server);
+                $('#login_button_m').click(login_to_server);
+                $('#create_account_button_m').click(function() {
+                    log_to_creation_page();
+                })
+                $('#create_account_button').click(function() {
+                    log_to_creation_page();
+                })
         }
     })
 }
@@ -742,7 +757,7 @@ function log_to_creation_page() {
                 setTimeout(function() {
                     create_account();
                     create_clicked = true;
-                }, 10000);
+                }, 5000);
             })
             $('#to_login').click(function() {
                 logout_to_mainpage();
