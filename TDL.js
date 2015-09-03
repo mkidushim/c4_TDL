@@ -17,7 +17,7 @@ var lname;
 var pass1;
 var pass2;
 var from_create_page;
-
+var h2_exists = false;
 //Input: input values from title, details, timestamp inputs
 //Output: pushing values into the todo_initialize object
 //Result: pushing object into todo_items_array
@@ -47,195 +47,219 @@ function sort_todo(a, b) {
 //Result: display the todo_items_array objects (to do list items) onto the DOM
 // this is done upon the document loading the original page
 function populate_todo_list() {
-    $('#details_LI').val('');
-    $('#title_LI').val('');
-    $('#timeStamp_LI').val('');
-    $('#display_list').empty();
-    for (var i = 0; i < todo_items_array.length; i++) {
-        var TD_item = $("<ul>", {
-            class: 'TD_item list-group',
-            id: todo_items_array[i].id,
-            data_index: i
-        });
+    if (!todo_items_array[0]) {
+        $('.TD_item').remove();
+        if (h2_exists == true) {
+            return
+        } else if (h2_exists == false) {
+            var h2 = $("<h2>", {
+                text: "No saved Todo items, input information above to create a new one.",
+                class: "col-md-10 col-md-offset-2",
+                id: "no_todo"
 
-        var delete_button = $("<button>", {
-            type: 'button',
-            data_index: i,
-            text: 'Delete'
-        });
-
-        var p1_button = $("<button>", {
-            type: 'button',
-            class: 'button',
-            text: "Details",
-            data_index: i
-        });
-
-        var complete_button = $('<button>').attr('type', 'button').text('Complete').attr('data_index', i);
-
-        var update_button = $('<button>').attr('type', 'button').text('Update').attr('data_index', i);
-
-        // var p2_button = $("<button>", {
-        //     type: 'button',
-        //     class: 'button',
-        //     text: "priority 2",
-        //     data_index: i
-        // });
-
-        // var p3_button = $("<button>", {
-        //     type: 'button',
-        //     class: 'button',
-        //     text: "priority 3",
-        //     data_index: i
-        // });
-
-        // var p4_button = $("<button>", {
-        //     type: 'button',
-        //     class: 'button',
-        //     text: 'priority 4',
-        //     data_index: i
-        // });
-
-        var postId_num = $("<li>", {
-            class: 'list_item_num list-group-item',
-            text: "Post Id Number: " + todo_items_array[i].id,
-        });
-
-
-        var list_item_num = $("<li>", {
-            class: 'list_item_num list-group-item',
-            text: "List Item Number: " + (i + 1)
-        });
-
-        var timestamp = $("<li>", {
-            class: 'to_do_timestamp list-group-item',
-            text: "Time: " + todo_items_array[i].timeStamp,
-        });
-
-        var title = $("<li>", {
-            class: 'to_do_title list-group-item',
-            text: "Title: " + todo_items_array[i].title + " postID: " + todo_items_array[i].id,
-        });
-
-        var details = $("<li>", {
-            class: 'to_do_details list-group-item',
-            text: "Details: " + todo_items_array[i].details,
-        });
-
-
-        // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-        $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
-        $('#display_list').append(TD_item);
-
-        // This is what dilineates if the timestamp is past due
-        // input: timestamp due date
-        // result: if the to do list item timestamp is past due 
-        // add class pastDue which makes the text color red
-        var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
-        var dateInMS = Date.now();
-
-        if (selected_timeStamp < dateInMS) {
-            $(title).addClass('pastDue')
+            })
+            $('body').append(h2);
+            h2_exists = true;
         }
 
-        // This is what dilineates if the to do list item is complete
-        // input: to do list item
-        // result: if the to do list item is considered complete
-        // add text decoration of line through
-
-        if (todo_items_array[i].complete == 1) {
-            $(title).addClass('completed_item');
-        }
-
-        //Result: It splices off the the selected index item based on its clicking 
-        // of the selected delete button 
-        // ajax POST call that sends to the delete url
-        // the userId and postId to the server.
-        // response is Object {success: true, msgs: "Successfully deleted todo item, #"}
-
-        delete_button.click(function() {
-            console.log(todo_items_array[1])
-            var index = $(this).parent().attr('data_index');
-            console.log("list item ", index + ' was clicked');
-
-            todo_items_array.splice(index, 1);
-            populate_todo_list();
-            $.ajax({
-                dataType: 'json',
-                url: 'http://s-apis.learningfuze.com/todo/delete',
-                method: 'POST',
-                data: {
-                    userId: global_response.data[index].userId,
-                    postId: global_response.data[index].id,
-                },
-                cache: false,
-                crossDomain: true,
-
-                success: function(response) {
-
-                    console.log(response)
-                }
+    } else if (todo_items_array) {
+        $('#no_todo').remove();
+        h2_exists = false;
+        $('#details_LI').val('');
+        $('#title_LI').val('');
+        $('#timeStamp_LI').val('');
+        $('#display_list').empty();
+        for (var i = 0; i < todo_items_array.length; i++) {
+            var TD_item = $("<ul>", {
+                class: 'TD_item list-group',
+                id: todo_items_array[i].id,
+                data_index: i
             });
-        });
 
-        // Result: upon clicking of the p1 button for the selected to do list
-        // item it will post the to do list object info and append it into the modal
-        // the title, details, timestamp, and postId of the selected array index items
-        // based on its index = $(this).parent().attr('data_index');
-        p1_button.click(function() {
-            $('.modal-header').html('');
-            $('.modal-body').html('');
-            var index = $(this).parent().attr('data_index');
-            var title_display = $('<div>').html('Title : ' + todo_items_array[index].title);
-            var details_display = $('<div>').html('Details : ' + todo_items_array[index].details);
-            var timestamp_display = $('<div>').html('Time : ' + todo_items_array[index].timeStamp);
-            var postId_display = $('<div>').html('PostId : ' + todo_items_array[index].id);
-            $('.modal-header').append(title_display);
-            $('.modal-body').append(details_display, timestamp_display, postId_display);
-            $('#myModal').modal('show');
-        })
+            var delete_button = $("<button>", {
+                type: 'button',
+                data_index: i,
+                text: 'Delete'
+            });
 
-        // Result: upon clicking of the update button it will clear the title, details and
-        // timestamp of the selected to do list items on the DOM. If the user adds text into 
-        // the Modal it will take the input and push the data into the the array and refresh
-        // the DOM to show the updated information inputted by the user.
-        update_button.click(function() {
-            $('.modal-title').html('')
-            $('.modal-body').html('');
-            update_array = [];
-            var index = $(this).parent().attr('data_index');
-            update_array.push(todo_items_array[index]);
-            var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'Title').addClass('title_update col-xs-7 col-md-7');
-            var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'Details').addClass('details_update col-xs-7 col-md-7');
-            var time_update = $('<input>').attr('type', 'datetime-local').attr('placeholder', 'duedate').addClass('time_update col-md-7');
-            var submit_update = $('<button>').attr('type', 'submit').text('Submit').addClass('col-md-3 col-md-offset-4');
+            var p1_button = $("<button>", {
+                type: 'button',
+                class: 'button',
+                text: "Details",
+                data_index: i
+            });
 
-            submit_update.click(update_item);
-            $('.modal-title').html('Update for : ' + update_array[0].title)
-            $('.modal-body').append(title_update, details_update, time_update, submit_update);
-            $('#myModal').modal('show');
-        });
-        //***********complete function needs to be added******************//
-        // This is what dilineates if the to do list item is complete
-        // input: to do list item
-        // result: if the to do list item is considered complete
-        // add text decoration of line through and recall the 
-        // populate_todo_list function to reload the DOM
-        complete_button.click(function() {
-            update_array = [];
-            var index = $(this).parent().attr('data_index');
-            update_array.push(todo_items_array[index]);
-            if (update_array[0].complete == 0) {
-                update_array[0].complete = 1;
-                populate_todo_list();
-            } else if (update_array[0].complete == 1) {
-                update_array[0].complete = 0;
-                populate_todo_list();
+            var complete_button = $('<button>').attr('type', 'button').text('Complete').attr('data_index', i);
+
+            var update_button = $('<button>').attr('type', 'button').text('Update').attr('data_index', i);
+
+            // var p2_button = $("<button>", {
+            //     type: 'button',
+            //     class: 'button',
+            //     text: "priority 2",
+            //     data_index: i
+            // });
+
+            // var p3_button = $("<button>", {
+            //     type: 'button',
+            //     class: 'button',
+            //     text: "priority 3",
+            //     data_index: i
+            // });
+
+            // var p4_button = $("<button>", {
+            //     type: 'button',
+            //     class: 'button',
+            //     text: 'priority 4',
+            //     data_index: i
+            // });
+
+            var postId_num = $("<li>", {
+                class: 'list_item_num list-group-item',
+                text: "Post Id Number: " + todo_items_array[i].id,
+            });
+
+
+            var list_item_num = $("<li>", {
+                class: 'list_item_num list-group-item',
+                text: "List Item Number: " + (i + 1)
+            });
+
+            var timestamp = $("<li>", {
+                class: 'to_do_timestamp list-group-item',
+                text: "Time: " + todo_items_array[i].timeStamp,
+            });
+
+            var title = $("<li>", {
+                class: 'to_do_title list-group-item',
+                text: "Title: " + todo_items_array[i].title + " postID: " + todo_items_array[i].id,
+            });
+
+            var details = $("<li>", {
+                class: 'to_do_details list-group-item',
+                text: "Details: " + todo_items_array[i].details,
+            });
+
+
+            // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
+            $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
+            $('#display_list').append(TD_item);
+
+            // This is what dilineates if the timestamp is past due
+            // input: timestamp due date
+            // result: if the to do list item timestamp is past due 
+            // add class pastDue which makes the text color red
+            var selected_timeStamp = Date.parse(todo_items_array[i].timeStamp);
+            var dateInMS = Date.now();
+
+            if (selected_timeStamp < dateInMS) {
+                $(title).addClass('pastDue')
             }
 
-            item_complete_function();
+            // This is what dilineates if the to do list item is complete
+            // input: to do list item
+            // result: if the to do list item is considered complete
+            // add text decoration of line through
 
-        });
+            if (todo_items_array[i].complete == 1) {
+                $(title).addClass('completed_item');
+            }
+
+            //Result: It splices off the the selected index item based on its clicking 
+            // of the selected delete button 
+            // ajax POST call that sends to the delete url
+            // the userId and postId to the server.
+            // response is Object {success: true, msgs: "Successfully deleted todo item, #"}
+
+            delete_button.click(function() {
+
+                var index = $(this).parent().attr('data_index');
+                console.log("list item ", index + ' was clicked');
+                console.log(todo_items_array[index])
+
+                $.ajax({
+                    dataType: 'json',
+                    url: 'http://s-apis.learningfuze.com/todo/delete',
+                    method: 'POST',
+                    data: {
+                        userId: global_response.data[index].userId,
+                        postId: global_response.data[index].id,
+                    },
+                    cache: false,
+                    crossDomain: true,
+
+                    success: function(response) {
+                        if (response.success == true) {
+                            console.log(response)
+                            todo_items_array.splice(index, 1);
+                            $('')
+                            populate_todo_list();
+
+                        }
+
+                    }
+                });
+            });
+
+            // Result: upon clicking of the p1 button for the selected to do list
+            // item it will post the to do list object info and append it into the modal
+            // the title, details, timestamp, and postId of the selected array index items
+            // based on its index = $(this).parent().attr('data_index');
+            p1_button.click(function() {
+                $('.modal-header').html('');
+                $('.modal-body').html('');
+                var index = $(this).parent().attr('data_index');
+                var title_display = $('<div>').html('Title : ' + todo_items_array[index].title);
+                var details_display = $('<div>').html('Details : ' + todo_items_array[index].details);
+                var timestamp_display = $('<div>').html('Time : ' + todo_items_array[index].timeStamp);
+                var postId_display = $('<div>').html('PostId : ' + todo_items_array[index].id);
+                $('.modal-header').append(title_display);
+                $('.modal-body').append(details_display, timestamp_display, postId_display);
+                $('#myModal').modal('show');
+            })
+
+            // Result: upon clicking of the update button it will clear the title, details and
+            // timestamp of the selected to do list items on the DOM. If the user adds text into 
+            // the Modal it will take the input and push the data into the the array and refresh
+            // the DOM to show the updated information inputted by the user.
+            update_button.click(function() {
+                $('.modal-title').html('')
+                $('.modal-body').html('');
+                update_array = [];
+                var index = $(this).parent().attr('data_index');
+                update_array.push(todo_items_array[index]);
+                var title_update = $('<input>').attr('type', 'text').attr('placeholder', 'Title').addClass('title_update col-xs-7 col-md-7');
+                var details_update = $('<input>').attr('type', 'text').attr('placeholder', 'Details').addClass('details_update col-xs-7 col-md-7');
+                var time_update = $('<input>').attr('type', 'datetime-local').attr('placeholder', 'duedate').addClass('time_update col-md-7');
+                var submit_update = $('<button>').attr('type', 'submit').text('Submit').addClass('col-md-3 col-md-offset-4');
+
+                submit_update.click(update_item);
+                $('.modal-title').html('Update for : ' + update_array[0].title)
+                $('.modal-body').append(title_update, details_update, time_update, submit_update);
+                $('#myModal').modal('show');
+            });
+            //***********complete function needs to be added******************//
+            // This is what dilineates if the to do list item is complete
+            // input: to do list item
+            // result: if the to do list item is considered complete
+            // add text decoration of line through and recall the 
+            // populate_todo_list function to reload the DOM
+            complete_button.click(function() {
+                update_array = [];
+                var index = $(this).parent().attr('data_index');
+                update_array.push(todo_items_array[index]);
+                if (update_array[0].complete == 0) {
+                    update_array[0].complete = 1;
+                    populate_todo_list();
+                } else if (update_array[0].complete == 1) {
+                    update_array[0].complete = 0;
+                    populate_todo_list();
+                }
+
+                item_complete_function();
+
+            });
+        }
     }
 }
 
@@ -327,21 +351,22 @@ function populate_todo_single() {
         var index = $(this).parent().attr('data_index');
         console.log("list item ", index + ' was clicked');
 
-        todo_items_array.splice(index, 1);
-        populate_todo_list();
+
         $.ajax({
             dataType: 'json',
             url: 'http://s-apis.learningfuze.com/todo/delete',
             method: 'POST',
             data: {
                 userId: response.Id,
-                postId: global_response.data[0].id,
+                postId: global_response.data[index].id,
             },
             cache: false,
             crossDomain: true,
 
             success: function(response) {
                 console.log(response)
+                todo_items_array.splice(index, 1);
+                populate_todo_list();
             }
         });
     });
