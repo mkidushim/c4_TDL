@@ -7,7 +7,12 @@ button, input {
     border-radius: 10px;
 
 }
-
+.to_do_title.single {
+    background-color: yellow;
+}
+.TD_item.single {
+    border: 2px solid black;
+}
 h3, h6 {
     color: white;
     font: comic Sans MS, Cursive, sans-serif;

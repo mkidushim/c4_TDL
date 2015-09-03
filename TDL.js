@@ -190,9 +190,8 @@ function populate_todo_list() {
 
                     success: function(response) {
                         if (response.success == true) {
-                            console.log(response)
+                            console.log("multiple_todo delete: " + response.success)
                             todo_items_array.splice(index, 1);
-                            $('')
                             populate_todo_list();
 
                         }
@@ -275,7 +274,7 @@ function populate_todo_single() {
     // for (var i = iLN; i < (iLN + 1); i++) {
     $('#display_list').empty();
     var TD_item = $("<ul>", {
-        class: 'TD_item list-group',
+        class: 'TD_item single list-group',
         id: todo_items_array[0].id,
         data_index: 0
     });
@@ -313,8 +312,8 @@ function populate_todo_single() {
     });
 
     var title = $("<li>", {
-        class: 'to_do_title list-group-item',
-        text: "Title: " + todo_items_array[0].title + " Post_Id: " + todo_items_array[0].id,
+        class: 'to_do_title single list-group-item',
+        text: "Title: " + todo_items_array[0].title + " PostID: " + todo_items_array[0].id,
     });
 
     var details = $("<li>", {
@@ -364,9 +363,12 @@ function populate_todo_single() {
             crossDomain: true,
 
             success: function(response) {
-                console.log(response)
-                todo_items_array.splice(index, 1);
-                populate_todo_list();
+                if (response.success == true) {
+                    console.log('single delete' + response.success)
+                    todo_items_array.splice(index, 1);
+                    populate_todo_list();
+                }
+
             }
         });
     });
@@ -448,19 +450,32 @@ function postId_single() {
         method: 'POST',
         data: {
             postId: $('#input_search_id').val(),
+            userId: $('#id').html()
         },
         cache: false,
         crossDomain: true,
 
         success: function(response) {
-            global_1response = response.data;
-            console.log('postid response : ', global_1response);
-            todo_items_array = [];
-            global_1response = response;
-            todo_items_array = todo_items_array.concat(global_1response.data);
-            console.log("response: ", global_1response);
-            console.log('todo_items_array: ', todo_items_array);
-            populate_todo_single();
+            console.log(response.data[0].userId);
+            if (response.success == true) {
+                if (response.data[0].userId == parseFloat($('#id').html())) {
+                    console.log('yay search worked')
+                    $('#input_search_id').val('');
+                    global_1response = response.data;
+                    console.log('postid response : ', global_1response);
+                    todo_items_array = [];
+                    global_1response = response;
+                    todo_items_array = todo_items_array.concat(global_1response.data);
+                    console.log("response: ", global_1response);
+                    console.log('todo_items_array: ', todo_items_array);
+                    populate_todo_single();
+                } else if (response.data[0].userId != $('#id').html()){
+                    console.log('user not the same')
+                    return
+                }
+
+            }
+
 
         }
 
