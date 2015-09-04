@@ -262,19 +262,20 @@ function populate_todo_single() {
     var delete_button = $("<button>", {
         type: 'button',
         text: 'Delete',
-        data_index: 0
+        data_index: 0,
+        class: 'button col-xs-3'
     });
 
     var p1_button = $("<button>", {
         type: 'button',
-        class: 'button',
+        class: 'button col-xs-3',
         text: "Details",
         data_index: 0
     });
 
-    var complete_button = $('<button>').attr('type', 'button').text('Complete').attr('data_index', 0);
+    var complete_button = $('<button>').attr('type', 'button').addClass('button x col-xs-2').text('X').attr('data_index', 0);
 
-    var update_button = $('<button>').attr('type', 'button').text('Update').attr('data_index', 0);
+    var update_button = $('<button>').attr('type', 'button').addClass('button col-xs-3').text('Update').attr('data_index', 0);
 
     var postId_num = $("<li>", {
         class: 'list_item_num list-group-item',
@@ -293,7 +294,7 @@ function populate_todo_single() {
 
     var title = $("<li>", {
         class: 'to_do_title single list-group-item',
-        text: "Title: " + todo_items_array[0].title + " PostID: " + todo_items_array[0].id,
+        text: "Title: " + todo_items_array[0].title + " postID: " + todo_items_array[0].id,
     });
 
     var details = $("<li>", {
@@ -303,7 +304,7 @@ function populate_todo_single() {
 
 
     // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-    $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
+    $(TD_item).append(title, p1_button, update_button, delete_button, complete_button)
     $('#display_list').append(TD_item);
 
     // This is what dilineates if the timestamp is past due

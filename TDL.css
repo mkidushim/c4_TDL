@@ -13,9 +13,7 @@ button, input {
 .TD_item {
     margin-bottom: 50px;
 }
-.TD_item.single {
-    border: 2px solid black;
-}
+
 h3, h6 {
     color: white;
     font: comic Sans MS, Cursive, sans-serif;
@@ -31,7 +29,7 @@ h3, h6 {
     padding-left: 5px;
 }
 .button.x{
-    padding-left: 10px;
+    padding-left: 14px;
 }
 #password_m {
     color: white;
