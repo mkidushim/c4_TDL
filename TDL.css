@@ -10,6 +10,9 @@ button, input {
 .to_do_title.single {
     background-color: yellow;
 }
+.TD_item {
+    margin-bottom: 50px;
+}
 .TD_item.single {
     border: 2px solid black;
 }
@@ -22,7 +25,13 @@ h3, h6 {
 }
 
 .list-group {
-    margin-top: 45px;
+    margin-top: 25px;
+}
+.button {
+    padding-left: 5px;
+}
+.button.x{
+    padding-left: 10px;
 }
 #password_m {
     color: white;

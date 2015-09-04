@@ -80,41 +80,19 @@ function populate_todo_list() {
             var delete_button = $("<button>", {
                 type: 'button',
                 data_index: i,
-                text: 'Delete'
+                text: 'Delete',
+                class: "button col-xs-3"
             });
 
             var p1_button = $("<button>", {
                 type: 'button',
-                class: 'button',
+                class: 'button col-xs-3',
                 text: "Details",
                 data_index: i
             });
 
-            var complete_button = $('<button>').attr('type', 'button').text('Complete').attr('data_index', i);
-
-            var update_button = $('<button>').attr('type', 'button').text('Update').attr('data_index', i);
-
-            // var p2_button = $("<button>", {
-            //     type: 'button',
-            //     class: 'button',
-            //     text: "priority 2",
-            //     data_index: i
-            // });
-
-            // var p3_button = $("<button>", {
-            //     type: 'button',
-            //     class: 'button',
-            //     text: "priority 3",
-            //     data_index: i
-            // });
-
-            // var p4_button = $("<button>", {
-            //     type: 'button',
-            //     class: 'button',
-            //     text: 'priority 4',
-            //     data_index: i
-            // });
-
+            var complete_button = $('<button>').attr('type', 'button').text('X').addClass('button x col-xs-2').attr('data_index', i);
+            var update_button = $('<button>').attr('type', 'button').addClass('button col-xs-3').text('Update').attr('data_index', i);
             var postId_num = $("<li>", {
                 class: 'list_item_num list-group-item',
                 text: "Post Id Number: " + todo_items_array[i].id,
@@ -143,8 +121,9 @@ function populate_todo_list() {
 
 
             // $(TD_item).append(list_item_num, title, details, timestamp, delete_button, p1_button, p2_button, p3_button, p4_button);
-            $(TD_item).append(title, p1_button, update_button, complete_button, delete_button)
-            $('#display_list').append(TD_item);
+
+            $(TD_item).append(title, p1_button, update_button, delete_button, complete_button)
+            $('#display_list').append(TD_item)
 
             // This is what dilineates if the timestamp is past due
             // input: timestamp due date
@@ -676,14 +655,13 @@ function logout_to_mainpage() {
         url: 'login.html',
         cache: false,
         success: function(response) {
-            if (from_create_page == true) {
-                if(create_exists == false){
-                var alert = $('<div>').addClass('alert alert-success').html("Account for Username: " + user + " ceated successfully.");
-                $('body').append(alert);
-                create_exists = true;
+            if (user && from_create_page == true) {
+                if (create_exists == false) {
+                    var alert = $('<div>').addClass('alert alert-success').html("Account for Username: " + user + " ceated successfully.");
+                    $('body').append(alert);
+                    create_exists = true;
+                }
             }
-            }
-            
             $('.container').html('');
             $('.container').html(response);
             $('#login_button').click(login_to_server);
@@ -698,37 +676,37 @@ function logout_to_mainpage() {
     })
 }
 
-function nacc_to_login() {
-    $.ajax({
-        dataType: 'html',
-        url: 'login.html',
-        cache: false,
-        success: function(response) {
-            if (create_exists == false) {
-                var info = $("<h2>", {
-                    class: "col-md-7 col-mdoffset-3 text-success",
-                    text: ""
-                })
-                $('body').append("<h2 class='col-md-7 col-md-offset-3 .text-success'>hi</h2>")
-                create_exists = true;
-            } else if (create_exists == true){
-                console.log('exists')
-            }
-            $('.container').html('');
-                $('.container').html(response);
+// function nacc_to_login() {
+//     $.ajax({
+//         dataType: 'html',
+//         url: 'login.html',
+//         cache: false,
+//         success: function(response) {
+//             if (create_exists == false) {
+//                 var info = $("<h2>", {
+//                     class: "col-md-7 col-mdoffset-3 text-success",
+//                     text: ""
+//                 })
+//                 $('body').append("<h2 class='col-md-7 col-md-offset-3 .text-success'>hi</h2>")
+//                 create_exists = true;
+//             } else if (create_exists == true) {
+//                 console.log('exists')
+//             }
+//             $('.container').html('');
+//             $('.container').html(response);
 
 
-                $('#login_button').click(login_to_server);
-                $('#login_button_m').click(login_to_server);
-                $('#create_account_button_m').click(function() {
-                    log_to_creation_page();
-                })
-                $('#create_account_button').click(function() {
-                    log_to_creation_page();
-                })
-        }
-    })
-}
+//             $('#login_button').click(login_to_server);
+//             $('#login_button_m').click(login_to_server);
+//             $('#create_account_button_m').click(function() {
+//                 log_to_creation_page();
+//             })
+//             $('#create_account_button').click(function() {
+//                 log_to_creation_page();
+//             })
+//         }
+//     })
+// }
 //adding glyph color to create page
 //input: when clicking create account the user will be redirected to a new page
 //output: new page loaded with creation_page.html
